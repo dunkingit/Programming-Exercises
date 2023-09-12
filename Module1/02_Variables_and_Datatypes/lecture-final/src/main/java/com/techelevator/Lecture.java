@@ -8,28 +8,28 @@ public class Lecture {
 		1. Create a variable to hold an int and call it numberOfExercises.
 			Then set it to 26.
 		*/
-
-		//System.out.println(numberOfExercises);
+		int numberOfExercises = 26;
+		System.out.println(numberOfExercises);
 
 		/*
 		2. Create a variable to hold a double and call it half.
 			Set it to 0.5.
 		*/
-
-		//System.out.println(half);
+		double half = 0.5;
+		System.out.println(half);
 
 		/*
 		3. Create a variable to hold a String and call it name.
 			Set it to "TechElevator".
 		*/
-
-		//System.out.println(name);
+		String name = "TechElevator";
+		System.out.println(name);
 
 		/*
 		4. Create a variable called seasonsOfFirefly and set it to 1.
 		*/
-
-		//System.out.println(seasonsOfFirefly);
+		int seasonsOfFirefly = 1;
+		System.out.println(seasonsOfFirefly);
 
 		/*
 		5. Create a variable called myFavoriteLanguage and set it to "Java".
@@ -40,13 +40,18 @@ public class Lecture {
 		/*
 		6. Create a variable called pi and set it to 3.1416.
 		*/
+		float pi = 3.1416f;
+		System.out.println(pi);
 
-		//System.out.println(pi);
-
+		int five = 5;
+		int two = 2;
+		double result = (double) five / two;
+		System.out.println(result);
 		/*
 		7. Create and set a variable that holds your name.
 		*/
-
+		String myName = "Rachelle";
+		System.out.println(myName);
 		/*
 		8. Create and set a variable that holds the number of buttons on your mouse.
 		*/
@@ -127,6 +132,13 @@ public class Lecture {
 		26. Now set isDoneWithExercise to true.
 		*/
 
+		long x = 10;
+		int y = (int) x;
+
+		int a = 5;
+		int b = 2;
+		double answer = 5.0/2;
+		System.out.println(answer);
 	}
 
 }
