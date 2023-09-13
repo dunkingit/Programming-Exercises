@@ -25,7 +25,7 @@ public class Exercise03_ShippingTotal {
      * calculateShippingRate(45) ➔ 0.75
      */
     public double calculateShippingRate(int weightPounds) {
-        return 0.0;
+        return weightPounds * (weightPounds >= 40? 0.75:0.50);
     }
 
     /*
