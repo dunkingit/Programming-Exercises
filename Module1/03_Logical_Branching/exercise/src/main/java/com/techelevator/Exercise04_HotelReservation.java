@@ -26,22 +26,12 @@ public class Exercise04_HotelReservation {
     calculateStayTotal(3) ➔ 269.97
      */
     public double calculateStayTotal(int numberOfNights) {
-        double stayTotal = 0.00;
-
-        if(numberOfNights <= 2){
-            //99 per night
-            stayTotal += numberOfNights * DAILY_RATE;
-        }else {
-            //89.99 per night
-            stayTotal += numberOfNights * DISCOUNT_RATE;
-        }
-
-        return stayTotal;
+        return 0.0;
     }
 
     /*
     The owners of Innovator's Inn offer parking at an additional cost of $25.00 per night.
-    Calculate the stay total based on the number of nights (int) 
+    Calculate the stay total based on the number of nights (int)
     and on whether the guest requires parking (boolean).
 
     Examples:
@@ -51,20 +41,14 @@ public class Exercise04_HotelReservation {
     calculateStayTotal(3, true) ➔ 344.97
      */
     public double calculateStayTotal(int numOfTotalNights, boolean includesParking) {
-        double stayTotal = calculateStayTotal(numOfTotalNights);
-
-        if(includesParking == true){
-            stayTotal += (PARKING_RATE * numOfTotalNights);
-        }
-
-        return stayTotal;
+        return 0.0;
     }
 
     /*
     Innovator's Inn offers late checkout—but it comes at a price.
-    A guest can reserve a late checkout for an additional fee of $20. 
-    Calculate the stay total given the number of nights (int), 
-    whether they require parking (boolean), and whether they require a late checkout (boolean). 
+    A guest can reserve a late checkout for an additional fee of $20.
+    Calculate the stay total given the number of nights (int),
+    whether they require parking (boolean), and whether they require a late checkout (boolean).
 
     Examples:
     calculateStayTotal(2, false, false) ➔ 199.98
@@ -77,11 +61,6 @@ public class Exercise04_HotelReservation {
     calculateStayTotal(3, true, true) ➔ 364.97
      */
     public double calculateStayTotal(int numOfTotalNights, boolean includesParking, boolean includesLateCheckout) {
-        double stayTotal = calculateStayTotal(numOfTotalNights, includesParking);
-        if(includesLateCheckout == true){
-            stayTotal += LATE_CHECKOUT_FEE;
-        }
-
-        return stayTotal;
+        return 0.0;
     }
 }
