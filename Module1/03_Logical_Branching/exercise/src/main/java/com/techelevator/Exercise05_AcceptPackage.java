@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import java.lang.reflect.Array;
+
 public class Exercise05_AcceptPackage {
 
     /*
@@ -24,7 +26,7 @@ public class Exercise05_AcceptPackage {
     acceptPackage(50) ➔ false
      */
     public boolean acceptPackage(int weightPounds) {
-        return false;
+        return weightPounds <= MAX_WEIGHT_POUNDS;
     }
 
     /*
@@ -41,7 +43,10 @@ public class Exercise05_AcceptPackage {
     acceptPackage(50, 4, 5, 10) ➔ false
      */
     public boolean acceptPackage(int weightPounds, int lengthInches, int widthInches, int heightInches) {
-        return false;
+        boolean condition_a = weightPounds <= MAX_WEIGHT_POUNDS;
+        double sum_Inches = (lengthInches * widthInches * heightInches);
+        boolean condition_b = (lengthInches * widthInches * heightInches) <= MAX_CUBIC_INCHES;
+        return condition_a && condition_b;
     }
 
     /*
@@ -64,6 +69,11 @@ public class Exercise05_AcceptPackage {
     acceptPackage(50, 4, 5, 10, true) ➔ false
      */
     public boolean acceptPackage(int weightPounds, int lengthInches, int widthInches, int heightInches, boolean isSurchargePaid) {
-        return false;
+        boolean condition_a = weightPounds <= MAX_WEIGHT_POUNDS;
+        double sum_Inches = (lengthInches * widthInches * heightInches);
+        boolean condition_b = sum_Inches <= MAX_CUBIC_INCHES;
+        boolean condition_c = (lengthInches <= MAX_DIMENSION_INCHES) && (widthInches <= MAX_DIMENSION_INCHES) && (heightInches <= MAX_DIMENSION_INCHES);
+        boolean condition_d = condition_c? true:isSurchargePaid? true:false;
+        return condition_a && condition_b && condition_d;
     }
 }
