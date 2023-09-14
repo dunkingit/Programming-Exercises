@@ -90,7 +90,7 @@ public class Examples {
 		System.out.println();
 
 		// Print whether each number between 1 and 10 (inclusive) is even or odd
-		for (int ix = 1; ix <= 10; ix++) {
+		for (int ix = 1; ix < 11; ix= ix + 2) {
 			if (ix % 2 == 0) {
 				System.out.println(ix + " is even");
 			} else {
