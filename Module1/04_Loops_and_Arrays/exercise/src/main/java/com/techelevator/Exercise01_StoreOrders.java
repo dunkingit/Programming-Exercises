@@ -63,7 +63,7 @@ public class Exercise01_StoreOrders {
     public int getCalzoneSales(int[] orders) {
         int total_cals = 0;
         for(int i = 0; i < orders.length; i++){
-            int element = orders[i]
+            int element = orders[i];
             if(element == CALZONE) {
                 total_cals += 1;
             }
@@ -88,9 +88,9 @@ public class Exercise01_StoreOrders {
     public int getCheesePizzaRevenue(int[] orders) {
         int total_cals = 0;
         for(int i = 0; i < orders.length; i++){
-            int ele = orders[i]
+            int ele = orders[i];
             int price = ele == 10? 8: ele == 20? 11:ele == 30? 14:0;
-            total_cals += price
+            total_cals += price;
         };
         return total_cals;
     }
