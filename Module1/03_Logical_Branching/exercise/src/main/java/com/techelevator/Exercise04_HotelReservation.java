@@ -31,7 +31,7 @@ public class Exercise04_HotelReservation {
 
     /*
     The owners of Innovator's Inn offer parking at an additional cost of $25.00 per night.
-    Calculate the stay total based on the number of nights (int) 
+    Calculate the stay total based on the number of nights (int)
     and on whether the guest requires parking (boolean).
 
     Examples:
@@ -48,9 +48,9 @@ public class Exercise04_HotelReservation {
 
     /*
     Innovator's Inn offers late checkout—but it comes at a price.
-    A guest can reserve a late checkout for an additional fee of $20. 
-    Calculate the stay total given the number of nights (int), 
-    whether they require parking (boolean), and whether they require a late checkout (boolean). 
+    A guest can reserve a late checkout for an additional fee of $20.
+    Calculate the stay total given the number of nights (int),
+    whether they require parking (boolean), and whether they require a late checkout (boolean).
 
     Examples:
     calculateStayTotal(2, false, false) ➔ 199.98
