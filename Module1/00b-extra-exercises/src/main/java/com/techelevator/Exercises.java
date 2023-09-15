@@ -12,7 +12,39 @@ public class Exercises {
     arrayDeduplication([1, 1, 1]) → [1]
     */
     public int[] arrayDeduplication(int[] nums) {
-        return null;
+        System.out.println(nums);
+        if(nums.length < 1){
+            return nums;
+        }
+        int dup = 0;
+        String text = "";
+        // Array length
+        for (int i = 0; i < nums.length; i++) {
+            text += nums[i] + ", ";
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[i] == nums[j]){
+                    dup += 1;
+                }
+            }
+        }
+        System.out.println(text);
+        System.out.println(dup);
+        System.out.println(nums);
+        int[] newArray = new int[nums.length - dup];
+        for (int i = 0; i < nums.length; i++) {
+            boolean dup_boo = false;
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[i] == nums[j]){
+                    dup_boo = true;
+                }
+            }
+            if (dup_boo == false) {
+                newArray[i] = nums[i];
+                System.out.println(newArray[i]);
+            }
+        }
+        System.out.println(newArray);
+        return newArray;
     }
     
     /*
