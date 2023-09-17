@@ -4,75 +4,70 @@ import java.util.Scanner;
 
 public class LinearConvert {
 	public static double convertToDouble(Scanner scanner){
-//		text
-		String error_None_Int = "Sorry the input received is not a number. \n" +
-				"Please try again using a valid number. ";
-
 		String element = scanner.nextLine();
-		Double number;
-
 		while(true){
 			try {
-				number = Double.parseDouble(element);
-				break;
+				return Double.parseDouble(element);
 			}
 			catch (NumberFormatException ex){
 				System.out.println(ex);
-				System.out.println(error_None_Int);
+				retry("number", element);
 				element = scanner.nextLine();
 			};
-		};
-		return number;
+		}
 	};
+
+	public static void retry(String choice, String input){
+		//Error Strings
+		String inputR = "Sorry the input received";
+		String invalid = 	"\nis not a valid " + choice + ".\n";
+		String tryAgain = 	"Please try again using a valid " + choice;
+		System.out.println(inputR+ "\n--> " + input + invalid + tryAgain);
+	}
+
+	public static void welcome(){
+		String welcome = "Welcome to the program";
+		String goal = "The goal of this program is to\n" +
+				"convert: [Meters] -> [Feet]" +
+				"\nOR\n" +
+				"convert: [Feet] -> [Meters]";
+		String selection = "Please type 'm' or 'f' to convert your number to that measurement system";
+		System.out.println(welcome);
+		System.out.println(goal);
+		System.out.println(selection);
+
+	}
 
 
 	public static void main(String[] args) {
 		final double m = 0.3048;
 		final double f = 3.2808399;
-		String welcome = "Welcome to the program";
 
-		String goal = "The goal of this program is to\n" +
-				"convert: [Meters] -> [Feet]" +
-				"\nOR\n"+
-				"convert: [Feet] -> [Meters]";
-
-		String selection = "Please type 'm' or 'f' to convert your number to that measurement system";
-		String request_Input = "Please input your desired starting number. ";
-
-		//Error Strings
-		String input_R = "Sorry the input received";
-		String invalid = 	"\nis not a valid input.\n";
-		String try_Again = 	"Please try again using a valid parameter. ";
-		String sc = "Successful";
+		welcome();
 
 		Scanner scanner = new Scanner(System.in);
-
-		System.out.println(welcome);
-		System.out.println(goal);
-		System.out.println(selection);
-		String choice = scanner.nextLine();
-
+		String inputEntry = scanner.nextLine();
 		while(true){
-			if(choice.equals("m") || choice.equals("f")){
+			if(inputEntry.equals("m") || inputEntry.equals("f")){
 				break;
 			}
-			System.out.println(input_R+ "\n--> " + choice + invalid + try_Again);
-			choice = scanner.nextLine();
+			retry(" parameter of: 'm' or 'f'", inputEntry);
+			inputEntry = scanner.nextLine();
+		}
+		String requestInput = "Please input your desired starting number. ";
+		System.out.println(requestInput);
+		double numberChoice = convertToDouble(scanner);
+
+		if (inputEntry.equals("m")){
+			double num = numberChoice * m;
+			int result = (int) num;
+			System.out.println("Your number " + numberChoice + " x " + m + " = " + result + " Meters");
 		}
 
-		System.out.println(request_Input);
-		double number_Choice = convertToDouble(scanner);
-
-		if (choice.equals("m")){
-			double num = number_Choice * m;
+		if (inputEntry.equals("f")){
+			double num = numberChoice * f;
 			int result = (int) num;
-			System.out.println("Your number " + number_Choice + " x " + m + " = " + result + " Meters");
-		}
-
-		if (choice.equals("f")){
-			double num = number_Choice * f;
-			int result = (int) num;
-			System.out.println("Your number " + number_Choice + " x " + f + " = " + result + " Feet");
+			System.out.println("Your number " + numberChoice + " x " + f + " = " + result + " Feet");
 		}
 	}
 

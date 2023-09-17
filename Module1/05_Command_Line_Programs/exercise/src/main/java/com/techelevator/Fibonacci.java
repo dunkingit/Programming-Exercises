@@ -1,60 +1,59 @@
 package com.techelevator;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Fibonacci {
 
-	public static int convert_To_Int(String element){
-//		text
-		String error_None_Int = "Sorry the input received is not a number. \n" +
-				"Please try again using a valid number. ";
-		String sc = "Successfully made int. ";
-
-		int number;
-
+	public static int convertToInt(Scanner scanner){
+		String element = scanner.nextLine();
 		while(true){
 			try {
-				number = Integer.parseInt(element);
-				break;
+				return Integer.parseInt(element);
 			}
 			catch (NumberFormatException ex){
 				System.out.println(ex);
-				System.out.println(error_None_Int);
-				Scanner scanner = new Scanner(System.in);
+				retry("number", element);
 				element = scanner.nextLine();
 			};
-		};
-
-		return number;
+		}
 	};
 
-	public static void main(String[] args) {
+	public static void retry(String choice, String input){
+		//Error Strings
+		String inputR = "Sorry the input received";
+		String invalid = 	"\nis not a valid " + choice + ".\n";
+		String tryAgain = 	"Please try again using a valid " + choice;
+		System.out.println(inputR+ "\n--> " + input + invalid + tryAgain);
+	}
+
+	public static void welcome(){
 		String welcome = "Welcome to the program";
 		String goal = "The goal of this program is to get the fibonacci numbers up to the " +
 				"specified numbers";
-		String request_Input = "Please input your desired starting number. ";
-		String fib_Numbers = "0,1";
-
+		String requestInput = "Please input your desired starting number. ";
 		System.out.println(welcome);
 		System.out.println(goal);
-		System.out.println(request_Input);
+		System.out.println(requestInput);
+	}
 
+	public static void main(String[] args) {
+		welcome();
+		String listOfFibNumbers = "0,1";
 		Scanner scanner = new Scanner(System.in);
-		int number_Choice = convert_To_Int(scanner.nextLine());
+		int numberChoice = convertToInt(scanner);
 
-		for (int i = 0; i < number_Choice; i++) {
-			String[] newArray = fib_Numbers.split(",");
-			int last = convert_To_Int(newArray[newArray.length - 1]);
-			int before_Last = convert_To_Int(newArray[newArray.length - 2]);
-			i = before_Last + last;
-			if(i > number_Choice){
+		for (int i = 0; i < numberChoice; i++) {
+			String[] newArray = listOfFibNumbers.split(",");
+			int lastElement = Integer.parseInt(newArray[newArray.length - 1]);
+			int beforeLastElement = Integer.parseInt(newArray[newArray.length - 2]);
+			i = beforeLastElement + lastElement;
+			if(i > numberChoice){
 				break;
 			}
-			System.out.println(before_Last + " + " + last + " = " + i);
-			fib_Numbers += "," + i;
+			System.out.println(beforeLastElement + " + " + lastElement + " = " + i);
+			listOfFibNumbers += "," + i;
 		}
 		System.out.println("\n-----Fibonacci-----");
-		System.out.println(fib_Numbers);
+		System.out.println(listOfFibNumbers);
 	}
 
 }

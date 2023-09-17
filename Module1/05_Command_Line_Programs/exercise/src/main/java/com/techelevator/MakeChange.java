@@ -12,44 +12,42 @@ import java.util.Scanner;
  */
 public class MakeChange {
 	public static double convertToDouble(Scanner scanner){
-//		text
-		String error_None_Int = "Sorry the input received is not a number. \n" +
-				"Please try again using a valid number. ";
-
 		String element = scanner.nextLine();
-		Double number;
-
 		while(true){
 			try {
-				number = Double.parseDouble(element);
-				break;
+				return Double.parseDouble(element);
 			}
 			catch (NumberFormatException ex){
 				System.out.println(ex);
-				System.out.println(error_None_Int);
+				retry("number", element);
 				element = scanner.nextLine();
 			};
-		};
-		return number;
+		}
+
 	};
 
-	public static void main(String[] args) {
-//		Greeting
+	public static void retry(String choice, String input){
+		//Error Strings
+		String inputR = "Sorry the input received";
+		String invalid = 	"\nis not a valid " + choice + ".\n";
+		String tryAgain = 	"Please try again using a valid " + choice;
+		System.out.println(inputR+ "\n--> " + input + invalid + tryAgain);
+	}
+
+	public static void welcome(){
 		String welcome = "Welcome to the program\n";
 		String goal = "The goal of this program is to calculate change\n";
 		String whole_Greeting = welcome + goal;
+		System.out.println(whole_Greeting);
+	}
+
+	public static void main(String[] args) {
+		welcome();
 
 //		Questions
 		String amount_Bill = "Please enter the amount of the bill:\n";
 		String amount_Tendered = "Please enter the amount tendered: ";
 
-
-		//Error Strings
-		String input_R = "Sorry the input received";
-		String invalid = 	"\nis not a valid input.\n";
-		String try_Again = 	"Please try again using a valid parameter. ";
-
-		System.out.println(whole_Greeting);
 		Scanner scanner = new Scanner(System.in);
 		double result;
 
@@ -70,7 +68,5 @@ public class MakeChange {
 		}
 
 		System.out.println("The change required is: " + result);
-
 	}
-
 }
