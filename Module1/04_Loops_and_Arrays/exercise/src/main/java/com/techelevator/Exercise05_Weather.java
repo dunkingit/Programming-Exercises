@@ -73,10 +73,9 @@ public class Exercise05_Weather {
 	fixTemperatures([]) → []
      */
     public int[] fixTemperatures(int[] temperatures) {
-        for (int each: temperatures) {
-            each = each + 2;
+        for (int i = 0; i < temperatures.length; i++) {
+            temperatures[i] = i == 0 || i % 2 == 0? temperatures[i] += 2:temperatures[i];
         }
-        System.out.println(temperatures.toString());
         return temperatures;
     };
 }
