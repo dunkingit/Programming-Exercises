@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import java.lang.reflect.Array;
+
 public class Exercise05_Weather {
 
     private final static int FREEZING_TEMPERATURE = 32;
@@ -25,7 +27,11 @@ public class Exercise05_Weather {
 	belowFreezing([]) → 0
     */
 	public int belowFreezing(int[] dailyHighs) {
-		return 0;
+        int days = 0;
+        for (int i = 0; i < dailyHighs.length; i++) {
+            if (dailyHighs[i] <= 32){days++;};
+        }
+		return days;
 	}
 
     /*
@@ -43,7 +49,13 @@ public class Exercise05_Weather {
 	hottestDay([55]) → 55
     */
     public int hottestDay(int[] dailyHighs) {
-        return 0;
+        int set_Highest = -100;
+        for (int i = 0; i < dailyHighs.length; i++) {
+            if (dailyHighs[i] > set_Highest){
+                set_Highest = dailyHighs[i];
+            };
+        }
+        return set_Highest;
     }
 
     /*
@@ -61,6 +73,10 @@ public class Exercise05_Weather {
 	fixTemperatures([]) → []
      */
     public int[] fixTemperatures(int[] temperatures) {
-        return new int[] {};
-    }
+        for (int each: temperatures) {
+            each = each + 2;
+        }
+        System.out.println(temperatures.toString());
+        return temperatures;
+    };
 }

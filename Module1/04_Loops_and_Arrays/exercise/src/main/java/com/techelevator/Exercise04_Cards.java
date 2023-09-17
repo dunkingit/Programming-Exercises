@@ -61,15 +61,13 @@ public class Exercise04_Cards {
     discardTopCard([]) → []
      */
     public String[] discardTopCard(String[] remainingDeck) {
-        if (remainingDeck.length > 0){
-            String[] hand = new String[remainingDeck.length - 1];
-            for (int i = 0; i < remainingDeck.length; i++) {
-                hand[i] = remainingDeck[i + 1];
-            }
+        if (remainingDeck.length == 0){
+            return remainingDeck;
             };
-
-
-
-
-    }    
+        String[] hand = new String[remainingDeck.length - 1];
+        for (int i = 0; i < remainingDeck.length - 1; i++) {
+            hand[i] = remainingDeck[i + 1];
+        }
+        return hand;
+    }
 }
