@@ -64,7 +64,7 @@ public class TempConvert {
 
 		Scanner scanner = new Scanner(System.in);
 		String userInput = userio(scanner);
-		
+
 		System.out.println("Please input your desired starting number. ");
 		double numberChoice = convertToDouble(scanner);
 		if (userInput.equals("c")){
