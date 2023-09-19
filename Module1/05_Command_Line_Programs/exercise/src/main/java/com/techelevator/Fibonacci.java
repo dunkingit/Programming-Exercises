@@ -26,6 +26,8 @@ public class Fibonacci {
 	}
 
 	public static void welcome(){
+		/// Method to welcome the visitor. ///
+
 		String welcome = "Welcome to the program";
 		String goal = "The goal of this program is to get the fibonacci numbers up to the " +
 				"specified numbers";
