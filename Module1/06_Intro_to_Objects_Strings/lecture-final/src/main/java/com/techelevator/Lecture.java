@@ -1,11 +1,21 @@
 package com.techelevator;
 
+
+
+import java.util.Scanner;
+
 public class Lecture {
 
 	public static void main(String[] args) {
 
+		Scanner scanner = new Scanner(System.in);
+
+		com.techelevator.example.ExampleClass exampleClass = new com.techelevator.example.ExampleClass();
+
 		JavaBlueStrings jbStr = new JavaBlueStrings();
-		jbStr.setGivenString("Hey Students!");
+		System.out.println("Enter a message:");
+		String consoleSubmission = scanner.nextLine();
+		jbStr.setGivenString(consoleSubmission);
 		System.out.println(jbStr.getGivenString());
 
 		JavaBlueStrings javaBStr = new JavaBlueStrings();
