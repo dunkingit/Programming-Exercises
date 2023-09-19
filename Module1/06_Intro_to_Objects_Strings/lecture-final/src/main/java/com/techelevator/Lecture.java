@@ -4,6 +4,16 @@ public class Lecture {
 
 	public static void main(String[] args) {
 
+		JavaBlueStrings jbStr = new JavaBlueStrings();
+		jbStr.setGivenString("Hey Students!");
+		System.out.println(jbStr.getGivenString());
+
+		JavaBlueStrings javaBStr = new JavaBlueStrings();
+		javaBStr.setGivenString("Hey, I'm a new Java Blue String!");
+
+
+
+
 		System.out.println("************************************");
 		System.out.println("****** MAKING A STRING OBJECT ******");
 		System.out.println("************************************");
@@ -15,14 +25,31 @@ public class Lecture {
 
 		/* create an new instance of String using a literal */
 
-		
+		String bootcampName = "Tech Elevator";
+
+		System.out.println(bootcampName);
+
+		bootcampName = bootcampName.toUpperCase();
+
+		System.out.println(bootcampName);
+		System.out.println(bootcampName);
+		System.out.println(bootcampName);
+		System.out.println(bootcampName);
+
 		System.out.println();
 		System.out.println("******************************");
 		System.out.println("****** MEMBER METHODS ******");
 		System.out.println("******************************");
 		System.out.println();
 
+		String bootName = "TECH ELEVATOR";
 
+		boolean isBootCampStringSame = bootName == bootcampName;
+		System.out.println(isBootCampStringSame);
+
+		isBootCampStringSame = bootName.equals(bootcampName);
+
+		System.out.println(isBootCampStringSame);
 		/* Other commonly used methods:
 		 *
 		 * endsWith
