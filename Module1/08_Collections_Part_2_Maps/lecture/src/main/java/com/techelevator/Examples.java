@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Examples {
@@ -9,7 +10,14 @@ public class Examples {
 	 * separated by a comma, return a map where the character is the key and the house is the value.
 	 */
 	public Map<String,String> hogwartsHouseName(String[] hogwartsRoster) {
-		return null;
+		Map<String,String> dict = new HashMap<>();
+		for(String each: hogwartsRoster){
+			String[] array = each.split(",");
+			String key = array[0];
+			String value = array[1];
+			dict.put(key, value);
+		}
+		return dict;
 	}
 
 	/*

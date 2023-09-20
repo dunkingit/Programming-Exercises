@@ -1,7 +1,7 @@
 package com.techelevator;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.SQLOutput;
+import java.util.*;
 
 public class Exercises {
 
@@ -14,16 +14,16 @@ public class Exercises {
 	 *
 	 * If the name of the animal is not found, null, or empty, return "unknown".
 	 *
-	 * Rhino -> Crash
-	 * Giraffe -> Tower
-	 * Elephant -> Herd
-	 * Lion -> Pride
-	 * Crow -> Murder
-	 * Pigeon -> Kit
-	 * Flamingo -> Pat
-	 * Deer -> Herd
-	 * Dog -> Pack
-	 * Crocodile -> Float
+	 Rhino -> Crash
+	 Giraffe -> Tower
+	 Elephant -> Herd
+	 Lion -> Pride
+	 Crow -> Murder
+	 Pigeon -> Kit
+	 Flamingo -> Pat
+	 Deer -> Herd
+	 Dog -> Pack
+	 Crocodile -> Float
 	 *
 	 * animalGroupName("giraffe") → "Tower"
 	 * animalGroupName("") -> "unknown"
@@ -34,7 +34,27 @@ public class Exercises {
 	 *
 	 */
 	public String animalGroupName(String animalName) {
-		return null;
+		String[] array = {"Rhino,Crash,"
+				,"Giraffe,Tower,"
+				,"Elephant,Herd,"
+				,"Lion,Pride,"
+				,"Crow,Murder,"
+				,"Pigeon,Kit,"
+				,"Flamingo,Pat,"
+				,"Deer,Herd,"
+				,"Dog,Pack,"
+				,"Crocodile,Float,"
+		};
+
+		Map<String, String> newDict = new HashMap<>();
+		for(String each: array){
+			String key = each.split(",")[0].toLowerCase(Locale.ROOT);
+			String value = each.split(",")[1];
+			newDict.put(key, value);
+		}
+//		return newDict.getOrDefault(animalName.toLowerCase(Locale.ROOT), "unknown");
+		return animalName != null && animalName.length() > 1 && newDict.containsKey(animalName.toLowerCase())?
+				newDict.get(animalName.toLowerCase()):"unknown";
 	}
 
 	/*
@@ -60,7 +80,21 @@ public class Exercises {
 	 *
 	 */
 	public double isItOnSale(String itemNumber) {
-		return -1.0;
+		try{
+			itemNumber = itemNumber.toUpperCase();
+			Map<String, Double> newDict = new HashMap<>();
+			String[] codes = {"KITCHEN4001", "GARAGE1070", "LIVINGROOM", "KITCHEN6073", "BEDROOM3434", "BATH0073"};
+			double[] discounts = {0.20, 0.15, 0.10, 0.40, 0.60, 0.15};
+			for (int i = 0; i < codes.length; i++) {
+				String key = codes[i];
+				double value = discounts[i];
+				newDict.put(key, value);
+			}
+			return newDict.getOrDefault(itemNumber, 0.00);
+		}
+		catch (Exception ex){
+			return 0.00;
+		}
 	}
 
 	/*
@@ -76,8 +110,29 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> robPeterToPayPaul(Map<String, Integer> peterPaul) {
-		return null;
-	}
+		int peter = peterPaul.get("Peter");
+		int paul = peterPaul.get("Paul");
+
+		boolean conditon1 = paul < 1000;
+		boolean conditon2 = peter > 0;
+
+		// Peter -> Paul
+
+		if(conditon1 && conditon2){
+			int peterHalf =  peter % 2 == 0? (int)(peter / 2) : (int)Math.ceil((double)(peter) / 2);
+			int paulHalf = 	peter % 2 == 0? paul + (int)Math.ceil((double)(peter) / 2):paul + (int)(peter / 2);
+			peterPaul.put("Peter", peterHalf);
+			peterPaul.put("Paul", paulHalf);
+			return peterPaul;
+
+		};
+		//Expected: map containing ["Peter"-><1173>]
+		//     but: map was [<Peter=1172>, <Paul=1672>]
+
+		//Expected: map containing ["Paul"-><1672>]
+		//     but: map was [<Peter=1173>, <Paul=1673>]
+		return peterPaul;
+	};
 
 	/*
 	 * Modify and return the given Map as follows: if "Peter" has $50 or more, AND "Paul" has $100 or more,
@@ -89,7 +144,25 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> peterPaulPartnership(Map<String, Integer> peterPaul) {
-		return null;
+			int peter = peterPaul.get("Peter");
+			int paul = peterPaul.get("Paul");
+
+			boolean conditon1 = peter >= 5000;
+			boolean conditon2 = paul >= 10000;
+
+		System.out.println(conditon1);
+		System.out.println(conditon2);
+
+			if(conditon1 && conditon2){
+				double quarter = (double)(peter / 4) + (double)(paul / 4);
+				peterPaul.put("Peter", peter - (int)(peter / 4));
+				peterPaul.put("Paul", paul - (int)(paul / 4));
+				peterPaul.put("PeterPaulPartnership", (int)(quarter));
+				System.out.println(peterPaul);
+				return peterPaul;
+			}
+		System.out.println(peterPaul);
+			return peterPaul;
 	}
 
 	/*
@@ -104,7 +177,9 @@ public class Exercises {
 	 * beginningAndEnding(["muddy", "good", "moat", "good", "night"]) → {"g": "d", "m": "t", "n": "t"}
 	 */
 	public Map<String, String> beginningAndEnding(String[] words) {
-		return null;
+		Map<String, String> newDict2 = new HashMap<>();
+		Arrays.asList(words).forEach((el) -> newDict2.put(el.substring(0, 1), el.substring(el.length() -1)));
+		return newDict2;
 	}
 
 	/*
@@ -120,7 +195,15 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> wordCount(String[] words) {
-		return null;
+		Map<String, Integer> dict = new HashMap<>();
+		for(String each: words){
+			int counter = 0;
+			for(String other: words){
+				if(each.equals(other)){counter++;};
+			}
+			dict.put(each, counter);
+		}
+		return dict;
 	}
 
 	/*
@@ -135,7 +218,15 @@ public class Exercises {
 	 *
 	 */
 	public Map<Integer, Integer> integerCount(int[] ints) {
-		return null;
+		Map<Integer, Integer> dict = new HashMap<>();
+		for(int each: ints){
+			int counter = 0;
+			for(int other: ints){
+				if(each == other){counter++;};
+			}
+			dict.put(each, counter);
+		}
+		return dict;
 	}
 
 	/*
@@ -148,7 +239,15 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Boolean> wordMultiple(String[] words) {
-		return null;
+		Map<String, Boolean> dict = new HashMap<>();
+		for(String each: words){
+			int counter = 0;
+			for(String other: words){
+				if(each.equals(other)){counter++;};
+			}
+			dict.put(each, counter >= 2);
+		}
+		return dict;
 	}
 
 	/*
@@ -163,7 +262,23 @@ public class Exercises {
 	 */
 	public Map<String, Integer> consolidateInventory(Map<String, Integer> mainWarehouse,
 			Map<String, Integer> remoteWarehouse) {
-		return null;
+
+		Map<String, Integer> dict = new HashMap<>();
+		dict.putAll(mainWarehouse);
+		System.out.println(dict);
+		for(Map.Entry<String, Integer> each: remoteWarehouse.entrySet()){
+			String key = each.getKey();
+			int value = each.getValue();
+			if(dict.containsKey(key)){
+				int both = dict.get(key) + remoteWarehouse.get(key);
+				System.out.println("Inner Value " + mainWarehouse.get(key));
+				System.out.println("Inner Value " + remoteWarehouse.get(key));
+				System.out.println("Both: " + both);
+				dict.put(key, both);
+			}else {dict.put(key, value);}
+		}
+		System.out.println(dict);
+		return dict;
 	}
 
 	/*
