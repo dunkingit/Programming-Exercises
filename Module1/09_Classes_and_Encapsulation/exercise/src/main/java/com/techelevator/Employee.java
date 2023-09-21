@@ -6,7 +6,6 @@ public class Employee {
     int employeeId;
     String firstName;
     String lastName;
-    String fullName;
     String department;
     double annualSalary;
 
@@ -45,7 +44,6 @@ public class Employee {
     }
 
     public void setDepartment(String department) {
-//
         this.department = department;
     }
 
