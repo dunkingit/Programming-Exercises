@@ -116,21 +116,13 @@ public class Exercises {
 		boolean conditon1 = paul < 1000;
 		boolean conditon2 = peter > 0;
 
-		// Peter -> Paul
-
 		if(conditon1 && conditon2){
 			int peterHalf =  peter % 2 == 0? (int)(peter / 2) : (int)Math.ceil((double)(peter) / 2);
 			int paulHalf = 	peter % 2 == 0? paul + (int)Math.ceil((double)(peter) / 2):paul + (int)(peter / 2);
 			peterPaul.put("Peter", peterHalf);
 			peterPaul.put("Paul", paulHalf);
 			return peterPaul;
-
 		};
-		//Expected: map containing ["Peter"-><1173>]
-		//     but: map was [<Peter=1172>, <Paul=1672>]
-
-		//Expected: map containing ["Paul"-><1672>]
-		//     but: map was [<Peter=1173>, <Paul=1673>]
 		return peterPaul;
 	};
 
@@ -146,13 +138,8 @@ public class Exercises {
 	public Map<String, Integer> peterPaulPartnership(Map<String, Integer> peterPaul) {
 			int peter = peterPaul.get("Peter");
 			int paul = peterPaul.get("Paul");
-
 			boolean conditon1 = peter >= 5000;
 			boolean conditon2 = paul >= 10000;
-
-		System.out.println(conditon1);
-		System.out.println(conditon2);
-
 			if(conditon1 && conditon2){
 				double quarter = (double)(peter / 4) + (double)(paul / 4);
 				peterPaul.put("Peter", peter - (int)(peter / 4));
@@ -161,7 +148,6 @@ public class Exercises {
 				System.out.println(peterPaul);
 				return peterPaul;
 			}
-		System.out.println(peterPaul);
 			return peterPaul;
 	}
 
@@ -265,15 +251,11 @@ public class Exercises {
 
 		Map<String, Integer> dict = new HashMap<>();
 		dict.putAll(mainWarehouse);
-		System.out.println(dict);
 		for(Map.Entry<String, Integer> each: remoteWarehouse.entrySet()){
 			String key = each.getKey();
 			int value = each.getValue();
 			if(dict.containsKey(key)){
 				int both = dict.get(key) + remoteWarehouse.get(key);
-				System.out.println("Inner Value " + mainWarehouse.get(key));
-				System.out.println("Inner Value " + remoteWarehouse.get(key));
-				System.out.println("Both: " + both);
 				dict.put(key, both);
 			}else {dict.put(key, value);}
 		}
@@ -297,7 +279,22 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> last2Revisited(String[] words) {
-		return null;
+
+		Map<String, Integer> dict = new HashMap<>();
+
+		for(String each: words){
+			int counter = 0;
+			String last2 = each.substring(each.length() - 2);
+			String wholeWord = each.substring(0, each.length() - 1);
+			for (int i = 0; i < each.length() - 2; i++) {
+				String testString = wholeWord.substring(i, i+2);
+				if(testString.equals(last2)){
+					counter++;
+				};
+			}
+			dict.put(each, counter);
+		};
+		return dict;
 	}
 
 }
