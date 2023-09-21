@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Examples {
@@ -9,7 +10,18 @@ public class Examples {
 	 * separated by a comma, return a map where the character is the key and the house is the value.
 	 */
 	public Map<String,String> hogwartsHouseName(String[] hogwartsRoster) {
-		return null;
+		Map<String, String> pottersFriends = new HashMap<>();
+
+		for(String currentString : hogwartsRoster){
+			//"Harry Potter,Griffindor"
+			//if I split a string based on a character I get back an array with each element pulled from the original string
+			String[] arrayFromCurrentString = currentString.split(",");
+			//arrayFromCurrentString[0] represents the character
+			//arrayFromCurrentString[1] represents the house
+			pottersFriends.put(arrayFromCurrentString[0], arrayFromCurrentString[1]);
+		}
+
+		return pottersFriends;
 	}
 
 	/*
