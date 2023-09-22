@@ -40,4 +40,12 @@ public class Pizza {
     public void setToppings(List<String> toppings) {
         this.toppings = toppings;
     }
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "size='" + size + '\'' +
+                ", toppings=" + toppings +
+                '}';
+    }
 }

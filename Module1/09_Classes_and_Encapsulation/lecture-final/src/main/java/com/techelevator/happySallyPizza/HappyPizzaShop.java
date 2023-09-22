@@ -35,9 +35,13 @@ public class HappyPizzaShop {
         //calling the setToppings() setter to give our instance toppings
         largePizza.setToppings(listyToppings);
 
+
+
+        System.out.println(largePizza);
         //print to the console the state of our second pizza
         System.out.println(largePizza.getPrice());
         System.out.println(largePizza.getSize());
         System.out.println(largePizza.getToppings());
+
     }
 }
