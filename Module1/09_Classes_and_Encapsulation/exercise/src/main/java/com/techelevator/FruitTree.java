@@ -16,6 +16,13 @@ public class FruitTree {
     public String getTypeOfFruit() {
         return typeOfFruit;
     }
+
+//    public void setPiecesOfFruitLeft(int piecesOfFruitLeft) {
+//        this.piecesOfFruitLeft = piecesOfFruitLeft;
+//    }
+
+
+    //    Create a method called pickFruit that accepts an int called numberOfPiecesToRemove and returns a boolean.
     public boolean pickFruit(int numberOfPiecesToRemove){
         if(getPiecesOfFruitLeft() - numberOfPiecesToRemove >= 0){
             this.piecesOfFruitLeft = (getPiecesOfFruitLeft() - numberOfPiecesToRemove);
