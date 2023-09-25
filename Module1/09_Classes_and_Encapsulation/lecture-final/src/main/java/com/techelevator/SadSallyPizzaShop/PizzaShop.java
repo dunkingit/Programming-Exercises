@@ -1,7 +1,7 @@
 package com.techelevator.SadSallyPizzaShop;
 
 import java.util.Scanner;
-public class SSPizzaShop {
+public class PizzaShop {
 
         public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
