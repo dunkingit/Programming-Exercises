@@ -12,17 +12,12 @@ public class SavingsAccount extends BankAccount{
 
     @Override
     public int withdraw(int amountToWithdraw) {
-        final double BELOWAMOUNTCHARGEFEE = 150.00;
+        final double MAINTENANCE_AMOUNT = 150.00;
         final int FEE = 2;
-        int checkTransaction = this.getBalance() - amountToWithdraw;
-        boolean chargeFee = checkTransaction < BELOWAMOUNTCHARGEFEE;
-        int transaction = chargeFee? amountToWithdraw + FEE:amountToWithdraw;
-
-        int checkBalance = this.getBalance() - transaction;
-        if(checkBalance < 0 || amountToWithdraw <= 0){
-            return super.withdraw(0);
-        };
-        return super.withdraw(transaction);
+        int verifyFunds = this.getBalance() - Math.max(amountToWithdraw, 0);;
+        boolean chargeFee = verifyFunds < MAINTENANCE_AMOUNT;
+        int transaction = chargeFee? amountToWithdraw + FEE :amountToWithdraw;
+        return super.withdraw(this.getBalance() - transaction >= 0? transaction:0);
 
     }
 }

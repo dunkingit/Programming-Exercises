@@ -12,14 +12,12 @@ public class CheckingAccount extends BankAccount {
 
     @Override
     public int withdraw(int amountToWithdraw) {
-        final double MAXOVERDRAW = -100.00;
+        final double OVERDRAW_LIMIT = -100.00;
         final int FEE = 10;
-        int checkTransaction = this.getBalance() - amountToWithdraw;
-        boolean chargeFee = checkTransaction > MAXOVERDRAW && checkTransaction < 0;
+
+        int verifyFunds = this.getBalance() - Math.max(amountToWithdraw, 0);
+        boolean chargeFee = verifyFunds > OVERDRAW_LIMIT && verifyFunds < 0;
         int transaction = chargeFee? amountToWithdraw + FEE:amountToWithdraw;
-        if(checkTransaction <= MAXOVERDRAW || amountToWithdraw <= 0){
-            return super.withdraw(0);
-        };
-        return super.withdraw(transaction);
+        return super.withdraw(verifyFunds <= OVERDRAW_LIMIT? 0:transaction);
     }
 }
