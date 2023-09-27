@@ -37,8 +37,13 @@ public class BankCustomer{
     }
 
     public Accountable[] getAccounts() {
-//        Accountable[] array = new Accountable[this.accounts.size()];
-        Accountable[] array = (Accountable[]) accounts.toArray();
+        Accountable[] array = new Accountable[this.accounts.size()];
+        int counter = 0;
+
+        for(Accountable each: this.accounts){
+            array[counter] = each;
+            counter++;
+        }
         return array;
     }
 
