@@ -1,5 +1,8 @@
 package com.techelevator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Application {
 
     public static void main(String[] args) {
@@ -35,5 +38,15 @@ public class Application {
             System.out.println(currentBid.getBidder() + " with bid: " + currentBid.getBidAmount());
         }
         System.out.println(buyoutAuction.getHighBid().getBidder() + " is the winner with a bid of " + buyoutAuction.getHighBid().getBidAmount());
+
+        List<Auction> auctions = new ArrayList<>();
+        auctions.add(generalAuction);
+        auctions.add(reserveAuction);
+        auctions.add(buyoutAuction);
+
+        for(Auction currentAuction : auctions){
+            currentAuction.placeBid(new Bid("Testing Bid", 40));
+            System.out.println(currentAuction.getHighBid().getBidder() + " won with a bid of : " + currentAuction.getHighBid().getBidAmount());
+        }
     }
 }
