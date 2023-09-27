@@ -6,7 +6,7 @@ public class BankCustomer{
     String name;
     String address;
     String phoneNumber;
-    List<Accountable> accounts;
+    private List<Accountable> accounts;
 
     public String getName() {
         return name;
@@ -32,13 +32,21 @@ public class BankCustomer{
         this.phoneNumber = phoneNumber;
     }
 
-    public List<Accountable> getAccounts() {
-        return accounts;
-    }
-
-    public void addAccounts(Accountable newAccount) {
+    public void addAccount(Accountable newAccount) {
         this.accounts.add(newAccount);
     }
+
+    public Accountable[] getAccounts() {
+//        Accountable[] array = new Accountable[this.accounts.size()];
+        Accountable[] array = (Accountable[]) accounts.toArray();
+        return array;
+    }
+
+//    public List<Accountable> getAccounts() {
+//        return this.accounts;
+//    }
+
+
 
     public boolean isVip(){
         int sum = 0;
