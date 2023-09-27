@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class BankCustomer{
@@ -37,19 +38,19 @@ public class BankCustomer{
     }
 
     public Accountable[] getAccounts() {
-        Accountable[] array = new Accountable[this.accounts.size()];
-        int counter = 0;
+//        Accountable[] array = new Accountable[this.accounts.size()];
+//        int counter = 0;
+//
+//        for(Accountable each: this.accounts){
+//            array[counter] = each;
+//            counter++;
+//        }
+//        return array;
+//        Accountable[] array = new Accountable[this.accounts.size()];
+//        return this.accounts.toArray(array);
 
-        for(Accountable each: this.accounts){
-            array[counter] = each;
-            counter++;
-        }
-        return array;
+        return this.accounts.toArray(Accountable[]::new);
     }
-
-//    public List<Accountable> getAccounts() {
-//        return this.accounts;
-//    }
 
 
 
