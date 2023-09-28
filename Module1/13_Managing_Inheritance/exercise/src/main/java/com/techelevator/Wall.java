@@ -4,7 +4,7 @@ abstract class Wall {
     private String color;
     private String name;
 
-    public Wall(String color, String name) {
+    public Wall(String name, String color) {
         this.color = color;
         this.name = name;
     }
