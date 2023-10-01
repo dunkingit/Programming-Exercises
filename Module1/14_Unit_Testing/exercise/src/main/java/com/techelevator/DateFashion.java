@@ -1,6 +1,10 @@
 package com.techelevator;
+import java.lang.reflect.Executable;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class DateFashion {
+
 
     /*
     You and your date are trying to get a table at a restaurant. The parameter "you" is the stylishness
@@ -13,6 +17,7 @@ public class DateFashion {
     dateFashion(5, 5) → 1
     */
     public int getATable(int you, int date) {
+
         int getTable = 1;
 
         if (you <= 2 || date <= 2) {
