@@ -5,46 +5,58 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AnimalGroupNameTests {
-    AnimalGroupName getName;
+    private AnimalGroupName getName;
+
+    private final String errorMessage1 = "Expected herd name for elephant is 'Herd'";
+    private final String errorMessage2 = "Expected herd name for deer is 'Herd'";
+    private final String errorMessage3 = "Animal name should be case insensitive";
+    private final String errorMessage4 = "If the name of the animal is not found, should return 'unknown'";
+    private final String errorMessage5 = "If the name of the animal is null or empty, should return 'unknown'";
 
     @Before
-    public void setup(){
+    public void setup() {
         getName = new AnimalGroupName();
-        System.out.println("Setting up enviroment");
-    };
-
-    @Test
-    public void Get_AnimalGroupName_returns_name_from_map_in_a_String(){
-
-        //Arrange
-        String questiontest1 = "elephant";
-        String answertest1 = "Herd";
-        String questiontest2 = "deer";
-        String answertest2 = answertest1;
-
-
-        //Act
-        String test1 = getName.getHerd(questiontest1);
-        String test2 = getName.getHerd(questiontest2);
-
-        //Edge case
-        //The animal name should be case insensitive
-        //If the name of the animal is not found, null, or empty, return "unknown".
-        String upperCase = questiontest1.toUpperCase();
-        String unknownName = "Cat";
-        String emptyString = "";
-
-        String testUpperCase = getName.getHerd(upperCase);
-        String testUnknownName = getName.getHerd(unknownName);
-        String testEmptyString = getName.getHerd(emptyString);
-
-        // Assert
-        Assert.assertEquals("Expected herd name for elephant is 'Herd'", answertest1, test1);
-        Assert.assertEquals("Expected herd name for deer is 'Herd'", answertest2, test2);
-        Assert.assertEquals("Animal name should be case insensitive", answertest1, testUpperCase);
-        Assert.assertEquals("If the name of the animal is not found, should return 'unknown'", "unknown", testUnknownName);
-        Assert.assertEquals("If the name of the animal is null or empty, should return 'unknown'", "unknown", testEmptyString);
+        System.out.println("Setting up environment");
     }
 
+    @Test
+    public void AnimalGroupName_getHerd_return_Herd_for_elephant() {
+        String input = "elephant";
+        String expected = "Herd";
+        String actual = getName.getHerd(input);
+        Assert.assertEquals(errorMessage1, expected, actual);
+    }
 
-    };
+    @Test
+    public void AnimalGroupName_getHerd_return_Herd_for_deer() {
+        String input = "deer";
+        String expected = "Herd";
+        String actual = getName.getHerd(input);
+        Assert.assertEquals(errorMessage2, expected, actual);
+    }
+
+    @Test
+    public void AnimalGroupName_getHerd_return_Herd_for_ELEPHANT_case_insensitive() {
+        String input = "ELEPHANT";
+        String expected = "Herd";
+        String actual = getName.getHerd(input);
+        Assert.assertEquals(errorMessage3, expected, actual);
+    }
+
+    @Test
+    public void AnimalGroupName_getHerd_return_unknown_for_Cat() {
+        String input = "Cat";
+        String expected = "unknown";
+        String actual = getName.getHerd(input);
+        Assert.assertEquals(errorMessage4, expected, actual);
+    }
+
+    @Test
+    public void AnimalGroupName_getHerd_return_unknown_for_empty_string() {
+        String input = "";
+        String expected = "unknown";
+        String actual = getName.getHerd(input);
+        Assert.assertEquals(errorMessage5, expected, actual);
+    }
+}
+

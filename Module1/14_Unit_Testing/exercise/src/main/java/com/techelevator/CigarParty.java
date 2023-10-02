@@ -1,5 +1,9 @@
 package com.techelevator;
 
+import java.lang.reflect.Member;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
 public class CigarParty {
 
     /*
@@ -12,6 +16,11 @@ public class CigarParty {
      haveParty(70, true) → true
      */
     public boolean haveParty(int cigars, boolean isWeekend) {
+        String methodName = new Object() {}
+                .getClass()
+                .getEnclosingMethod()
+                .getName();
+
         int minimumCigarCount = 40;
         int maximumCigarCount = 60;
 

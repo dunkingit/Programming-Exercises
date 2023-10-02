@@ -5,7 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FrontTimesTest {
-        FrontTimes frontLetters;
+    private FrontTimes frontLetters;
+
+    private final String errorMessage1 = "Expected result didn't match for 'Chocolate' and 2 repetitions";
+    private final String errorMessage2 = "Expected result didn't match for 'Abc' and 3 repetitions";
+    private final String errorMessage3 = "Expected result didn't match for empty string and 3 repetitions";
+    private final String errorMessage4 = "Expected result didn't match for 'Chocolate' and -2 repetitions";
+
     @Before
     public void beginSetup() {
         System.out.println("Beginning Setup");
@@ -13,34 +19,36 @@ public class FrontTimesTest {
     }
 
     @Test
-    public void test_generateString_checks_front_characters_repetition() {
-
-        //String Length Less than 3
-        //Non-Positive
-        //Empty String
-
-        // Step 1: Arrange
-        String word1 = "Chocolate";
-        String word2 = "Abc";
-        String emptyString = "";
-        int negNumber = -2;
-
-        String expected1 = "ChoCho";
-        String expected2 = "AbcAbcAbc";
-        String expected3 = emptyString;
-        String expected4 = emptyString;
-
-        // Step 2: Act
-        String result1 = frontLetters.generateString(word1, 2);
-        String result2 = frontLetters.generateString(word2, 3);
-        String result3 = frontLetters.generateString(emptyString, 3);
-        String result4 = frontLetters.generateString(word1, negNumber);
-
-        // Step 3: Assert
-        Assert.assertEquals(expected1, result1);
-        Assert.assertEquals(expected2, result2);
-        Assert.assertEquals(expected3, result3);
-        Assert.assertEquals(expected4, result4);
+    public void FrontTimes_generateString_return_String_for_Chocolate_and_2() {
+        String word = "Chocolate";
+        String expected = "ChoCho";
+        String actualResult = frontLetters.generateString(word, 2);
+        Assert.assertEquals(errorMessage1, expected, actualResult);
     }
 
+    @Test
+    public void FrontTimes_generateString_return_String_for_Abc_and_3() {
+        String word = "Abc";
+        String expected = "AbcAbcAbc";
+        String actualResult = frontLetters.generateString(word, 3);
+        Assert.assertEquals(errorMessage2, expected, actualResult);
+    }
+
+    @Test
+    public void FrontTimes_generateString_return_empty_string_for_empty_string_and_3() {
+        String word = "";
+        String expected = "";
+        String actualResult = frontLetters.generateString(word, 3);
+        Assert.assertEquals(errorMessage3, expected, actualResult);
+    }
+
+    @Test
+    public void FrontTimes_generateString_return_empty_string_for_Chocolate_and_negative_2() {
+        String word = "Chocolate";
+        int negNumber = -2;
+        String expected = "";
+        String actualResult = frontLetters.generateString(word, negNumber);
+        Assert.assertEquals(errorMessage4, expected, actualResult);
+    }
 }
+

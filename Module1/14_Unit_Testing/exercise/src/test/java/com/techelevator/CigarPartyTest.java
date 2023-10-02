@@ -4,60 +4,57 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
 public class CigarPartyTest {
-        CigarParty party;
+    private CigarParty party;
+    private final String errorMessage1 = "During weekdays, below 40 cigars should return false.";
+    private final String errorMessage2 = "During weekdays, between 40 and 60 cigars should return true.";
+    private final String errorMessage3 = "During weekends, there's no upper limit on cigars.";
 
     @Before
-    public void beginSetup(){
+    public void initialize() {
         party = new CigarParty();
         System.out.println("Beginning Setup");
-    };
+    }
 
     @Test
-    public void CigarParty_returns_boolean_test(){
-        //Tests Boolean between 40 and 60, inclusive.
-        //Unless it is the weekend, no upperbound
-        //(int cigars, boolean isWeekend)
+    public void CigarParty_haveParty_return_boolean_true_for_weekday_and_cigars_in_40_to_60_range() {
+        int cigars = 40;
+        boolean isWeekend = false;
+        boolean result = party.haveParty(cigars, isWeekend);
+        Assert.assertEquals(errorMessage2, true, result);
+    }
 
+    @Test
+    public void CigarParty_haveParty_return_boolean_true_for_weekday_and_cigars_below_40() {
+        int cigars = 60;
+        boolean isWeekend = false;
+        boolean result = party.haveParty(cigars, isWeekend);
+        Assert.assertEquals(errorMessage1, true, result);
+    }
 
-        //Step 1: Arrange
-        //During the weekday
-        int weekdayExclusiveBelowEdgeCase = 40;
-        int weekdayExclusiveAboveEdgeCase = 60;
-        //During the weekend
-        int weekendExclusiveBelowEdgeCase = weekdayExclusiveBelowEdgeCase;
+    @Test
+    public void CigarParty_haveParty_return_boolean_false_for_weekday_and_cigars_above_60() {
+        int cigars = 61;
+        boolean isWeekend = false;
+        boolean result = party.haveParty(cigars, isWeekend);
+        Assert.assertEquals(errorMessage1, false, result);
+    }
 
-        //Step 2: Act
-        //Tests Boolean between 40 and 60, inclusive.
-        boolean test1 = party.haveParty(weekdayExclusiveBelowEdgeCase, false);
-        boolean test2 = party.haveParty(weekdayExclusiveAboveEdgeCase, false);
-        //Outside of inclusive.
-        boolean test3 = party.haveParty(weekdayExclusiveBelowEdgeCase - 1, false);
-        boolean test4 = party.haveParty(weekdayExclusiveAboveEdgeCase + 1, false);
-        //Weekend Test
-        boolean test5 = party.haveParty(weekendExclusiveBelowEdgeCase, true);
+    @Test
+    public void CigarParty_haveParty_return_boolean_false_for_weekend_and_cigars_below_40() {
+        int cigars = 39;
+        boolean isWeekend = true;
+        boolean result = party.haveParty(cigars, isWeekend);
+        Assert.assertEquals(errorMessage1, false, result);
+    }
 
-        //Step 3: Assert
-        String errorMessagePlain = "Expected False, Sorry please try again\n";
-//                "Please double check you are at the right cigar party and try your cigar again. ";
-
-        String errorMessage1 = "Hey there! It looks like the squirrel party might not be a hit this time around. " +
-                "Remember, during the weekdays they prefer between 40 and 60 cigars. " +
-                "Let's try that range, shall we? 😊";
-
-        String errorMessage2 = "Oops! It seems our squirrel friends " +
-                "might be a bit short on cigars for their weekday bash. " +
-                "Let's make sure they have between 40 and 60 cigars for the best party vibes! 🎉";
-
-        String errorMessage3 = "Hold on! The squirrel party isn't booming just yet. " +
-                "If it's the weekend, there's no limit on the fun! But on weekdays, " +
-                "40 to 60 cigars make it perfect. Let's adjust and party on! 🐿️🎈";
-
-
-        Assert.assertEquals(errorMessage1, test1, true);
-        Assert.assertEquals(errorMessage1, test2, true);
-        Assert.assertEquals(errorMessage1, test3, false);
-        Assert.assertEquals(errorMessage2, test4, false);
-        Assert.assertEquals(errorMessage3, test5, true);
-    };
+    @Test
+    public void CigarParty_haveParty_return_boolean_true_for_weekend_and_cigars_above_60() {
+        int cigars = 70;
+        boolean isWeekend = true;
+        boolean result = party.haveParty(cigars, isWeekend);
+        Assert.assertEquals(errorMessage3, true, result);
+    }
 }
+
