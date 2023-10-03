@@ -25,7 +25,7 @@ public class BookReader {
 
         File bookFile = new File(filePath);
         try(Scanner fileInput = new Scanner(bookFile))
-        {
+        {   Scanner pager = new Scanner(System.in);
             boolean inBookText = false;
             while(fileInput.hasNextLine()) {
                 String lineOfText = fileInput.nextLine();
@@ -41,7 +41,7 @@ public class BookReader {
                 if ((lineCount % 10 == 0) && (lineCount > 1))  {
                     System.out.println("Line Count: " + lineCount);
                     System.out.println("Press 'Enter' to continue to the next page");
-                    new Scanner(System.in).nextLine();
+                    pager.nextLine();
                 }
 
                 if (lineOfText.startsWith(END_MARKER)) {
