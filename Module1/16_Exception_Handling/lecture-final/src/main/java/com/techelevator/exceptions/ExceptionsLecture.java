@@ -15,8 +15,16 @@ public class ExceptionsLecture {
 		 * code to handle it. */
 		System.out.println("The following cities: ");
 		String[] cities = new String[] { "Cleveland", "Columbus", "Cincinnati" };
-
-
+		try {
+			System.out.println(cities[0]);
+			System.out.println(cities[1]);
+			System.out.println(cities[2]);
+			System.out.println(cities[3]);
+			System.out.println("Will this line print?");
+		} catch(ArrayIndexOutOfBoundsException e){
+			System.out.println("Yikes! You went too far!");
+			System.out.println(e.getMessage());
+		}
 		System.out.println("**********************************************************************************");
 		System.out.println();
 		System.out.println("**********************************************************************************");
@@ -24,7 +32,12 @@ public class ExceptionsLecture {
 		
 		/* try/catch blocks will also catch Exceptions that are thrown from method calls further down the stack */
 		// try calling doSomethingDangerous()
-
+		try{
+			doSomethingDangerous();
+			System.out.println("Will this line print?");
+		}catch(ArrayIndexOutOfBoundsException e){
+			System.out.println("the array index out of bounds exception was caught");
+		}
 
 
 		System.out.println("**********************************************************************************");
@@ -36,6 +49,22 @@ public class ExceptionsLecture {
 		 * sout messages to ask user how many hours they worked this week and parse value to integer. Then see what happens
 		 * if the user enters a word for the answer vs a numeric value.
 		 *  */
+		while(true){
+
+				System.out.println("How many hours did you work last week: ");
+				String hours = scan.nextLine();
+			try{
+
+				int hoursWorked = Integer.parseInt(hours);
+				int standardWorkWeekHours = 40;
+				int overtimeHours = hoursWorked - 40;
+				System.out.println("You worked " + overtimeHours + " overtime hours last week.");
+				break;
+			}catch(Exception e){
+				System.out.println("We wanted a numeric value not the word.");
+			}
+		}
+
 
 
 		System.out.println("**********************************************************************************");
@@ -62,7 +91,7 @@ public class ExceptionsLecture {
 		
 		/* The withdraw method can throw a checked exception (i.e. OverdraftException) so we need to catch it since
 		 * the main method does not declare that it throws any exceptions. */
-		double currentBalance = 250;
+		double currentBalance = 350;
 		double amountToWithdraw = 300;
 		try {
 			double newBalance = withdraw(currentBalance, amountToWithdraw);
@@ -80,7 +109,11 @@ public class ExceptionsLecture {
 		System.out.println("**********************************************************************************");
 		
 		/* if we try to call the withdraw method outside of a try/catch, it will cause a compiler error */
-		//withdraw(currentBalance, amountToWithdraw);
+		try {
+			withdraw(currentBalance, amountToWithdraw);
+		} catch (OverdraftException e) {
+			throw new RuntimeException(e);
+		}
 
 
 		System.out.println("**********************************************************************************");
@@ -140,6 +173,7 @@ public class ExceptionsLecture {
 		int[] numbers = new int[5];
 		for (int i = 0; i < 10; i++) {
 			numbers[i] = i;  // this line will throw an Exception once i reaches 5
+			System.out.println(numbers[i]);
 		}
 		System.out.println("Look Ma, no Exceptions!");  // This line will not execute because an Exception will be thrown inside the for loop
 	}
