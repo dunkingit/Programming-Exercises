@@ -4,7 +4,10 @@ import java.io.*;
 import java.util.*;
 
 public class FindAndReplace {
-
+//    String promptInputSearchWord;
+//    String promptInputReplaceWord;
+//    String promptInputSourceFile;
+//    String promptInputDestinationFile;
     // Use this scanner for all user input. Don't create additional Scanners with System.in
     private final Scanner userInput = new Scanner(System.in);
     StringBuilder text = new StringBuilder();
@@ -34,7 +37,9 @@ public class FindAndReplace {
             System.err.println("Error: " + e.getMessage());
             System.out.println("The source file could not be found. Exiting...");
             System.exit(0);
-        }
+        };
+
+        //Reading the file
         String promptInputDestinationFile = input("What is the destination file? ");
         if (promptInputSourceFile.equals(promptInputDestinationFile)) {
             System.out.println("Source and destination files are the same. This might corrupt your data. Please provide a different destination.");
@@ -52,6 +57,12 @@ public class FindAndReplace {
             System.out.println("The destination file could not be accessed. Exiting...");
             System.exit(0);
         }
+
+
+
+
     }
+
+
 }
 
