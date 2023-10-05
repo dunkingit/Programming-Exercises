@@ -29,8 +29,7 @@ public class FindAndReplace {
 
         try (Scanner reader = new Scanner(new File(promptInputSourceFile))) {
             while (reader.hasNextLine()) {
-                text.append(reader.nextLine()
-                        .trim().replaceAll(promptInputSearchWord,
+                text.append(reader.nextLine().replaceAll(promptInputSearchWord,
                                 promptInputReplaceWord)).append("\r\n");
             }
         } catch (FileNotFoundException e) {
