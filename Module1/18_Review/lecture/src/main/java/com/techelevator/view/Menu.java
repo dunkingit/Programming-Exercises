@@ -12,6 +12,7 @@ public class Menu {
     private Scanner scanner = new Scanner(System.in);
 
     public String getHomeScreenOption() {
+
         System.out.println("What would you like to do?");
         System.out.println();
 
