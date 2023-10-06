@@ -11,12 +11,12 @@ public class Main {
     public static void main(String[] args) {
 
 
-        double change = 84.75;
+        double change = 84.93;
         double[] moneyChange = {20.00, 10.00, 5.0, 1.00, 0.25, 0.10, 0.05, 0.01};
-        String[] wordChange = {"Twenties", "Ten", "Five", "Dollar", "Quarter", "Dime", "Dime", "Penny"};
+        String[] wordChange = {"Twenties", "Ten", "Five", "Dollar", "Quarter", "Dime", "Nickel", "Penny"};
         String textChange = "";
         int counter = 0;
-        while(change > 0){
+        while(change >= 0 && counter <= 7){
             int div = (int)(change / moneyChange[counter]);
             if (div > 0){
                 change = change - (div * moneyChange[counter]);
