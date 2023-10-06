@@ -2,7 +2,7 @@ package com.techelevator.items;
 
 import java.math.BigDecimal;
 
-public class Item {
+public abstract class Item {
 
     private BigDecimal price;
     private String name;
@@ -50,6 +50,8 @@ public class Item {
         return isTaxable;
     }
 
-
+    public void setTaxable(boolean isTaxable){
+        this.isTaxable = isTaxable;
+    }
 
 }
