@@ -22,8 +22,12 @@ public class Food extends Item{
 
     @Override
     public String toString() {
-        return "Food{" + super.getName() +
-                " isTaxable=" + isTaxable +
+        String taxable = "";
+        if(isTaxable){
+            taxable = "taxable";
+        }
+        return "Food is yummy { " + super.getName() +" - $"+ super.getPrice() +
+                " " + taxable +
                 '}';
     }
 }
