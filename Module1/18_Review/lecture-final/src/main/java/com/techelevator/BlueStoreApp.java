@@ -16,6 +16,14 @@ public class BlueStoreApp {
     public BlueStoreApp(Map<String,Item> inventory){
         this.inventory = inventory;
     }
+
+    /* The main entry point for the application */
+    public static void main(String[] args) {
+        InventoryBuilder inventoryBuilder = new InventoryBuilder("inventory.csv");
+        Map<String, Item> mapOfItems = inventoryBuilder.getInventory();
+        BlueStoreApp javaBlueApp = new BlueStoreApp(mapOfItems);
+        javaBlueApp.run();
+    }
     public void run() {
         menu.displayHomeScreen();
 
@@ -33,7 +41,7 @@ public class BlueStoreApp {
                List<String> skusInCart = menu.getUserCartSelections(choice);
                menu.displayMessage("You selected:");
                for(String sku : skusInCart){
-                   menu.displayMessage(String.valueOf(inventory.get(sku)));
+                   menu.displayMessage((inventory.get(sku)).toString());
                }
 
             }
@@ -43,10 +51,5 @@ public class BlueStoreApp {
             }
         }
     }
-    /* The main entry point for the application */
-    public static void main(String[] args) {
-        InventoryBuilder inventoryBuilder = new InventoryBuilder("inventory.csv");
-        BlueStoreApp javaBlueApp = new BlueStoreApp(inventoryBuilder.getInventory());
-        javaBlueApp.run();
-    }
+
 }
