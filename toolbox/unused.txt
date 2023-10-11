@@ -1,34 +1,9 @@
-public class Main {
-<<<<<<< HEAD
-    public static void main(String[] args) {;
-        Log.output("error.txt", "Testing");
-=======
-    public static void main(String[] args) {
-
-
-//        double change = 84.93;
-//        double[] moneyChange = {20.00, 10.00, 5.0, 1.00, 0.25, 0.10, 0.05, 0.01};
-//        String[] wordChange = {"Twenties", "Ten", "Five", "Dollar", "Quarter", "Dime", "Nickel", "Penny"};
-//        String textChange = "";
-//        int counter = 0;
-//        while(change >= 0 && counter <= 7){
-//            int div = (int)(change / moneyChange[counter]);
-//            if (div > 0){
-//                change = change - (div * moneyChange[counter]);
-//                textChange += "(" + (int)div + ") " + wordChange[counter] + " ";
-//            }
-//            counter++;
-//        }
-//
-//        System.out.println(textChange);
-
-
-        double a = 1.0;
-        double b = 1.00;
-        System.out.println(a == b);
-
-
-
+//        testA test = new testA();
+//        testB test2 = new testB();
+//        test.putstuff();
+//        System.out.println(test.getNewmap().toString());
+//        System.out.println(test2.getNewmap().toString());
+//        System.out.println(test2.testmethod());
 //        change=change%100;
 //        int quarters = Math.round(change/25);
 //        change=change%25;
@@ -62,7 +37,3 @@ public class Main {
 //            System.out.println(Arrays.toString(dict.get(each)));
 //        }
 //        System.out.println(alist);
-
->>>>>>> b3f0e98ec2113ba7d65c704b939489c762b35dba
-    }
-}

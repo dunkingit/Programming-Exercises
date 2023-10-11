@@ -1,7 +1,0 @@
-        List<String> strings = List.of("a", "b", "a", "c", "b", "b", "d");
-        Map<String, Integer> stringOccurrences = tools.countOccurrences(strings);
-        System.out.println(stringOccurrences);  // {a=2, b=3, c=1, d=1}
-
-        List<Integer> integers = List.of(1, 2, 3, 1, 2, 4, 5, 4);
-        Map<Integer, Integer> integerOccurrences = Utility.countOccurrences(integers);
-        PrinterUtility.print(integerOccurrences);
