@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Map;
 
-public class PrinterUtility {
+public class Print {
 
     // For Maps
     public static <K, V> void print(Map<K, V> map) {

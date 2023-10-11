@@ -1,0 +1,39 @@
+//        testA test = new testA();
+//        testB test2 = new testB();
+//        test.putstuff();
+//        System.out.println(test.getNewmap().toString());
+//        System.out.println(test2.getNewmap().toString());
+//        System.out.println(test2.testmethod());
+//        change=change%100;
+//        int quarters = Math.round(change/25);
+//        change=change%25;
+//        int dimes = Math.round(change/10);
+//        change=change%10;
+//        int nickels = Math.round(change/5);
+//        change=change%5;
+//        int pennies = Math.round(change/1);
+
+//        System.out.println("Quarters: " + quarters);
+//        System.out.println("Dimes: " + dimes);
+//        System.out.println("Nickels: " + nickels);
+//        System.out.println("Pennies: " + pennies);
+
+//        FileManager fm = new FileManager();
+//        StringBuilder filetext = fm.read("test1.txt");
+//        System.out.println(filetext);
+//        TestGui test = new TestGui(400, 400);
+
+//        Map<String, String[]> dict = new HashMap<>();
+//
+//        dict.put("a2", new String[]{"a2", "b2"});
+//        dict.put("a1", new String[]{"a1", "b1"});
+//        dict.put("a4", new String[]{"a4", "b4"});
+//        dict.put("A4", new String[]{"A4", "B4"});
+//        dict.put("c3", new String[]{"c3", "b3"});
+//        dict.put("d3", new String[]{"d3", "b3"});
+//        List<String> alist = new ArrayList<>(dict.keySet());
+//        Collections.sort(alist);;
+//        for(String each: alist){
+//            System.out.println(Arrays.toString(dict.get(each)));
+//        }
+//        System.out.println(alist);

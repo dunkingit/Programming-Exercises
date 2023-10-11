@@ -24,14 +24,6 @@ public class Utility {
         return interlaced;
     }
 
-//    public class OccurrenceCounter {
-        /**
-         * Counts the occurrences of each item in a list.
-         *
-         * @param items The list of items to count
-         * @param <T>   The type of items in the list
-         * @return A map where each key is an item from the list and its value is the count of that item's occurrences
-         */
         public static <T> Map<T, Integer> countOccurrences(List<T> items) {
             Map<T, Integer> occurrenceMap = new HashMap<>();
             for (T item : items) {
