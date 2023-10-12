@@ -1,13 +1,12 @@
 package com.techelevator.view;
 
+import com.techelevator.BlueStoreApp;
 import com.techelevator.items.Item;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
+
     //This class holds all calls on Scanner(System.in) and System.out's
     private Scanner scanner = new Scanner(System.in);
 
