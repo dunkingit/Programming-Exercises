@@ -10,6 +10,6 @@ public class HomeGood extends Item{
 
     @Override
     public String toString() {
-        return "HomeGood{}" + super.getName();
+        return "HomeGood { " + super.getName() + " - $" + super.getPrice() + " }";
     }
 }

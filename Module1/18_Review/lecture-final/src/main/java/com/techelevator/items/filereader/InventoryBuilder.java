@@ -27,9 +27,9 @@ public class InventoryBuilder {
     public Map<String, Item> getInventory(){
         Map<String, Item> inventoryMap = new HashMap<>();
         //use the string filePath to make an instance of a File
-        File inventory = new File(filePath);
+        File inventoryFile = new File(filePath);
         //build a Scanner object and use the File as a source
-        try(Scanner inventoryScanner = new Scanner(inventory)){
+        try(Scanner inventoryScanner = new Scanner(inventoryFile)){
             //look at each line in the file using the scanner
             while(inventoryScanner.hasNext()){
                 //make new items
@@ -56,8 +56,9 @@ public class InventoryBuilder {
 
                } else {
                    item = new Food(sku,true);
-              ;
+
                }
+
                 item.setName(name);
                 item.setDescription(description);
                 item.setPrice(new BigDecimal(price));

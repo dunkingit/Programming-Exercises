@@ -12,6 +12,6 @@ public class Apparel extends Item{
 
     @Override
     public String toString() {
-        return "Apparel{}" + super.getName();
+        return "Apparel { " + super.getName() + " - $" + super.getPrice() + " }";
     }
 }
