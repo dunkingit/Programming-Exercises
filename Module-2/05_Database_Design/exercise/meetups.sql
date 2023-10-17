@@ -1,47 +1,45 @@
 DROP TABLE IF EXISTS amember, agroup, aevent, member_group, member_event;
 
 CREATE TABLE amember (
-    member_number serial,
-	last_name varchar(50) NOT NULL,
+    member_number serial PRIMARY KEY,
+    last_name varchar(50) NOT NULL,
     first_name varchar(50) NOT NULL,
-	email_address varchar(65),
-	phone_number BigInt, 
-	dob date,
-	reminder_email boolean,
-    CONSTRAINT  member_number PRIMARY KEY(member_number)
+    email_address varchar(65),
+    phone_number bigint,
+    dob date,
+    reminder_email boolean
 );
 
 CREATE TABLE agroup (
-    group_number serial,
-	group_name varchar(95),
-	group_memeber_count int not null,
-    CONSTRAINT group_number PRIMARY KEY(group_number)
+    group_number serial PRIMARY KEY,
+    group_name varchar(95) UNIQUE NOT NULL,
+    group_member_count int NOT NULL DEFAULT 0
 );
 
-Create table aevent(
-	event_number serial,
-	event_name varchar(95), 
-	event_desc varchar(95), 
-	start_time timestamp, 
-	duration int NOT NULL,
-	event_coordinator varchar(50),
-	event_attendance int not null
+CREATE TABLE aevent (
+    event_number serial PRIMARY KEY,
+    event_name varchar(95) NOT NULL,
+    event_desc varchar(95),
+    start_time timestamp NOT NULL,
+    duration int CHECK (duration >= 30) NOT NULL,
+    group_number int,
+    CONSTRAINT fk_group FOREIGN KEY (group_number) REFERENCES agroup(group_number)
 );
 
-CREATE table member_group(
-	member_number int,
-	group_number int,
-	CONSTRAINT member_group PRIMARY KEY(member_number, group_number),
-	CONSTRAINT member_number FOREIGN KEY (amember) REFERENCES amember(member_number),
-	CONSTRAINT group_number FOREIGN KEY (agroup) REFERENCES agroup(group_number)
+CREATE TABLE member_group (
+    member_number int,
+    group_number int,
+    PRIMARY KEY (member_number, group_number),
+    CONSTRAINT fk_member_membergroup FOREIGN KEY (member_number) REFERENCES amember(member_number),
+    CONSTRAINT fk_group_membergroup FOREIGN KEY (group_number) REFERENCES agroup(group_number)
 );
 
-create table member_event(
-	member_number int,
-	event_number int,
-	CONSTRAINT member_event PRIMARY KEY(member_number, event_number),
-	CONSTRAINT member_number FOREIGN KEY (amember) REFERENCES amember(member_number),
-	CONSTRAINT aevent FOREIGN KEY (aevent) REFERENCES aevent(event_number)
+CREATE TABLE member_event (
+    member_number int,
+    event_number int,
+    PRIMARY KEY (member_number, event_number),
+    CONSTRAINT fk_member_memberevent FOREIGN KEY (member_number) REFERENCES amember(member_number),
+    CONSTRAINT fk_event_memberevent FOREIGN KEY (event_number) REFERENCES aevent(event_number)
 );
 
 

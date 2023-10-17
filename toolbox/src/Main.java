@@ -4,23 +4,34 @@ import java.util.*;
 import java.util.List;
 
 public class Main {
+
     public static void main(String[] args) {
-        boolean a1 = true;
-        Scanner kb = new Scanner (System.in);
-        while (a1 == true)
-        {
-            System.out.print("This message will display if it works.");
-            System.out.print("Would you like to play again? y/n: ");
-            String play1 = kb.nextLine();
-            if (play1.equals("n"))
-            {
-                a1 = false;
-                System.out.println("Final score:");
+        Main.run();
+    }
+
+    public static void run(){
+        Random random = new Random();
+        int[] al = new int[10];
+        int index = 0;
+        while (true) {
+            int num = random.nextInt(11);
+            boolean inList = false;
+            for (int each: al) {
+                if (each == num){
+                    inList = true;
+                }
             }
-            else if (play1.equals("y"))
-            {
-                System.out.println(" ");
-            }}}
+            if(!inList){
+                al[index] = num;
+                index++;
+            }
+            if(index == 9){
+                break;
+            }
+        }
+
+        System.out.println(Arrays.toString(al));
+    }
 
 
 

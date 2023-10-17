@@ -28,4 +28,19 @@ public class test {
     public String bottombox (int num){
         return "╚" + "═".repeat(num - 1) + "╝";
     };
+
+    public void takeMoneyOption(int balance) {
+        String overage = "Sorry at this time we can not accept bills over a $100\n" +
+                "Please try again";
+        String over1000 = "We're sorry but depositing that much would exceed the maximum allowance of $1000";
+        String invalidAmmount = "You have entered a invalid amount.\n" +
+                "Please try again. ";
+        int enterNumbered = balance;
+
+        System.out.println(
+                enterNumbered < 0? invalidAmmount:
+                                enterNumbered + balance > 1000? over1000:
+                                        enterNumbered > 100? overage:"Thank you");
+
+    }
 }
