@@ -13,16 +13,21 @@ public class JdbcStateDao implements StateDao {
     private final JdbcTemplate jdbcTemplate;
 
     public JdbcStateDao(DataSource dataSource) {
+        //take the data source passed in to the constructor and
+        //pass it to the jdbc template constructor
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
     public State getStateByAbbreviation(String stateAbbreviation) {
-        State state = null;
+        State state = new State();
         String sql = "SELECT state_abbreviation, state_name FROM state WHERE state_abbreviation = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, stateAbbreviation);
         if (results.next()) {
-            state = mapRowToState(results);
+//            state = mapRowToState(results);
+
+            state.setStateAbbreviation(results.getString("state_abbreviation"));
+            state.setStateName(results.getString("state_name"));
         }
         return state;
     }
@@ -32,7 +37,7 @@ public class JdbcStateDao implements StateDao {
         State state = null;
         String sql = "SELECT state_abbreviation, state_name FROM state WHERE capital = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, cityId);
-        if (results.next()) {
+        while (results.next()) {
             state = mapRowToState(results);
         }
         return state;
