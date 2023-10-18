@@ -20,19 +20,26 @@ public class USCitiesAndParksCLI {
     private final ParkDao parkDao;
 
     public static void main(String[] args) {
+
+        //instantiating a datasource using apache driver
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setUrl("jdbc:postgresql://localhost:5432/UnitedStates");
         dataSource.setUsername("postgres");
         dataSource.setPassword("postgres1");
 
+        //instantiating an instance of USCitiesAndParksCLI aka this class -
+        // and passing data source set above to the constructor of the USCitiesAndParksCLI class
         USCitiesAndParksCLI application = new USCitiesAndParksCLI(dataSource);
         application.run();
     }
 
     public USCitiesAndParksCLI(DataSource dataSource) {
+        //using the data source that was passed in when constructor was called
+        //now instatiate instances of each JDBC implementation class and passing given data source
+        //to each constructor of each implementation class
         stateDao = new JdbcStateDao(dataSource);
         cityDao = new JdbcCityDao(dataSource);
-        // cityDao = new MemoryCityDao();
+       //  cityDao = new MemoryCityDao();
         parkDao = new JdbcParkDao(dataSource);
     }
 

@@ -1,6 +1,8 @@
 package com.techelevator.dao;
 
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.State;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -13,21 +15,20 @@ public class JdbcStateDao implements StateDao {
     private final JdbcTemplate jdbcTemplate;
 
     public JdbcStateDao(DataSource dataSource) {
-        //take the data source passed in to the constructor and
-        //pass it to the jdbc template constructor
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
     public State getStateByAbbreviation(String stateAbbreviation) {
-        State state = new State();
+        State state = null;
         String sql = "SELECT state_abbreviation, state_name FROM state WHERE state_abbreviation = ?;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, stateAbbreviation);
-        if (results.next()) {
-//            state = mapRowToState(results);
-
-            state.setStateAbbreviation(results.getString("state_abbreviation"));
-            state.setStateName(results.getString("state_name"));
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, stateAbbreviation);
+            if (results.next()) {
+                state = mapRowToState(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
         }
         return state;
     }
@@ -36,9 +37,13 @@ public class JdbcStateDao implements StateDao {
     public State getStateByCapital(int cityId) {
         State state = null;
         String sql = "SELECT state_abbreviation, state_name FROM state WHERE capital = ?;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, cityId);
-        while (results.next()) {
-            state = mapRowToState(results);
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, cityId);
+            if (results.next()) {
+                state = mapRowToState(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
         }
         return state;
     }
@@ -47,9 +52,13 @@ public class JdbcStateDao implements StateDao {
     public List<State> getStates() {
         List<State> states = new ArrayList<>();
         String sql = "SELECT state_abbreviation, state_name FROM state;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-        while (results.next()) {
-            states.add(mapRowToState(results));
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while (results.next()) {
+                states.add(mapRowToState(results));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
         }
         return states;
     }

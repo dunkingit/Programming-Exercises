@@ -20,12 +20,25 @@ public class JdbcParkDao implements ParkDao {
 
     @Override
     public int getParkCount() {
-        return 0;
+        int countOfParks = 0;
+        String sql = "SELECT COUNT(*) AS count_of_parks FROM park;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        if(results.next()){
+            countOfParks = results.getInt("count_of_parks");
+        }
+        return countOfParks;
     }
     
     @Override
     public LocalDate getOldestParkDate() {
-        return null;
+        LocalDate oldestParkDateEst = null;
+        String sql = "SELECT MIN(date_established) AS oldest_park \n" +
+                "FROM park;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        if(results.next()){
+            oldestParkDateEst = results.getDate("oldest_park").toLocalDate();
+        }
+        return oldestParkDateEst;
     }
     
     @Override
@@ -59,7 +72,28 @@ public class JdbcParkDao implements ParkDao {
     }
 
     @Override
-    public List<Park> getParksByName(String name, boolean useWildCard) { return new ArrayList<>(); }
+    public List<Park> getParksByName(String name, boolean useWildCard) {
+        List<Park> parks = new ArrayList<>();
+        String sql = "SELECT park_id, park_name, date_established, area, has_camping\n" +
+                "FROM park\n" +
+                "WHERE park_name ILIKE ?;";
+
+        //need to swap out the string name so that is looks like this %name%
+        if(useWildCard){
+            name = "%"+name+"%";
+        }
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, name);
+        while(results.next()){ 
+            Park park = new Park();
+            park.setParkId(results.getInt("park_id"));
+            park.setParkName(results.getString("park_name"));
+            park.setDateEstablished(results.getDate("date_established").toLocalDate());
+            park.setArea(results.getDouble("area"));
+            park.setHasCamping(results.getBoolean("has_camping"));
+            parks.add(park);
+        }
+        return parks;
+    }
 
     private Park mapRowToPark(SqlRowSet rowSet) {
         return new Park();
