@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface GenreDao {
 
-    /**
+    /**JdbcCollectionDao, JdbcGenreDao, JdbcMovieDao, and JdbcPersonDao classes.
      * Get a list of all genres from the datastore.
      * The list is never null. It is empty if there are no genres in the datastore.
      *
