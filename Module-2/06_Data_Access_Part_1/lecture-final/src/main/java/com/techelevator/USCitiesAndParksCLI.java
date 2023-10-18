@@ -39,7 +39,6 @@ public class USCitiesAndParksCLI {
         //to each constructor of each implementation class
         stateDao = new JdbcStateDao(dataSource);
         cityDao = new JdbcCityDao(dataSource);
-       //  cityDao = new MemoryCityDao();
         parkDao = new JdbcParkDao(dataSource);
     }
 

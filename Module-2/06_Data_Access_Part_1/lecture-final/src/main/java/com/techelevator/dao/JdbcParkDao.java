@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Park;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.SQLErrorCodes;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import javax.sql.DataSource;
@@ -43,27 +44,62 @@ public class JdbcParkDao implements ParkDao {
     
     @Override
     public double getAverageParkArea() {
-        return 0.0;
+        double avgArea = 0.00;
+        String sql = "SELECT AVG(area) AS avg_park_area FROM park;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        if(results.next()){
+            avgArea = results.getDouble("avg_park_area");
+        }
+        return avgArea;
     }
     
     @Override
     public List<String> getParkNames() {
-        return new ArrayList<>();
+        List<String> parkNames = new ArrayList<>();
+        String sql = "SELECT park_name FROM park;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()){
+            parkNames.add(results.getString("park_name"));
+        }
+        return parkNames;
     }
     
     @Override
     public Park getRandomPark() {
-        return new Park();
+        Park park = null;
+        String sql = "SELECT park_id, park_name, date_established, area, has_camping FROM park\n" +
+                "ORDER BY RANDOM()\n" +
+                "LIMIT 1;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        if(results.next()){
+            park = mapRowToPark(results);
+        }
+        return park;
     }
 
     @Override
     public List<Park> getParksWithCamping() {
-        return new ArrayList<>();
+        List<Park> parksWithCamping = new ArrayList<>();
+        String sql = "SELECT park_id, park_name, date_established, area, has_camping FROM park\n" +
+                "WHERE has_camping = true;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()){
+            Park park = mapRowToPark(results);
+            parksWithCamping.add(park);
+        }
+        return parksWithCamping;
     }
 
     @Override
     public Park getParkById(int parkId) {
-        return new Park();
+        Park park = null;
+        String sql = "SELECT park_id, park_name, date_established, area, has_camping FROM park\n" +
+                "WHERE park_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,parkId);
+        if(results.next()){
+            park = mapRowToPark(results);
+        }
+        return park;
     }
 
     @Override
@@ -84,18 +120,22 @@ public class JdbcParkDao implements ParkDao {
         }
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, name);
         while(results.next()){ 
-            Park park = new Park();
-            park.setParkId(results.getInt("park_id"));
-            park.setParkName(results.getString("park_name"));
-            park.setDateEstablished(results.getDate("date_established").toLocalDate());
-            park.setArea(results.getDouble("area"));
-            park.setHasCamping(results.getBoolean("has_camping"));
+            Park park = mapRowToPark(results);
             parks.add(park);
         }
         return parks;
     }
 
+
+
     private Park mapRowToPark(SqlRowSet rowSet) {
-        return new Park();
+        Park park = new Park();
+        park.setParkId(rowSet.getInt("park_id"));
+        park.setParkName(rowSet.getString("park_name"));
+        park.setDateEstablished(rowSet.getDate("date_established").toLocalDate());
+        park.setArea(rowSet.getDouble("area"));
+        park.setHasCamping(rowSet.getBoolean("has_camping"));
+
+        return park;
     }
 }
