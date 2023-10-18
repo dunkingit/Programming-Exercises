@@ -1,68 +1,104 @@
+import javax.swing.*;
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+
 public class Main {
-<<<<<<< HEAD
-    public static void main(String[] args) {;
-        Log.output("error.txt", "Testing");
-=======
+
     public static void main(String[] args) {
-
-
-//        double change = 84.93;
-//        double[] moneyChange = {20.00, 10.00, 5.0, 1.00, 0.25, 0.10, 0.05, 0.01};
-//        String[] wordChange = {"Twenties", "Ten", "Five", "Dollar", "Quarter", "Dime", "Nickel", "Penny"};
-//        String textChange = "";
-//        int counter = 0;
-//        while(change >= 0 && counter <= 7){
-//            int div = (int)(change / moneyChange[counter]);
-//            if (div > 0){
-//                change = change - (div * moneyChange[counter]);
-//                textChange += "(" + (int)div + ") " + wordChange[counter] + " ";
-//            }
-//            counter++;
-//        }
-//
-//        System.out.println(textChange);
-
-
-        double a = 1.0;
-        double b = 1.00;
-        System.out.println(a == b);
-
-
-
-//        change=change%100;
-//        int quarters = Math.round(change/25);
-//        change=change%25;
-//        int dimes = Math.round(change/10);
-//        change=change%10;
-//        int nickels = Math.round(change/5);
-//        change=change%5;
-//        int pennies = Math.round(change/1);
-
-//        System.out.println("Quarters: " + quarters);
-//        System.out.println("Dimes: " + dimes);
-//        System.out.println("Nickels: " + nickels);
-//        System.out.println("Pennies: " + pennies);
-
-//        FileManager fm = new FileManager();
-//        StringBuilder filetext = fm.read("test1.txt");
-//        System.out.println(filetext);
-//        TestGui test = new TestGui(400, 400);
-
-//        Map<String, String[]> dict = new HashMap<>();
-//
-//        dict.put("a2", new String[]{"a2", "b2"});
-//        dict.put("a1", new String[]{"a1", "b1"});
-//        dict.put("a4", new String[]{"a4", "b4"});
-//        dict.put("A4", new String[]{"A4", "B4"});
-//        dict.put("c3", new String[]{"c3", "b3"});
-//        dict.put("d3", new String[]{"d3", "b3"});
-//        List<String> alist = new ArrayList<>(dict.keySet());
-//        Collections.sort(alist);;
-//        for(String each: alist){
-//            System.out.println(Arrays.toString(dict.get(each)));
-//        }
-//        System.out.println(alist);
-
->>>>>>> b3f0e98ec2113ba7d65c704b939489c762b35dba
+        Main.run();
     }
-}
+
+    public static void run(){
+        Random random = new Random();
+        int[] al = new int[10];
+        int index = 0;
+        while (true) {
+            int num = random.nextInt(11);
+            boolean inList = false;
+            for (int each: al) {
+                if (each == num){
+                    inList = true;
+                }
+            }
+            if(!inList){
+                al[index] = num;
+                index++;
+            }
+            if(index == 9){
+                break;
+            }
+        }
+
+        System.out.println(Arrays.toString(al));
+    }
+
+
+
+//        List<String> alist = new ArrayList<>();
+//
+//        Parent pa = new Parent();
+//        pa.theList(alist);
+//        System.out.println(pa.outList().toString());
+//        pa.addto("test");
+//        System.out.println(pa.outList().toString());
+//
+//        ChildA a = new ChildA();
+//        ChildB b = new ChildB();
+//
+//        a.incrementByTwo();
+//        a.incrementByTwo();
+//        System.out.println(a.getValue()); // prints 12
+//
+//        System.out.println(b.getValue()); // prints 12
+//        a.outList();
+//        b.outList();
+//        a.addto("ChildA");
+//        b.addto("ChildB");
+//        System.out.println(a.outList().toString());
+//        System.out.println(b.outList().toString());
+//        a.addto("ChildA");
+//        System.out.println(a.outList().toString());
+//        System.out.println(b.outList().toString());
+
+
+
+//        JTextArea messageText;
+//        test atest = new test();
+//        atest.fullbox("How much would you like to deposit today? ", 50);
+//        JFrame window = new JFrame();
+//        int width = 1000;
+//        int length = 1000;
+//        int centerWidth = width / 2;
+//        int centerLength = length / 2;
+//
+//        window.setSize(width, length);
+//        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        window.getContentPane().setBackground(Color.black);
+//        window.setLayout(null);
+//        String aa = atest.fullbox("aaa ", 30);
+//        messageText = new JTextArea(aa);
+//        messageText.setBounds(centerWidth - 200, centerLength - 300, 1200, 1000);
+//        messageText.setBackground(Color.black);
+//        messageText.setForeground(Color.white);
+//        messageText.setEditable(false);
+//        messageText.setLineWrap(false);
+//        messageText.setWrapStyleWord(true);
+////        messageText.setFont(new Font("Book Antiqua", Font.PLAIN, 26));
+////        messageText.setFont(new Font("Monospaced", Font.PLAIN, 20));
+//        window.add(messageText);
+//
+//
+//
+//        window.setVisible(true);
+
+        // Load the resource bundle
+//        Locale currentLocale = Locale.getDefault();
+//        ResourceBundle messages = ResourceBundle.getBundle("messages", currentLocale);
+//
+//        // Retrieve messages
+//        String welcome = messages.getString("message1");
+//
+//        System.out.println(welcome);
+
+    }
