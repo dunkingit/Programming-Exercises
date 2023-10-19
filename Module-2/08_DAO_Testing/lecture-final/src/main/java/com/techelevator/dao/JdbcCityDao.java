@@ -39,7 +39,7 @@ public class JdbcCityDao implements CityDao {
     @Override
     public List<City> getCitiesByState(String stateAbbreviation) {
         List<City> cities = new ArrayList<>();
-        String sql = "SELECT city_id, city_name, population, area " +
+        String sql = "SELECT city_id, city_name, state_abbreviation, population, area " +
                      "FROM city " +
                      "WHERE state_abbreviation = ? " +
                      "ORDER BY city_id;";

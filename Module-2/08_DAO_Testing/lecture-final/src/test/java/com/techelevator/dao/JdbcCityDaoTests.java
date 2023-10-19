@@ -94,7 +94,7 @@ public class JdbcCityDaoTests extends BaseDaoTests {
     }
 
     private void assertCitiesMatch(City expected, City actual) {
-        Assert.assertEquals(expected.getCityId(), actual.getCityId());
+        Assert.assertEquals( expected.getCityId(), actual.getCityId());
         Assert.assertEquals(expected.getCityName(), actual.getCityName());
         Assert.assertEquals(expected.getStateAbbreviation(), actual.getStateAbbreviation());
         Assert.assertEquals(expected.getPopulation(), actual.getPopulation());

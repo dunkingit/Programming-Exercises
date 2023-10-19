@@ -42,7 +42,7 @@ public class JdbcParkDao implements ParkDao {
         String sql = "SELECT p.park_id, park_name, date_established, area, has_camping " +
                      "FROM park p " +
                      "JOIN park_state ps ON p.park_id = ps.park_id " +
-                     "WHERE park_name = ? " +
+                     "WHERE state_abbreviation = ? " +
                      "ORDER BY p.park_id;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, stateAbbreviation);
