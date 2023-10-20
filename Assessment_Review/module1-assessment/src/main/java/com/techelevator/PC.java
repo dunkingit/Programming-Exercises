@@ -5,6 +5,18 @@ public class PC {
     private String memory;
     private String graphicsCard;
 
+    public void setCpu(String cpu) {
+        this.cpu = cpu;
+    }
+
+    public void setMemory(String memory) {
+        this.memory = memory;
+    }
+
+    public void setGraphicsCard(String graphicsCard) {
+        this.graphicsCard = graphicsCard;
+    }
+
     public String getCpu() {
         return cpu;
     }
