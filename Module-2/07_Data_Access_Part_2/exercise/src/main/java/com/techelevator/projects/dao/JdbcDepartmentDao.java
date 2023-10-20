@@ -16,7 +16,7 @@ import com.techelevator.projects.model.Department;
 public class JdbcDepartmentDao implements DepartmentDao {
 
 	private final String DEPARTMENT_SELECT = "SELECT d.department_id, d.name FROM department d ";
-	
+
 	private final JdbcTemplate jdbcTemplate;
 
 	public JdbcDepartmentDao(DataSource dataSource) {
@@ -28,10 +28,16 @@ public class JdbcDepartmentDao implements DepartmentDao {
 		Department department = null;
 		String sql = DEPARTMENT_SELECT +
 				" WHERE d.department_id=?";
+		try{
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+			if (results.next()) {
+				department = mapRowToDepartment(results);
+			}
 
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-		if (results.next()) {
-			department = mapRowToDepartment(results);
+		} catch (CannotGetJdbcConnectionException e) {
+			throw new DaoException("Unable to connect to server or database", e);
+		} catch (DataIntegrityViolationException e) {
+			throw new DaoException("Data integrity violation", e);
 		}
 
 		return department;
@@ -42,27 +48,72 @@ public class JdbcDepartmentDao implements DepartmentDao {
 		List<Department> departments = new ArrayList<>();
 		String sql = DEPARTMENT_SELECT;
 
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-		while (results.next()) {
-			departments.add(mapRowToDepartment(results));
+		try {
+
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+			while (results.next()) {
+				departments.add(mapRowToDepartment(results));
+			}
+		} catch (CannotGetJdbcConnectionException e) {
+			throw new DaoException("Unable to connect to server or database", e);
+		} catch (DataIntegrityViolationException e) {
+			throw new DaoException("Data integrity violation", e);
 		}
-		
 		return departments;
 	}
 
 	@Override
 	public Department createDepartment(Department department) {
-		throw new DaoException("createDepartment() not implemented");
+		Department newDepartment = null;
+		String sql = "INSERT INTO department (name) VALUES (?) RETURNING department_id;";
+
+		try {
+			int newDepartmentId = jdbcTemplate.queryForObject(sql, int.class, department.getName());
+			newDepartment = getDepartmentById(newDepartmentId);
+		} catch (CannotGetJdbcConnectionException e) {
+			throw new DaoException("Unable to connect to server or database", e);
+		} catch (DataIntegrityViolationException e) {
+			throw new DaoException("Data integrity violation", e);
+//			throw new DaoException("createDepartment() not implemented");
+		}
+//		throw new DaoException("createDepartment() not implemented");
+		return newDepartment;
 	}
 
 	@Override
 	public Department updateDepartment(Department department) {
-		throw new DaoException("updateDepartment() not implemented");
+		Department updatedDepartment = null;
+		String sql = "UPDATE department SET name = ? WHERE department_id = ?;";
+
+		try {
+			int numberOfRows = jdbcTemplate.update(sql, department.getName(), department.getId());
+			if (numberOfRows > 0) {
+				updatedDepartment = getDepartmentById(department.getId());
+			}
+		} catch (CannotGetJdbcConnectionException e) {
+			throw new DaoException("Unable to connect to server or database", e);
+		} catch (DataIntegrityViolationException e) {
+			throw new DaoException("Data integrity violation", e);
+		}
+
+		return updatedDepartment;
+//		throw new DaoException("updateDepartment() not implemented");
 	}
 
 	@Override
 	public int deleteDepartmentById(int id) {
-		throw new DaoException("updateDepartment() not implemented");
+		String assignToUnassignedSql = "UPDATE employee SET department_id = 0 WHERE department_id = ?;";
+		String sql = "DELETE FROM department WHERE department_id = ?;";
+
+		try {
+			jdbcTemplate.update(assignToUnassignedSql, id);
+			return jdbcTemplate.update(sql, id);
+		} catch (CannotGetJdbcConnectionException e) {
+			throw new DaoException("Unable to connect to server or database", e);
+		} catch (DataIntegrityViolationException e) {
+			throw new DaoException("Data integrity violation", e);
+		}
+//		throw new DaoException("updateDepartment() not implemented");
 	}
 
 	private Department mapRowToDepartment(SqlRowSet results) {

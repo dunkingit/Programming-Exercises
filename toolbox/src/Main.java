@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
@@ -11,26 +12,32 @@ public class Main {
 
     public static void run(){
         Random random = new Random();
-        int[] al = new int[10];
-        int index = 0;
-        while (true) {
-            int num = random.nextInt(11);
-            boolean inList = false;
-            for (int each: al) {
-                if (each == num){
-                    inList = true;
-                }
-            }
-            if(!inList){
-                al[index] = num;
-                index++;
-            }
-            if(index == 9){
-                break;
-            }
-        }
+        List<String> alist = new ArrayList<>();
+        alist.add("a");
+        alist.add("b");
+        alist.add("c");
+        List<Integer> blist = new ArrayList<>();
+        blist.add(1);
+        blist.add(2);
+        blist.add(3);
+        int[] clist = new int[5];
+        clist[0] = 0;
+        clist[1] = 1;
+//        for (int i = 0; i < 100; i++) {
+//            RandomGen ra = new RandomGen();
+//            ra.goFullRandom();
+//            List<String> ne = ra.getRandomNumbers();
+//            int[] ar = new int[ne.size()];
+//            for (int j = 0; j < ne.size(); j++) {
+//                ar[j] = Integer.parseInt(ne.get(j));
+//            }
+//            Arrays.sort(ar);
+//            System.out.println(Arrays.toString(ar));
+//        }
 
-        System.out.println(Arrays.toString(al));
+        RandomGen ra = new RandomGen();
+        ra.fillit(25, 0, 26);
+
     }
 
 
@@ -99,6 +106,26 @@ public class Main {
 //        // Retrieve messages
 //        String welcome = messages.getString("message1");
 //
-//        System.out.println(welcome);
+//        System.out.println(welcome);        Random random = new Random();
+//        int[] al = new int[10];
+//        int index = 0;
+//        while (true) {
+//            int num = random.nextInt(11);
+//            boolean inList = false;
+//            for (int each: al) {
+//                if (each == num){
+//                    inList = true;
+//                }
+//            }
+//            if(!inList){
+//                al[index] = num;
+//                index++;
+//            }
+//            if(index == 9){
+//                break;
+//            }
+//        }
+//
+//        System.out.println(Arrays.toString(al));
 
     }
