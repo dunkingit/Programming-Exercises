@@ -29,7 +29,7 @@ public class JdbcPersonDao implements PersonDao {
         System.out.println("ID is " + id);
         String sql = "select * from person where person_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-        return results.next()? mapToPerson(results):new Person();
+        return results.next()? mapToPerson(results):null;
     }
 
     @Override
@@ -47,7 +47,14 @@ public class JdbcPersonDao implements PersonDao {
 
     @Override
     public List<Person> getPersonsByCollectionName(String collectionName, boolean useWildCard) {
-        return null;
+        List<Person> personList = new ArrayList<>();
+        String newName = useWildCard? "ilike %" + collectionName + "%":"= " + collectionName;
+        String sql = "select * from person join movie_actor on movie_actor.actor_id = person.person_id join movie on movie.movie_id = movie_actor.movie_id join collection on collection.collection_id = movie.collection_id where collection.collection_name ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, newName);
+        while(results.next()) {
+            personList.add(mapToPerson(results));
+        }
+        return personList;
     }
 
     //person_id, person_name, birthday, deathday, biography, profile_path, home_page
