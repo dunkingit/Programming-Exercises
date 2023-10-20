@@ -14,6 +14,7 @@ public interface GenreDao {
      */
     List<Genre> getGenres();
 
+
     /**
      * Get a genre from the datastore that has the given id.
      * If the id is not found, return null.

@@ -409,4 +409,13 @@ public class MovieDBCLI {
 		System.out.print(prompt + " >>> ");
 		return new Scanner(System.in).nextLine();
 	}
+
+	public static String constructSQL(String original, String wildcard, boolean usedWildCard, boolean inclueSemiColon) {
+		System.out.println(original.replace(wildcard, usedWildCard? "ilike ?" : "= ?") + (inclueSemiColon? ";":""));
+		return original.replace(wildcard, usedWildCard? "ilike ?" : "= ?") + (inclueSemiColon? ";":"");
+	}
+
+	public static String appendTextBasedUponWildcard(String original, boolean usedWildCard) {
+		return usedWildCard? "%" + original + "%":original;
+	}
 }
