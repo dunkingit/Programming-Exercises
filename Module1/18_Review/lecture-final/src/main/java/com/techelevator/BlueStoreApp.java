@@ -12,7 +12,7 @@ import java.util.Map;
 public class BlueStoreApp {
 
     /* To ensure that we only load the inventory once, we are setting the inventory map when we create OrangeStoreApp in main()*/
-    private Menu menu = new Menu();
+   private Menu menu;
     private Map<String, Item> inventory;
 
     public BlueStoreApp(Map<String,Item> inventory){
@@ -27,6 +27,7 @@ public class BlueStoreApp {
         javaBlueApp.run();
     }
     public void run() {
+        menu = new Menu();
         menu.displayHomeScreen();
         List<String> skusInCart = new ArrayList<>();
         while(true) {
