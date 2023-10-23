@@ -31,6 +31,11 @@ public class LogFileWriter{
  }
 
  public boolean writeInv(String str){
+  String log = outputFormat(str);
+  return writeLog(INVENTORYLOG, log);
+ }
+
+ public boolean writeInv1(String str){
   String between = "═".repeat(40) + "\n".repeat(5) + "═".repeat(40) + "\n";
   String log = outputFormat(between + str);
   return writeLog(INVENTORYLOG, log);

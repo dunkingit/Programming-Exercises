@@ -1,1 +1,9 @@
 20-10-2023 11:19 DEPOSIT: $0.00 $100.00
+20-10-2023 13:41 DEPOSIT: $0.00 $100.00
+20-10-2023 13:43 WITHDRAW: $100.00 $97.55
+20-10-2023 13:43 DEPOSIT: $0.00 $2.45
+20-10-2023 13:43 changeToGive = (97.55296274872002)
+Text Change: (4) Twenties (1) Ten (1) Five (2) Dollars (2) Quarters (1) Nickel Change: $97.55 
+
+Giving Change: : $97.55 $0.00
+20-10-2023 13:43 SUCCESSFUL CHECKOUT: : $0.00 $0.00

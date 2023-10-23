@@ -49,7 +49,7 @@ public class Cart {
         }
         double totalAmount = shoppingCart.stream().mapToDouble(CartItem::getSumPrice).sum();
         System.out.println("-".repeat(80));
-        System.out.println(String.format("Total amount: $%-10.2f", totalAmount));
+        System.out.println(String.format("IN CART TOTAL: $%-10.2f", totalAmount) + "\n\n\n");
     }
     public void addToCart(CartItem ci) {
         inCartqty += ci.getQuantityInCart();

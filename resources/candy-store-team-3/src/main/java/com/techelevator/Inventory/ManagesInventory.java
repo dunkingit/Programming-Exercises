@@ -66,6 +66,7 @@ public class ManagesInventory {
             stocksInventory(each);
             itemCounter++;
         }
+        logger.writeInv1("End of list. ");
 
     }
 

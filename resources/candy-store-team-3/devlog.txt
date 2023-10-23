@@ -1,2 +1,25 @@
 20-10-2023 11:19 Event: Choice: 3
 20-10-2023 11:21 Event: Choice: 2
+20-10-2023 13:20 Event: Choice: 3
+20-10-2023 13:20 Event: Choice: 1
+20-10-2023 13:20 Event: Choice: 2
+20-10-2023 13:20 Event: Choice: 1
+20-10-2023 13:26 Event: Choice: 3
+20-10-2023 13:27 Event: Choice: 2
+20-10-2023 13:40 Event: Choice: 2
+20-10-2023 13:40 Event: Choice: 1
+20-10-2023 13:41 Event: Choice: 2
+20-10-2023 13:41 Event: subChoice: 2
+20-10-2023 13:41 Event: Input: N9
+20-10-2023 13:41 Event: NOT ENOUGH FUNDS: BALANCE = 0.0
+20-10-2023 13:41 Event: subChoice: 1
+20-10-2023 13:42 Event: subChoice: 2
+20-10-2023 13:42 Event: Input: N19
+20-10-2023 13:42 Event: QTY Error: QTY AMOUNT: 7false
+20-10-2023 13:42 Event: subChoice: 2
+20-10-2023 13:42 Event: Input: N5
+20-10-2023 13:43 Event: subChoice: 3
+20-10-2023 13:43 Event: Checkout: 
+20-10-2023 13:43 Event: SUCCESSFUL CHECKOUT: 
+20-10-2023 13:43 Event: subChoice: 4
+20-10-2023 13:43 Event: Choice: 1
