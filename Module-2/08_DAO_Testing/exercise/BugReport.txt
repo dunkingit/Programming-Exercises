@@ -1,34 +1,76 @@
 Bug 1
 -----
 Test that demonstrates problem:
+public void getTimesheetsByProjectId_with_valid_id_returns_list_of_all_timesheets_for_project()
 
-Expected output:
+Code:
 
-Actual output:
+    public List<Timesheet> getTimesheetsByProjectId(int projectId) {
+        List<Timesheet> timesheets = new ArrayList<>();
+        String sql = "SELECT timesheet_id, employee_id, project_id, date_worked, hours_worked, billable, description " +
+                "FROM timesheet " +
+                "WHERE employee_id = ? " +
+                "ORDER BY timesheet_id;";
+        //employee_id is wrong
+
+Expected output: 2
+
+Actual output: 1
 
 How did you fix this bug?
+replaced employee_id with project id
 
 
 Bug 2
 -----
 Test that demonstrates problem:
 
+public void getTimesheetsByEmployeeId_with_valid_employee_id_returns_list_of_timesheets_for_employee()
+
+Code:
+
+
+    public List<Timesheet> getTimesheetsByEmployeeId(int employeeId) {
+        List<Timesheet> timesheets = new ArrayList<>();
+        String sql = "SELECT timesheet_id, employee_id, project_id, date_worked, hours_worked, billable, description " +
+                "FROM timesheet " +
+                "WHERE employee_id = ? " +
+                "ORDER BY timesheet_id;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, employeeId);
+            if (results.next()) {
+                Timesheet timesheet = mapRowToTimesheet(results);
+                timesheets.add(timesheet);
+            }
+
+
 Expected output:
 
 Actual output:
 
 How did you fix this bug?
+Replaced if with while
 
 
 Bug 3
 -----
 Test that demonstrates problem:
 
-Expected output:
+getBillable hours test
 
-Actual output:
+code:
+    public double getBillableHours(int employeeId, int projectId) {
+        double billableHours = 0;
+        String sql = "SELECT sum(hours_worked) AS billable_hours " +
+                "FROM timesheet " +
+                "WHERE employee_id = ? AND project_id = ?";
+
+Expected output:1.5
+
+Actual output:2.5
 
 How did you fix this bug?
+removed sum
 
 
 Bug 4
