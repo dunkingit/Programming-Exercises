@@ -6,6 +6,7 @@ import org.junit.runners.Parameterized;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
@@ -42,7 +43,7 @@ public class AuctionService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Auction> entity = new HttpEntity<>(updatedAuction, headers);
         try {
-            restTemplate.put(API_BASE_URL+ "/", entity);
+            restTemplate.put(API_BASE_URL+ "/" + updatedAuction.getId(), entity);
             return true;
         }
         catch (ResourceAccessException e) {
