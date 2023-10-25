@@ -55,7 +55,13 @@ public class Exercises {
 	 extraEnd("Hi") → "HiHiHi"
 	 */
 	public String extraEnd(String str) {
-		return null;
+		String extraEnd = "";
+		if(str.length() >= 2){
+			String lastTwo = str.substring(str.length()-2);
+			extraEnd = lastTwo + lastTwo + lastTwo;
+			//System.out.println(extraEnd);
+		}
+		return extraEnd;
 	}
 
 	/*
