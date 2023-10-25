@@ -10,6 +10,8 @@ public class Reservation {
     private String checkoutDate;
     private int guests;
 
+    public Reservation(){}
+
     public int getId() {
         return id;
     }
