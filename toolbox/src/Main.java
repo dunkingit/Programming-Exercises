@@ -7,37 +7,16 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+
         Main.run();
     }
 
     public static void run(){
-        Random random = new Random();
-        List<String> alist = new ArrayList<>();
-        alist.add("a");
-        alist.add("b");
-        alist.add("c");
-        List<Integer> blist = new ArrayList<>();
-        blist.add(1);
-        blist.add(2);
-        blist.add(3);
-        int[] clist = new int[5];
-        clist[0] = 0;
-        clist[1] = 1;
-//        for (int i = 0; i < 100; i++) {
-//            RandomGen ra = new RandomGen();
-//            ra.goFullRandom();
-//            List<String> ne = ra.getRandomNumbers();
-//            int[] ar = new int[ne.size()];
-//            for (int j = 0; j < ne.size(); j++) {
-//                ar[j] = Integer.parseInt(ne.get(j));
-//            }
-//            Arrays.sort(ar);
-//            System.out.println(Arrays.toString(ar));
-//        }
+        test(null);
+    }
 
-        RandomGen ra = new RandomGen();
-        ra.fillit(25, 0, 26);
-
+    public static void test(Double num){
+        System.out.println("This number is: " + num.);
     }
 
 
