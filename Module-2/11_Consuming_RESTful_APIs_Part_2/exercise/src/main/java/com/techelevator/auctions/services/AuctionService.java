@@ -1,6 +1,8 @@
 package com.techelevator.auctions.services;
 
+import com.sun.jdi.Method;
 import com.techelevator.util.BasicLogger;
+import org.junit.runners.Parameterized;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -10,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.techelevator.auctions.model.Auction;
 
+import java.lang.reflect.Parameter;
+
 public class AuctionService {
 
     public static String API_BASE_URL = "http://localhost:3000/auctions";
@@ -17,17 +21,50 @@ public class AuctionService {
 
 
     public Auction add(Auction newAuction) {
-        // place code here
-        return null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Auction> entity = new HttpEntity<>(newAuction, headers);
+        Auction newauction = null;
+        try {
+            newauction = restTemplate.postForObject(API_BASE_URL, entity, Auction.class);
+        }
+        catch (ResourceAccessException e) {
+            System.out.println(e.getMessage());
+        }
+        catch (RestClientResponseException e) {
+            System.out.println(e.getRawStatusCode());
+        }
+        return newauction;
     }
 
     public boolean update(Auction updatedAuction) {
-        // place code here
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Auction> entity = new HttpEntity<>(updatedAuction, headers);
+        try {
+            restTemplate.put(API_BASE_URL+ "/", entity);
+            return true;
+        }
+        catch (ResourceAccessException e) {
+            System.out.println(e.getMessage());
+        }
+        catch (RestClientResponseException e) {
+            System.out.println(e.getRawStatusCode());
+        }
         return false;
     }
 
     public boolean delete(int auctionId) {
-        // place code here
+        try {
+            restTemplate.delete(API_BASE_URL+ "/" +auctionId);
+            return true;
+        }
+        catch (ResourceAccessException e) {
+            System.out.println(e.getMessage());
+        }
+        catch (RestClientResponseException e) {
+            System.out.println(e.getRawStatusCode());
+        }
         return false;
     }
 

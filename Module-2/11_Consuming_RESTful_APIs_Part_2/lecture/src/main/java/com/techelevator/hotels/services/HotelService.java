@@ -3,6 +3,9 @@ package com.techelevator.hotels.services;
 import com.techelevator.hotels.model.Hotel;
 import com.techelevator.hotels.model.Reservation;
 import com.techelevator.util.BasicLogger;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
@@ -17,8 +20,28 @@ public class HotelService {
      * Create a new reservation in the hotel reservation system
      */
     public Reservation addReservation(Reservation newReservation) {
-        // TODO: Implement method
-        return null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Reservation> entity = new HttpEntity<>(newReservation, headers);
+
+        Reservation returnedUser = null;
+        try {
+            returnedUser = restTemplate.postForObject("http://localhost:3000" + "/reservations", entity, Reservation.class);
+            System.out.println(API_BASE_URL);
+            System.out.println(returnedUser.toString());
+        }
+        catch (ResourceAccessException e) {
+            System.out.println("ResourceAccessException");
+            // Handle network I/O errors
+            System.out.println(e.getMessage());
+        }
+        catch (RestClientResponseException e) {
+            System.out.println("RestClientResponseException");
+            // Handle response status codes 4xx and 5xx
+            System.out.println(e.getRawStatusCode());
+        }
+
+        return returnedUser;
     }
 
     /**
