@@ -37,7 +37,7 @@ public class HotelController {
      * @param id the id of the hotel
      * @return all info for a given hotel
      */
-    @RequestMapping(path = "/hotels/{hotelId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{hotelId}", method = RequestMethod.GET)
     public Hotel get(@PathVariable int hotelId) {
         return hotelDao.getHotelById(hotelId);
     }
