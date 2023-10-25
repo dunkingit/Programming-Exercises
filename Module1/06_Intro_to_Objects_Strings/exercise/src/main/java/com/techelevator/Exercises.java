@@ -57,7 +57,17 @@ public class Exercises {
 	 extraEnd("Hi") → "HiHiHi"
 	 */
 	public String extraEnd(String str) {
+<<<<<<< HEAD
 		return str.substring(str.length() - 2).repeat(3);
+=======
+		String extraEnd = "";
+		if(str.length() >= 2){
+			String lastTwo = str.substring(str.length()-2);
+			extraEnd = lastTwo + lastTwo + lastTwo;
+			//System.out.println(extraEnd);
+		}
+		return extraEnd;
+>>>>>>> 7b76bf96b77830d918a116a9ab095633d9087d70
 	}
 
 	/*
