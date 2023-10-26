@@ -8,8 +8,6 @@ public class Hotel {
     private int roomsAvailable;
     private String coverImage;
 
-public Hotel(){}
-
     @Override
     public String toString() {
         return "\n--------------------------------------------" +
