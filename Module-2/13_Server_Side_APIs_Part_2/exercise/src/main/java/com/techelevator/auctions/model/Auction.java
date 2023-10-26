@@ -1,15 +1,26 @@
 package com.techelevator.auctions.model;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
+@Component
 public class Auction {
 
+
     private int id;
+    @NotBlank(message = "The title field must not be blank.")
     private String title;
+    @NotBlank(message = "The description field must not be blank.")
     private String description;
+    @NotBlank(message = "The user field must not be blank.")
     private String user;
+    @Positive( message = "The currentBid field must be greater than 0." )
     private double currentBid;
 
     public Auction() {
