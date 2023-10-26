@@ -6,8 +6,10 @@ import com.techelevator.reservations.model.Hotel;
 import com.techelevator.reservations.model.Reservation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,6 +34,9 @@ public class HotelController {
      */
     @RequestMapping(path = "/hotels", method = RequestMethod.GET)
     public List<Hotel> list(@RequestParam(required=false) String state, @RequestParam(required = false) String city) {
+        if(state != null){
+
+        }
         return hotelDao.getHotelsByStateAndCity(state, city);
     }
 
@@ -100,7 +105,37 @@ public class HotelController {
      */
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/reservations", method = RequestMethod.POST)
-    public Reservation addReservation(@RequestBody Reservation reservation) {
-        return reservationDao.createReservation(reservation);
+    public Reservation addReservation(@Valid @RequestBody Reservation reservation) {
+        try{
+            return reservationDao.createReservation(reservation);
+        }catch(ResourceAccessException e){
+            throw new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT);
+        }
+
+    }
+
+    @RequestMapping(path = "/reservations/{id}", method = RequestMethod.PUT)
+    public boolean updateReservation(@Valid @RequestBody Reservation reservationToUpdate, @PathVariable int id){
+        boolean success = false;
+       reservationToUpdate.setId(id);
+        try{
+            reservationDao.updateReservation(reservationToUpdate);
+            success = true;
+        }catch (ResourceAccessException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        return success;
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "/reservations/{id}", method = RequestMethod.DELETE)
+    public void deleteReservation(@PathVariable int id){
+        try{
+            int numRowsDeleted = reservationDao.deleteReservationById(id);
+
+        }catch(ResourceAccessException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 }
