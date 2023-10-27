@@ -1,12 +1,26 @@
 package com.techelevator.reservations.model;
 
+import javax.validation.constraints.*;
+
 public class Reservation {
 
+
     private int id;
+
+    @Min(value = 1, message = "Hotel ID must be provided")
     private int hotelId;
+    @NotBlank(message = "Please provide the name of our guest")
     private String fullName;
+    @NotBlank(message = "you must provide a date for checking in")
+//    @FutureOrPresent(message = "Must provide a current or future date")
     private String checkinDate;
+
+    @NotBlank(message = "you must provide a date for when you will leave")
+//    @Future( message = "you must provide a date in the future")
     private String checkoutDate;
+
+    @Min(value = 1)
+    @Max(value = 5)
     private int guests;
 
     public Reservation(int id, int hotelId, String fullName, String checkinDate, String checkoutDate, int guests) {
