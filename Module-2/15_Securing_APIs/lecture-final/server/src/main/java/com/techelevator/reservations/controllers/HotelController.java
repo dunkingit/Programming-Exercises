@@ -8,18 +8,19 @@ import com.techelevator.reservations.exception.DaoException;
 import com.techelevator.reservations.model.Hotel;
 import com.techelevator.reservations.model.Reservation;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
+@PreAuthorize("isAuthenticated()")
 
 @RestController
 public class HotelController {
 
     private HotelDao hotelDao;
     private ReservationDao reservationDao;
-
     public HotelController() {
         this.hotelDao = new MemoryHotelDao();
         this.reservationDao = new MemoryReservationDao(hotelDao);
@@ -34,6 +35,7 @@ public class HotelController {
      * @param city  the city to filter by
      * @return a list of hotels that match the city & state
      */
+ @PreAuthorize("permitAll")
     @RequestMapping(path = "/hotels", method = RequestMethod.GET)
     public List<Hotel> list(@RequestParam(required=false) String state, @RequestParam(required = false) String city) {
         return hotelDao.getHotelsByStateAndCity(state, city);
@@ -46,6 +48,7 @@ public class HotelController {
      * @param id the id of the hotel
      * @return all info for a given hotel
      */
+
     @RequestMapping(path = "/hotels/{id}", method = RequestMethod.GET)
     public Hotel get(@PathVariable int id) {
         Hotel hotel = hotelDao.getHotelById(id);
@@ -88,6 +91,7 @@ public class HotelController {
      * @param hotelId
      * @return all reservations for a given hotel
      */
+
     @RequestMapping(path = "/hotels/{id}/reservations", method = RequestMethod.GET)
     public List<Reservation> listReservationsByHotel(@PathVariable("id") int hotelId) {
         List<Reservation> reservations = reservationDao.getReservationsByHotel(hotelId);
@@ -133,6 +137,7 @@ public class HotelController {
      *
      * @param id
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "/reservations/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable int id) {
