@@ -23,3 +23,17 @@
 20-10-2023 13:43 Event: SUCCESSFUL CHECKOUT: 
 20-10-2023 13:43 Event: subChoice: 4
 20-10-2023 13:43 Event: Choice: 1
+28-10-2023 13:25 Event: Choice: 2
+28-10-2023 13:26 Event: Choice: 1
+28-10-2023 13:26 Event: Choice: 2
+28-10-2023 13:26 Event: subChoice: 1
+28-10-2023 13:26 Event: subChoice: 100
+28-10-2023 13:26 Event: subChoice: 1
+28-10-2023 13:26 Event: subChoice: 2
+28-10-2023 13:26 Event: Input: A21
+28-10-2023 13:27 Event: subChoice: 1
+28-10-2023 13:27 Event: subChoice: 3
+28-10-2023 13:27 Event: Checkout: 
+28-10-2023 13:27 Event: SUCCESSFUL CHECKOUT: 
+28-10-2023 13:27 Event: subChoice: 4
+28-10-2023 13:28 Event: Choice: 1

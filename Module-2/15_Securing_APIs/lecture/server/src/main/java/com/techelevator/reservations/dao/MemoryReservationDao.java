@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemoryReservationDao implements ReservationDao {
+public class  MemoryReservationDao implements ReservationDao {
 
     private static List<Reservation> reservations = new ArrayList<>();
     private HotelDao hotelDao;

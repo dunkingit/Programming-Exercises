@@ -7,3 +7,13 @@ Text Change: (4) Twenties (1) Ten (1) Five (2) Dollars (2) Quarters (1) Nickel C
 
 Giving Change: : $97.55 $0.00
 20-10-2023 13:43 SUCCESSFUL CHECKOUT: : $0.00 $0.00
+28-10-2023 13:26 DEPOSIT: $0.00 $0.00
+28-10-2023 13:26 DEPOSIT: $0.00 $100.00
+28-10-2023 13:27 DEPOSIT: $100.00 $100.00
+28-10-2023 13:27 WITHDRAW: $100.00 $89.45
+28-10-2023 13:27 DEPOSIT: $0.00 $10.55
+28-10-2023 13:27 changeToGive = (89.45108458172697)
+Text Change: (4) Twenties (1) Five (4) Dollars (1) Quarter (2) Dimes Change: $89.45 
+
+Giving Change: : $89.45 $0.00
+28-10-2023 13:27 SUCCESSFUL CHECKOUT: : $0.00 $0.00
