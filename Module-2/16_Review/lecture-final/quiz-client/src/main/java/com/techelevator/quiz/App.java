@@ -1,9 +1,11 @@
 package com.techelevator.quiz;
 
 import com.techelevator.quiz.model.AuthenticatedUser;
+import com.techelevator.quiz.model.Question;
 import com.techelevator.quiz.model.UserCredentials;
 import com.techelevator.quiz.services.AuthenticationService;
 import com.techelevator.quiz.services.ConsoleService;
+import com.techelevator.quiz.services.QuizService;
 
 public class App {
 
@@ -11,6 +13,8 @@ public class App {
 
     private final ConsoleService consoleService = new ConsoleService();
     private final AuthenticationService authenticationService = new AuthenticationService(API_BASE_URL);
+
+    private final QuizService quizService = new QuizService(API_BASE_URL);
 
     private AuthenticatedUser currentUser;
 
@@ -25,6 +29,7 @@ public class App {
         if (currentUser != null) {
             mainMenu();
         }
+
     }
     private void loginMenu() {
         int menuSelection = -1;
@@ -81,8 +86,8 @@ public class App {
     }
 
 	private void viewRandomQuestion() {
-		// TODO Auto-generated method stub
-		
+		Question question = quizService.getRandomQuestion();
+		consoleService.printMessage(question.getQuestion());
 	}
 
 	private void viewQuizzesByUserCredentials() {
