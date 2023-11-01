@@ -13,7 +13,7 @@ CREATE TABLE quiz_user (
 	user_id int NOT NULL DEFAULT nextval('seq_user_id'),
 	username varchar(50) UNIQUE NOT NULL,
 	password_hash varchar(200) NOT NULL,
-	role varchar(20),
+	role varchar(20) DEFAULT 'USER',
 	CONSTRAINT PK_quiz_user PRIMARY KEY (user_id),
 	CONSTRAINT UQ_username UNIQUE (username)
 );
@@ -26,6 +26,7 @@ CREATE SEQUENCE seq_question_id
 CREATE TABLE question (
 	question_id int NOT NULL DEFAULT nextval('seq_question_id'),
 	question_text text NOT NULL,
+	asked boolean DEFAULT false,
 	CONSTRAINT PK_question PRIMARY KEY (question_id)
 );
 
@@ -89,5 +90,6 @@ INSERT INTO answer(answer_text) VALUES ('An array in Java is a collection of key
 ('An array in Java is a special data type for storing characters. To declare and initialize a one-dimensional array with five integer elements, you use the charArray class.');
 INSERT INTO question_answer(question_id,answer_id) VALUES(2003,3010);
 
+
 COMMIT;
-SELECT * FROM answer;
+SELECT * FROM quiz_user;
