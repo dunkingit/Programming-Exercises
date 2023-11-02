@@ -2,10 +2,13 @@ package com.techelevator.quiz;
 
 import com.techelevator.quiz.model.AuthenticatedUser;
 import com.techelevator.quiz.model.Question;
+import com.techelevator.quiz.model.Quiz;
 import com.techelevator.quiz.model.UserCredentials;
 import com.techelevator.quiz.services.AuthenticationService;
 import com.techelevator.quiz.services.ConsoleService;
 import com.techelevator.quiz.services.QuizService;
+
+import java.util.List;
 
 public class App {
 
@@ -60,6 +63,8 @@ public class App {
     private void handleLogin() {
         UserCredentials credentials = consoleService.promptForCredentials();
         currentUser = authenticationService.login(credentials);
+        //have quiz service set the authToken
+        quizService.setAuthToken(currentUser.getToken());
         if (currentUser == null) {
             consoleService.printErrorMessage();
         }
@@ -91,8 +96,8 @@ public class App {
 	}
 
 	private void viewQuizzesByUserCredentials() {
-		// TODO Auto-generated method stub
-		
+		List<Quiz> quizList = quizService.getUserQuizzes();
+		consoleService.printQuizzes(quizList);
 	}
 
 	private void viewAdminMenu() {
