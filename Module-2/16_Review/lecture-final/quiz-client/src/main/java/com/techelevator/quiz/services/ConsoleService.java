@@ -1,9 +1,12 @@
 package com.techelevator.quiz.services;
 
 
+import com.techelevator.quiz.model.Question;
+import com.techelevator.quiz.model.Quiz;
 import com.techelevator.quiz.model.UserCredentials;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleService {
@@ -84,6 +87,21 @@ public class ConsoleService {
 
     public void printErrorMessage() {
         System.out.println("An error occurred. Check the log for details.");
+    }
+
+    public void printMessage(String message){
+        System.out.println(message);
+    }
+
+    public void printQuizzes(List<Quiz> quizList){
+        for(Quiz quiz : quizList){
+            System.out.println(quiz.getTitle());
+            System.out.println("Questions: ");
+            for(Question question : quiz.getQuestions()){
+
+                System.out.println(question.getQuestion());
+            }
+        }
     }
 
 }
