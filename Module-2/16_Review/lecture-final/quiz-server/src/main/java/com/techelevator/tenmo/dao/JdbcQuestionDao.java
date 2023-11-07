@@ -1,6 +1,6 @@
-package com.techelevator.dao;
+package com.techelevator.tenmo.dao;
 
-import com.techelevator.model.Question;
+import com.techelevator.tenmo.model.Question;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -39,3 +39,4 @@ public class JdbcQuestionDao implements QuestionDao{
         return question;
     }
 }
+
