@@ -24,6 +24,11 @@ h2 {
     font-size: 50px;
 }
 
+#creator{
+    font-family:  "bc";
+    font-size: 2rem;
+}
+
 section h2 {
     text-decoration: underline;
 }
