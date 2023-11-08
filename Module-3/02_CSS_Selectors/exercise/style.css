@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: rgba(192, 192, 192, 0.1);
+}
+
+/* * All borders are 1 pixel wide.
+* Blue: `#00ADEE`
+* Blue Border: `rgba(0, 173, 238, 0.4)`
+* Green: `#8CC36F`
+* Green Border: `rgba(170, 239, 135, 0.8)` */
+
+body aside {
+  border: 1px solid #00ADEE;
+  border-color: rgba(0, 173, 238, 0.4);
+  position: fixed;
+  height: 100vh;
+  width: 200px;
+}
+
+aside img {
+  height: 120px;
+  margin: 35px;
+}
+
+main {
+  padding-left: 200px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+body aside nav ul li {
+  border: 1px solid #00ADEE bottom;
+  border-color: rgba(0, 173, 238, 0.4);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+body aside nav ul li a{
+  color: #00ADEE;
+  font-weight: bold;
+}
+
+

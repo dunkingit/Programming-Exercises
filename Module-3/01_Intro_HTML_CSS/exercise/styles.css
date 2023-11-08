@@ -1,0 +1,75 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgba(204, 229, 255, .8)
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+q {
+    font-style: italic;
+}
+
+@font-face  {
+    font-family: "bc";
+    src: url('img/bloodcrowc.ttf') format('truetype');
+}
+
+.head {
+    font-family:  "bc";
+    font-size: 50px;
+}
+
+#creator{
+    font-family:  "bc";
+    font-size: 2rem;
+}
+
+section h2 {
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+#quotes-section q {
+    font-style: italic;
+}
+
+.image {
+    image-rendering: optimizeQuality;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+#te {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+#info-form {
+    background-color: rgba(204, 229, 255, .3)
+}
