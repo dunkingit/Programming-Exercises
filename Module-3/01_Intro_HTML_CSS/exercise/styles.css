@@ -14,6 +14,10 @@ h2 {
     text-align: center;
 }
 
+q {
+    font-style: italic;
+}
+
 @font-face  {
     font-family: "bc";
     src: url('img/bloodcrowc.ttf') format('truetype');
