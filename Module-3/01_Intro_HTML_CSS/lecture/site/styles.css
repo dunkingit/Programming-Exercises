@@ -1,0 +1,14 @@
+#table1 {
+    border: 1px solid black;
+    background-color: aqua
+}
+
+h1 {
+    text-shadow: 2cm;
+    color: cadetblue;
+}
+
+/* table, th, td {
+    border: 1px solid black;
+    background-color: aqua;
+} */

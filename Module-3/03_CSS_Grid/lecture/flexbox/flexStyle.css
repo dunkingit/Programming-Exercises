@@ -76,3 +76,16 @@ body {
   border-radius: 999px;
   margin: 0 10px;
 }
+
+header {
+  display: flex;
+}
+
+nav ul {
+  display: flex;
+  align-items: end; 
+}
+
+ul .container {
+  align-items: end; 
+}

@@ -4,7 +4,7 @@
 }
 
 html {
-  font-size: 16px;
+   font-size: 16px;
 }
 
 body {
@@ -18,7 +18,7 @@ body {
 * Green Border: `rgba(170, 239, 135, 0.8)` */
 
 body aside {
-  border: 1px solid #00ADEE;
+  border-right: 1px solid #00ADEE;
   border-color: rgba(0, 173, 238, 0.4);
   position: fixed;
   height: 100vh;
@@ -37,18 +37,23 @@ main {
 ul {
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
-body aside nav ul li {
-  border: 1px solid #00ADEE bottom;
+
+/* * Blue: `#00ADEE`
+* Blue Border: `rgba(0, 173, 238, 0.4)` */
+
+body aside nav ul li{
+  border-bottom: 1px solid #00ADEE;
   border-color: rgba(0, 173, 238, 0.4);
-  text-align: center;
   text-transform: uppercase;
 }
 
-body aside nav ul li a{
-  color: #00ADEE;
-  font-weight: bold;
+body aside nav ul > li > a{
+  text-decoration: none;
 }
 
-
+body aside nav ul :first-child :first-child{
+  text-decoration: underline;
+}
