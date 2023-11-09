@@ -1,4 +1,4 @@
-* {
+*{
   box-sizing: border-box;
   font-family: Tahoma, Verdana, Segoe, sans-serif;
 }
@@ -11,15 +11,12 @@ body {
   background-color: rgba(192, 192, 192, 0.1);
 }
 
-/* * All borders are 1 pixel wide.
-* Blue: `#00ADEE`
-* Blue Border: `rgba(0, 173, 238, 0.4)`
-* Green: `#8CC36F`
-* Green Border: `rgba(170, 239, 135, 0.8)` */
+main {
+  margin-left: 200px;
+}
 
 body aside {
-  border: 1px solid #00ADEE;
-  border-color: rgba(0, 173, 238, 0.4);
+  border-right: 1px solid rgba(0, 173, 238, 0.4);
   position: fixed;
   height: 100vh;
   width: 200px;
@@ -27,11 +24,8 @@ body aside {
 
 aside img {
   height: 120px;
-  margin: 35px;
-}
-
-main {
-  padding-left: 200px;
+  display: block;
+  margin: 0 auto;
 }
 
 ul {
@@ -40,15 +34,60 @@ ul {
 }
 
 body aside nav ul li {
-  border: 1px solid #00ADEE bottom;
-  border-color: rgba(0, 173, 238, 0.4);
-  text-align: center;
+  list-style: none;
+  border-bottom: 1px solid rgba(0, 173, 238, 0.4);
   text-transform: uppercase;
+  text-align: center;
+  padding: 10px 0;
 }
 
 body aside nav ul li a{
   color: #00ADEE;
   font-weight: bold;
+  text-decoration: none;
 }
 
+nav li:first-child {
+  text-decoration: underline;
+}
+
+header img {
+  height: 100px;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.banner {
+  width: 100%;
+  height: auto;
+}
+
+main {
+  padding: 0 20px;
+}
+
+header img {
+  height: 100px;
+  display: block;
+  margin-bottom: 20px;
+}
+
+section div {
+  width: 33%; 
+  display: inline-block; 
+  vertical-align: top; 
+  box-sizing: border-box; 
+}
+
+section div:not(:last-child) {
+  border-right: 1px solid rgba(170, 239, 135, 0.8); 
+}
+
+section h2 {
+  color: #8CC36F; 
+}
+
+section h2 i {
+  margin-right: 5px;
+}
 
