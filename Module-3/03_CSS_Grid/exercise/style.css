@@ -136,6 +136,12 @@ display: grid;
             'quote contact'
             'profile profile'
             'experience experience'
+            
+    }
+
+    #experience-grid {
+        row-gap: 20px;
+        column-gap: 20px;
     }
     
 }
@@ -150,5 +156,14 @@ display: grid;
             'quote'
             'profile'
             'experience'
+    }
+
+    #experience-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        'code'
+        'datebase'
+        'web'
+        'design';
     }
 }
