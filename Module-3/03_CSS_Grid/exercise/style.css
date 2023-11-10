@@ -146,6 +146,22 @@ display: grid;
         row-gap: 20px;
         column-gap: 20px;
     }
+
+    #experience-code {
+        grid-area: code;
+    }
+    
+    #experience-database {
+        grid-area: database;
+    }
+    
+    #experience-web {
+        grid-area: web;
+    }
+    
+    #experience-design {
+        grid-area: design;
+    }
     
 }
 
