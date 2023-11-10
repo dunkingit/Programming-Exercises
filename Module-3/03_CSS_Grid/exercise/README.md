@@ -59,6 +59,9 @@ Before starting on any of the layouts, you must define the grid areas in the CSS
 
 You'll define two HTML elements as grid containers. You can select these two elements by their `id` attributes: `main-grid` and `experience-grid`. Note how `experience-grid` is a child element of `main-grid`. The following two diagrams illustrate the grids you need to create:
 
+#experience-grid{}
+#main-grid{}
+
 ![Main grid](./img/main-grid.png)
 
 ![Experience grid](./img/experience-grid.png)
