@@ -79,9 +79,9 @@ display: grid;
     grid-area: picture;
 }
 
-/* #student-picture, #student-contact {
+#student-picture, #student-contact {
     text-align: center; 
-}  */
+} 
 
 #student-quote {
     grid-area: quote;
@@ -140,6 +140,9 @@ display: grid;
     }
 
     #experience-grid {
+        grid-template-areas:
+        'code web'
+        'datebase design';
         row-gap: 20px;
         column-gap: 20px;
     }
@@ -162,8 +165,8 @@ display: grid;
         grid-template-columns: 1fr;
         grid-template-areas:
         'code'
-        'datebase'
         'web'
+        'datebase'
         'design';
     }
 }
