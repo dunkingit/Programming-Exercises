@@ -51,12 +51,6 @@ header img {
     border-radius: 50%;
 }
 
-
-#experience-grid{
-display: grid;
-
-}
-
 #main-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -98,12 +92,12 @@ display: grid;
 }
 
 #experience-grid {
+    display: grid;
     grid-area: experience;
     grid-template-columns: 1fr 1fr;
-    display: grid;
     grid-template-areas:
     'code code'
-    'datebase database'
+    'database database'
     'web design';
     row-gap: 20px;
     column-gap: 50px;
@@ -142,7 +136,7 @@ display: grid;
     #experience-grid {
         grid-template-areas:
         'code web'
-        'datebase design';
+        'database design';
         row-gap: 20px;
         column-gap: 20px;
     }
@@ -182,7 +176,7 @@ display: grid;
         grid-template-areas:
         'code'
         'web'
-        'datebase'
+        'database'
         'design';
     }
 }
