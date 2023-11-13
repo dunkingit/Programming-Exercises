@@ -10,8 +10,15 @@
  */
 function variables() {
   // Declares a variable where the value cannot be changed
+  const foreverVariable = 21;
   // Declares a variable those value can be changed
+  let changesCome = 'Bob Dylan';
   // Declares a variable that will always be an array
+  const rrrrr = [];
+  console.log(rrrrr);
+  rrrrr.push('matey');
+  console.log(rrrrr);
+  rrrrr = 'pirates love pepperoni';
 }
 
 /**
@@ -74,10 +81,11 @@ function objects() {
   };
 
   // Log the object
-
+console.log(person);
   // Log the first and last name
-
+console.log(person.firstName, person.lastName);
   // Log each employee
+  console.log(person.employees);
 }
 
 /*
@@ -127,7 +135,10 @@ function stringFunctions(value) {
   console.log(`.length -  ${value.length}`);
   console.log(`.endsWith('World') - ${value.endsWith("World")}`);
   console.log(`.startsWith('Hello') - ${value.startsWith("Hello")}`);
-  console.log(`.indexOf('Hello') - ${value.indexOf("Hello")}`);
+  console.log(`.indexOf('Hello') - ${value.indexOf("o")}`);
+  console.log(value.substr(-4));
+  console.log(value.substring(2, -4));
+  console.log(value.slice(2,4));
 
   /*
     Other Methods
