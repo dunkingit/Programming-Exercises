@@ -1,8 +1,6 @@
 /**
- * All named functions will have the function keyword and
- * a name followed by parentheses.
  * 
- * @returns {number} 1
+ * @returns 
  */
 function returnOne() {
   return 1;
@@ -28,7 +26,9 @@ function printToConsole(value) {
  * @param {number} secondParameter the second parameter to multiply
  * @returns {number} the product of the multiplication
  */
-
+function multiplyTogether(firstParameter, secondParameter){
+  return firstParameter * secondParameter;
+}
 /**
  * This version makes sure that no parameters are ever missing. If
  * someone calls this function without parameters, we default the
@@ -41,7 +41,9 @@ function printToConsole(value) {
  * @returns {number} the product of the multiplication
  */
 
-
+function multiplyNoUndefined(firstParameter = 0, secondParameter = 0){
+  return firstParameter * secondParameter;
+}
  
 /**
  * Functions can return earlier before the end of the function. This could be useful
@@ -90,21 +92,21 @@ function scopeTest() {
   }
 }
 
+
+/**
+ * Takes details on user returns a concatenated string from the given array joining the separator.
+ * 
+ * @param {string} name user full name
+ * @param {number} age age of person in dog years
+ * @param {string[]} listOfQuirks list of funny quirks 
+ * @param {string} separator string used to join together elements from listOfQuirks
+ * @returns {string} full description of user
+ */
 function createSentenceFromUser(name, age, listOfQuirks = [], separator = ', ') {
   let description = `${name} is currently ${age} years old. Their quirks are: `;
   return description + listOfQuirks.join(separator);
 }
 
-/**
- * Takes an array and, using the power of anonymous functions, generates
- * their sum.
- *
- * @param {number[]} numbersToSum numbers to add up
- * @returns {number} sum of all the numbers
- */
-function sumAllNumbers(numbersToSum) {
-  return numbersToSum.reduce();
-}
 
 /**
  * Takes an array and returns a new array of only numbers that are
@@ -114,4 +116,34 @@ function sumAllNumbers(numbersToSum) {
  * @returns {number[]} a new array with only those numbers that are
  *   multiples of 3
  */
-function allDivisibleByThree(numbersToFilter) {}
+function allDivisibleByThree(numbersToFilter) {
+  return  numbersToFilter.filter(findMultipleThree)
+}
+
+function allDivisibleByThree(numbersToFilter){
+  return numbersToFilter.filter((currentNum)=>{
+    return currentNum % 3 === 0;
+  })
+}
+
+function allDivisibleByThree(numbersToFilter){
+  return numbersToFilter.filter(currentNum =>
+     currentNum % 3 === 0
+  )
+}
+/**
+ * Takes an array and, using the power of anonymous functions, generates
+ * their sum.
+ *
+ * @param {number[]} numbersToSum numbers to add up
+ * @returns {number} sum of all the numbers
+ */
+function sumAllNumbers(numbersToSum) {
+  return numbersToSum.reduce((sum, currentValue) =>
+     sum + currentValue
+  );
+}
+
+function findMultipleThree(num){
+  return num % 3 === 0;
+}
