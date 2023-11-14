@@ -1,2 +1,3 @@
 
-console.log('this is the greeting.js')
+console.log('this is the greeting.js');
+sayHello();
