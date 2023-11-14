@@ -19,8 +19,18 @@
  * @param {boolean} [recommendation=false] does the student have a recommendation
  * @returns {boolean} true if they are admitted
  */
+function isAdmitted (gpa, satScore=0, recommendation=false){
+    let condition1 = gpa > 4.0 || satScore > 1300
+    let condition2 = gpa > 3.0 && recommendation
+    let condition3 = satScore > 1200 && recommendation
+    
+    return condition1 || condition2 || condition3
+}
+    /**
 
-/**
+
+}
+
  * Write a function called useParameterToFilterArray that accepts a filter function
  * as a parameter. Use this function to filter unfilteredArray and return the result.
  *
@@ -28,6 +38,7 @@
  * @returns {number[]} the filtered array
  */
 let unfilteredArray = [1, 2, 3, 4, 5, 6];
+let useParameterToFilterArray = (filterFunction) => unfilteredArray.filter(filterFunction)
 
 /**
  * Write a function called makeNumber that takes two strings
@@ -38,10 +49,10 @@ let unfilteredArray = [1, 2, 3, 4, 5, 6];
  * returns the number 42293443.
  *
  * @param {string} first the first string of digits to concatenate
- * @param {string} [second=''] the second string of digits to concatenate
+ * @param {string} second='' the second string of digits to concatenate
  * @returns {number} the resultant number
  */
-
+let makeNumber = (first, second='') => parseInt(first + second)
 /**
  * Write a function called addAll that takes an unknown number of parameters
  * and adds all of them together. Return the sum.
@@ -49,13 +60,20 @@ let unfilteredArray = [1, 2, 3, 4, 5, 6];
  * @param {...number} num a series of numbers to add together
  * @returns {number} the sum of all the parameters (or arguments)
  */
-
+let addAll = (...number) => number.reduce((ac, cu) => ac + cu, 0)
 /*
  * Write and document a function called makeHappy that takes
  * an array and prepends 'Happy ' to the beginning of all the
  * words and returns them as a new array. Use the `map` function.
  */
 
+/**
+ * Takes an array and prepends 'Happy ' to the beginning of all the
+ * word.
+ * @param {array} array 
+ * @returns 'Happy ' appended to all strings inside of array.
+ */
+let makeHappy =(array) => array.map((cu) => 'Happy ' + cu)
 /*
  * Write and document a function called getFullAddressesOfProperties
  * that takes an array of JavaScript objects. Each object contains the
@@ -76,7 +94,25 @@ let unfilteredArray = [1, 2, 3, 4, 5, 6];
  *
  * Use `map` and an anonymous function.
  */
-
+// let getFullAddressesOfProperties = (array) => array.map((cu) => Object.values(cu).reduce((cu, ac) => cu + " " + ac))
+/**
+ * Returns whole string inserting into an array element with the following attributes from individual object in the parameter array.
+/ * streetNumber
+ *  streetName
+ *  streetType
+ *  city
+ *  state
+ *  zip
+ * 
+ * @param {array} array 
+ * @returns 
+ */
+let getFullAddressesOfProperties = (array) => {
+    return array.map((obj) => `${obj.streetNumber} ${obj.streetName} ${obj.streetType} ${obj.city} ${obj.state} ${obj.zip}`);
+  };
+// let getFullAddressesOfProperties = (array) => {
+//     console.log(array.map((obj) => Object.keys(obj).map((ac) => `${obj[ac]} `)))}
+    // return array.map((obj) => Object.keys(obj).map((ac) => `${obj[ac]} `))};
 /** 
  * Write and document a function called findLargest that uses `forEach`
  * to find the largest element in an array.
@@ -91,6 +127,19 @@ let unfilteredArray = [1, 2, 3, 4, 5, 6];
  * @param {number[]|string[]} searchArray the array to search
  * @returns {number|string} the number or string that is largest
  **/
+/**
+ * findLargest that uses `forEach`
+ * to find the largest element in an array.
+ * String lexical order
+ * Number Higher number
+ * @param {array} array 
+ * @returns 
+ */
+ function findLargest (array){
+    let topDog = ''
+    array.forEach((cu)=> topDog = cu > topDog? cu:topDog)
+    return topDog
+ }
 
 
 /*
@@ -109,4 +158,6 @@ let unfilteredArray = [1, 2, 3, 4, 5, 6];
  * calls with two anonymous functions.
  *
  * Read the tests to verify you have the correct behavior.
+ * 
  */
+let getSumOfSubArrayValues = (array=[0]) => array.flat(1).reduce((ac, cu) => ac + cu, 0)
