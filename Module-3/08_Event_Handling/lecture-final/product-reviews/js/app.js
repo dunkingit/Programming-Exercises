@@ -59,12 +59,52 @@ function displayReview(review) {
 
 // LECTURE STARTS HERE ---------------------------------------------------------------
 
-// Set the product reviews page title.
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Set the product reviews page title.
 setPageTitle();
 // Set the product reviews page description.
 setPageDescription();
 // Display all of the product reviews on our page.
 displayReviews();
+
+
+const pTagRef = document.querySelector('.description');
+pTagRef.addEventListener('click', (event) =>{
+
+ toggleDescriptionEdit(event.target)
+
+});
+
+const inputDescRef = document.getElementById('inputDesc');
+inputDescRef.addEventListener('keydown', (event) => {
+
+
+if(event.key === 'Enter'){
+ 
+  exitDescriptionEdit(event.target, true);
+}
+
+if(event.key === 'Escape'){
+  exitDescriptionEdit(event.target, false);
+}
+
+})
+
+const addReviewBtnRef = document.getElementById('btnToggleForm');
+addReviewBtnRef.addEventListener('click', () => {
+  showHideForm();
+})
+
+const saveReviewBtnRef = document.getElementById('btnSaveReview');
+saveReviewBtnRef.addEventListener('click', (event) => {
+  event.preventDefault();
+  saveReview();
+})
+
+})
+
+
 
 /**
  * Hide the description and show the text box.
@@ -129,4 +169,30 @@ function resetFormValues() {
 /**
  * Save the review that was added using the add review form.
  */
-function saveReview() {}
+function saveReview() {
+ const nameInput = document.getElementById('name');
+ const titleInput = document.getElementById('title');
+const ratingInput = document.getElementById('rating');
+const reviewInput = document.getElementById('review');
+
+const newReview = {
+  
+    reviewer: nameInput.value,
+    title: titleInput.value,
+    review:reviewInput.value,
+    rating: ratingInput.value
+  
+}
+console.log(reviews)
+reviews.push(newReview);
+displayReview(newReview);
+showHideForm();
+}
+
+// {
+//   reviewer: 'Malcolm Madwell',
+//   title: 'What a book!',
+//   review:
+//   "It certainly is a book. I mean, I can see that. Pages kept together with glue and there's writing on it, in some language. Yes indeed, it is a book!",
+//   rating: 3
+// }
