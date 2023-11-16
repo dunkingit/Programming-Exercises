@@ -162,6 +162,10 @@ let getFullAddressesOfProperties = (array) => {
  */
 // let getSumOfSubArrayValues = (array=[0]) => array.flat(1).reduce((ac, cu) => ac + cu, 0)
 
+<<<<<<< HEAD
 // function getSumOfSubArrayValues(array){
 //     console.log(array)
 // }
+=======
+let getSumOfSubArrayValues = (array) => array? array.reduce((ac, cu) => ac + cu.reduce((ac, cu) => cu + ac, 0), 0):0;
+>>>>>>> 5a95558d31adde42de734d8d124630ad5a1588d3
