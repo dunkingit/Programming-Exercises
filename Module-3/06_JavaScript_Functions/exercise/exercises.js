@@ -160,4 +160,8 @@ let getFullAddressesOfProperties = (array) => {
  * Read the tests to verify you have the correct behavior.
  * 
  */
-let getSumOfSubArrayValues = (array=[0]) => array.flat(1).reduce((ac, cu) => ac + cu, 0)
+// let getSumOfSubArrayValues = (array=[0]) => array.flat(1).reduce((ac, cu) => ac + cu, 0)
+
+// function getSumOfSubArrayValues(array){
+//     console.log(array)
+// }

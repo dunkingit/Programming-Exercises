@@ -36,3 +36,11 @@ function displayGroceries() {
     ul.appendChild(li);
   });
 }
+
+function updateAttribute(attKey, attValue, query) {
+  let updateElement = document.querySelect(query)
+  let getEleAtt = updateElement.getAttribute(attKey, attValue)
+  let x = "testing"
+  if (getEleAtt){
+  }
+}
