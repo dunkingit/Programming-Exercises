@@ -42,7 +42,8 @@ function addToTable(item, tableName){
  */
 function markCompleted() {
   let array = document.querySelectorAll("li")
-  array.forEach((cu) => cu.setAttribute("class", "completed") )
+  // array.forEach((cu) => cu.setAttribute("class", "completed") )
+  array.forEach((cu) => cu.classList.add("completed") )
 }
 
 setPageTitle();

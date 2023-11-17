@@ -72,22 +72,32 @@ function clear() {
 }
 
 // add event listener for when the DOM is loaded
-document.addEventListener('LOADED_EVENT_GOES_HERE', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
   // set the variable called display declared at the top of this file equal to the display element
   // HINT: use its id #display to get a reference to it
+  display = document.getElementById("display")
 
   // get a reference to all of the numbers
   // loop over each of the numbers
   // add a click event listener to each number to call the function clickNumber
+  let numbers = document.getElementsByClassName("number")
+  for(let num of numbers){
+    num.addEventListener("click", clickNumber)
+  }
 
   // get a reference to the decimal point button
   // add a click event listener to call the function clickNumber
   // the decimal point is part of the number so you can call clickNumber for it 
   // as you would for a number
 
+  let decBtn = document.getElementsByClassName("decimal")[0]
+  decBtn.addEventListener("click", clickNumber)
+
   // get a reference to the all clear button
   // add a click event listener to call the function clear  
+  let clear = document.getElementsByClassName("all-clear")[0]
+  clear.addEventListener("click", clear)
 
   // get a reference to all of the operators;
   // loop over each of the operators
@@ -97,4 +107,11 @@ document.addEventListener('LOADED_EVENT_GOES_HERE', () => {
   // should call the function performOperation
 
 });
+
+function addListenLoop(className, typeEvent, toDo){
+  let elements = document.getElementsByClassName(className)
+  for(let ele of elements){
+    ele.addEventListener(typeEvent, toDo)
+  }
+}
 

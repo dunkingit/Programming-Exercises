@@ -13,6 +13,18 @@ const groceries = [
   { id: 10, name: 'Tea', completed: false }
 ];
 
+document.addEventListener('DOMContentLoaded', () => {
+  // Set the product reviews page title.
+setPageTitle();
+// Display all of the grocery items on our page.
+displayGroceries()
+const toggles = document.getElementById("toggleAll")
+toggles.addEventListener("click", toggleAll)
+const toggleAnItem = document.getElementsByClassName("shopping-list")[0]
+toggleAnItem.addEventListener("click", event => toggleItem(event.target))
+toggleAnItem.addEventListener("dblclick", event => unToggleItem(event.target))
+});
+
 /**
  * This function will get a reference to the title and set its text to the value
  * of the pageTitle variable that was set above.
@@ -26,21 +38,43 @@ function setPageTitle() {
  * This function will loop over the array of groceries that was set above and add them to the DOM.
  */
 function displayGroceries() {
-  const ul = document.querySelector('ul');
+  const ul = document.getElementsByClassName("shopping-list")[0]
   groceries.forEach((item) => {
-    const li = document.createElement('li');
-    li.innerText = item.name;
-    const checkCircle = document.createElement('i');
-    checkCircle.setAttribute('class', 'far fa-check-circle');
-    li.appendChild(checkCircle);
-    ul.appendChild(li);
+    addEleAppendInnerText("li", item.name, ul)
   });
 }
 
-function updateAttribute(attKey, attValue, query) {
-  let updateElement = document.querySelect(query)
-  let getEleAtt = updateElement.getAttribute(attKey, attValue)
-  let x = "testing"
-  if (getEleAtt){
+function addEleAppendInnerText(ele, text, parent){
+  const newElement = document.createElement(ele);
+  newElement.setAttribute("class", "items")
+  newElement.innerText = text;
+  parent.appendChild(newElement);
+}
+
+
+function toggleAll(){
+  const items = document.getElementsByClassName("items")
+  for (const item of items){
+    toggleItem(item)
   }
+}
+
+function mark(item){
+  item.classList.add("completed")
+}
+
+function unmark(item){
+  item.classList.remove("completed")
+}
+
+function toggleItem(item){
+  if(!item.classList.contains("completed")){mark(item)}
+}
+
+function unToggleItem(item){
+  if(item.classList.contains("completed")){unmark(item)}
+}
+
+function toggles(item){
+  item.classList.contains("completed")? unmark(item):mark(item)
 }
