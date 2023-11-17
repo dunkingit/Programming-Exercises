@@ -12,19 +12,17 @@ const groceries = [
   { id: 9, name: 'Salad', completed: false },
   { id: 10, name: 'Tea', completed: false }
 ];
-
+const btn = document.getElementById("toggleAll")
 document.addEventListener('DOMContentLoaded', () => {
   // Set the product reviews page title.
 setPageTitle();
 // Display all of the grocery items on our page.
 displayGroceries()
-const toggles = document.getElementById("toggleAll")
-toggles.addEventListener("click", toggleAll)
+btn.addEventListener("click", toggleAllIncludingText)
 const toggleAnItem = document.getElementsByClassName("shopping-list")[0]
-toggleAnItem.addEventListener("click", event => toggleItem(event.target))
-toggleAnItem.addEventListener("dblclick", event => unToggleItem(event.target))
+toggleAnItem.addEventListener("click", event => mark(event.target))
+toggleAnItem.addEventListener("dblclick", event => unmark(event.target))
 });
-
 /**
  * This function will get a reference to the title and set its text to the value
  * of the pageTitle variable that was set above.
@@ -38,25 +36,30 @@ function setPageTitle() {
  * This function will loop over the array of groceries that was set above and add them to the DOM.
  */
 function displayGroceries() {
-  const ul = document.getElementsByClassName("shopping-list")[0]
-  groceries.forEach((item) => {
-    addEleAppendInnerText("li", item.name, ul)
-  });
-}
-
-function addEleAppendInnerText(ele, text, parent){
-  const newElement = document.createElement(ele);
-  newElement.setAttribute("class", "items")
-  newElement.innerText = text;
-  parent.appendChild(newElement);
-}
-
-
-function toggleAll(){
-  const items = document.getElementsByClassName("items")
-  for (const item of items){
-    toggleItem(item)
+  const ul = document.querySelector("ul")
+  ul.setAttribute("id", "items")
+  let counter = 1;
+  for (let item of groceries){
+    const newElement = document.createElement("li");
+    newElement.setAttribute("class", "item")
+    newElement.setAttribute("id", `item-${counter}`)
+    newElement.innerText = item.name;
+    ul.appendChild(newElement);
   }
+}
+
+
+function toggleAllIncludingText(){
+  const toggles = document.getElementById("items")
+  let check = toggles.classList.contains("completed")
+  let setParentClass = check? unmark(toggles):mark(toggles)
+  check? "Mark All Complete":"Mark All Incomplete"
+  let setItemClass = check? unmark:mark
+  const items = document.getElementsByClassName("item")
+  for (const aitem of items){
+    setItemClass(aitem)
+  }
+  btn.innerText = check? "Mark All Complete":"Mark All Incomplete"
 }
 
 function mark(item){
@@ -65,16 +68,4 @@ function mark(item){
 
 function unmark(item){
   item.classList.remove("completed")
-}
-
-function toggleItem(item){
-  if(!item.classList.contains("completed")){mark(item)}
-}
-
-function unToggleItem(item){
-  if(item.classList.contains("completed")){unmark(item)}
-}
-
-function toggles(item){
-  item.classList.contains("completed")? unmark(item):mark(item)
 }

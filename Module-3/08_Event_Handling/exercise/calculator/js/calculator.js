@@ -81,37 +81,35 @@ document.addEventListener('DOMContentLoaded', () => {
   // get a reference to all of the numbers
   // loop over each of the numbers
   // add a click event listener to each number to call the function clickNumber
-  let numbers = document.getElementsByClassName("number")
-  for(let num of numbers){
-    num.addEventListener("click", clickNumber)
-  }
-
+  addListenLoop("number", "click", clickNumber)
   // get a reference to the decimal point button
   // add a click event listener to call the function clickNumber
   // the decimal point is part of the number so you can call clickNumber for it 
   // as you would for a number
-
-  let decBtn = document.getElementsByClassName("decimal")[0]
-  decBtn.addEventListener("click", clickNumber)
-
+  getEleAddListen("decimal", "click", clickNumber)
   // get a reference to the all clear button
   // add a click event listener to call the function clear  
-  let clear = document.getElementsByClassName("all-clear")[0]
-  clear.addEventListener("click", clear)
-
+  getEleAddListen("all-clear", "click", clear)
   // get a reference to all of the operators;
   // loop over each of the operators
   // add a click event listener to each operator to call the function clickOperator
-
+  addListenLoop("operator", "click", clickOperator)
   // add click event listener for the equal sign
   // should call the function performOperation
-
+  getEleAddListen("equal-sign", "click", performOperation)
 });
 
 function addListenLoop(className, typeEvent, toDo){
   let elements = document.getElementsByClassName(className)
   for(let ele of elements){
-    ele.addEventListener(typeEvent, toDo)
+    ele.addEventListener(typeEvent, event => toDo(event))
   }
 }
+
+function getEleAddListen(className, typeEvent, toDo){
+  console.log(className)
+  let element = document.getElementsByClassName(className)[0]
+  element.addEventListener(typeEvent, event => toDo(event))
+}
+
 
