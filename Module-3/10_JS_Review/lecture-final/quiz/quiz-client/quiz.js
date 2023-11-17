@@ -1,10 +1,12 @@
+
 function fetchRandomQuestion(){
     fetch('http://localhost:8080/questions/random')
     .then(response => response.json())
     .then(data =>{
-        console.log(data)
+       
         const container = document.getElementById('container');
         const pTag = container.querySelector('p');
+
         pTag.innerText = data.question;
     })
 }
