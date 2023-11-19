@@ -72,29 +72,44 @@ function clear() {
 }
 
 // add event listener for when the DOM is loaded
-document.addEventListener('LOADED_EVENT_GOES_HERE', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
   // set the variable called display declared at the top of this file equal to the display element
   // HINT: use its id #display to get a reference to it
+  display = document.getElementById("display")
 
   // get a reference to all of the numbers
   // loop over each of the numbers
   // add a click event listener to each number to call the function clickNumber
-
+  addListenLoop("number", "click", clickNumber)
   // get a reference to the decimal point button
   // add a click event listener to call the function clickNumber
   // the decimal point is part of the number so you can call clickNumber for it 
   // as you would for a number
-
+  getEleAddListen("decimal", "click", clickNumber)
   // get a reference to the all clear button
   // add a click event listener to call the function clear  
-
+  getEleAddListen("all-clear", "click", clear)
   // get a reference to all of the operators;
   // loop over each of the operators
   // add a click event listener to each operator to call the function clickOperator
-
+  addListenLoop("operator", "click", clickOperator)
   // add click event listener for the equal sign
   // should call the function performOperation
-
+  getEleAddListen("equal-sign", "click", performOperation)
 });
+
+function addListenLoop(className, typeEvent, toDo){
+  let elements = document.getElementsByClassName(className)
+  for(let ele of elements){
+    ele.addEventListener(typeEvent, event => toDo(event))
+  }
+}
+
+function getEleAddListen(className, typeEvent, toDo){
+  console.log(className)
+  let element = document.getElementsByClassName(className)[0]
+  element.addEventListener(typeEvent, event => toDo(event))
+}
+
 

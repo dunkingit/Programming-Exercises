@@ -12,7 +12,17 @@ const groceries = [
   { id: 9, name: 'Salad', completed: false },
   { id: 10, name: 'Tea', completed: false }
 ];
-
+const btn = document.getElementById("toggleAll")
+document.addEventListener('DOMContentLoaded', () => {
+  // Set the product reviews page title.
+setPageTitle();
+// Display all of the grocery items on our page.
+displayGroceries()
+btn.addEventListener("click", toggleAllIncludingText)
+const toggleAnItem = document.getElementsByClassName("shopping-list")[0]
+toggleAnItem.addEventListener("click", event => mark(event.target))
+toggleAnItem.addEventListener("dblclick", event => unmark(event.target))
+});
 /**
  * This function will get a reference to the title and set its text to the value
  * of the pageTitle variable that was set above.
@@ -26,13 +36,36 @@ function setPageTitle() {
  * This function will loop over the array of groceries that was set above and add them to the DOM.
  */
 function displayGroceries() {
-  const ul = document.querySelector('ul');
-  groceries.forEach((item) => {
-    const li = document.createElement('li');
-    li.innerText = item.name;
-    const checkCircle = document.createElement('i');
-    checkCircle.setAttribute('class', 'far fa-check-circle');
-    li.appendChild(checkCircle);
-    ul.appendChild(li);
-  });
+  const ul = document.querySelector("ul")
+  ul.setAttribute("id", "items")
+  let counter = 1;
+  for (let item of groceries){
+    const newElement = document.createElement("li");
+    newElement.setAttribute("class", "item")
+    newElement.setAttribute("id", `item-${counter}`)
+    newElement.innerText = item.name;
+    ul.appendChild(newElement);
+  }
+}
+
+
+function toggleAllIncludingText(){
+  const toggles = document.getElementById("items")
+  let check = toggles.classList.contains("completed")
+  let setParentClass = check? unmark(toggles):mark(toggles)
+  check? "Mark All Complete":"Mark All Incomplete"
+  let setItemClass = check? unmark:mark
+  const items = document.getElementsByClassName("item")
+  for (const aitem of items){
+    setItemClass(aitem)
+  }
+  btn.innerText = check? "Mark All Complete":"Mark All Incomplete"
+}
+
+function mark(item){
+  item.classList.add("completed")
+}
+
+function unmark(item){
+  item.classList.remove("completed")
 }
