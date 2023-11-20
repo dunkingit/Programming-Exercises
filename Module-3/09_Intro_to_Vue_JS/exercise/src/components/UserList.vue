@@ -1,4 +1,5 @@
 <template>
+  <p>{{filteredList}}</p>
   <table id="tblUsers">
     <thead>
     <tr>
@@ -11,35 +12,87 @@
     </thead>
     <tbody>
       <tr>
-        <td><input type="text" id="firstNameFilter"/></td>
-        <td><input type="text" id="lastNameFilter"/></td>
-        <td><input type="text" id="usernameFilter"/></td>
-        <td><input type="text" id="emailFilter"/></td>
+        <td><input type="text" id="firstNameFilter" v-model="search.firstName"></td>
+        <td><input type="text" id="lastNameFilter" v-model="search.lastName"/></td>
+        <td><input type="text" id="usernameFilter" v-model="search.username"/></td>
+        <td><input type="text" id="emailFilter" v-model="search.emailAddress"/></td>
         <td>
-          <select id="statusFilter">
-            <option value="">Show All</option>
+          <select id="statusFilter" v-model="search.status">
+            <option value="" >Show All</option>
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
           </select>
         </td>
       </tr>
-      <!-- user listing goes here -->
+      <tr v-for="(user, index) in users" v-bind:key="index">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.emailAddress }}</td>
+        <td>{{ user.status }}</td>
+      </tr>
     </tbody>
   </table>
 </template>
 
 <script>
+import {computed} from "vue";
+
 export default {
   data() {
     return {
       users: [
-        { firstName: 'John', lastName: 'Smith', username: 'jsmith', emailAddress: 'jsmith@gmail.com', status: 'Active' },
-        { firstName: 'Anna', lastName: 'Bell', username: 'abell', emailAddress: 'abell@yahoo.com', status: 'Active' },
-        { firstName: 'George', lastName: 'Best', username: 'gbest', emailAddress: 'gbest@gmail.com', status: 'Inactive' },
-        { firstName: 'Ben', lastName: 'Carter', username: 'bcarter', emailAddress: 'bcarter@gmail.com', status: 'Active' },
-        { firstName: 'Katie', lastName: 'Jackson', username: 'kjackson', emailAddress: 'kjackson@yahoo.com', status: 'Active' },
-        { firstName: 'Mark', lastName: 'Smith', username: 'msmith', emailAddress: 'msmith@foo.com', status: 'Inactive' }
-      ]
+        {firstName: 'John', lastName: 'Smith', username: 'jsmith', emailAddress: 'jsmith@gmail.com', status: 'Active'},
+        {firstName: 'Anna', lastName: 'Bell', username: 'abell', emailAddress: 'abell@yahoo.com', status: 'Active'},
+        {firstName: 'George', lastName: 'Best', username: 'gbest', emailAddress: 'gbest@gmail.com', status: 'Inactive'},
+        {
+          firstName: 'Ben',
+          lastName: 'Carter',
+          username: 'bcarter',
+          emailAddress: 'bcarter@gmail.com',
+          status: 'Active'
+        },
+        {
+          firstName: 'Katie',
+          lastName: 'Jackson',
+          username: 'kjackson',
+          emailAddress: 'kjackson@yahoo.com',
+          status: 'Active'
+        },
+        {firstName: 'Mark', lastName: 'Smith', username: 'msmith', emailAddress: 'msmith@foo.com', status: 'Inactive'}
+      ],
+      search: {
+        firstName: "",
+        lastName: "",
+        username: "",
+        emailAddress: "",
+        status: "".value,
+      }
+    }
+  },
+  computed:{
+    filteredList(){
+      // for(let inner in this.search){
+      //   let text = this.search[inner]
+      //   // console.log("inner " + inner)
+      //   console.log("text " + text)
+      // }
+
+      let terms = Object.values(this.search)
+      let test = []
+      console.log(typeof this.users)
+      for (let each of this.users){
+        for (let other in each){
+          let othercheck = each[other]
+          for (let check of terms){
+            if(othercheck.includes(check)){
+              test.push(each)
+            }
+          }
+        }
+      }
+      console.log(test)
+      return test
     }
   }
 }
