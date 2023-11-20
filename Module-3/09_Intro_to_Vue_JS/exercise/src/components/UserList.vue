@@ -1,5 +1,4 @@
 <template>
-  <p>{{filteredList}}</p>
   <table id="tblUsers">
     <thead>
     <tr>
@@ -33,6 +32,7 @@
       </tr>
     </tbody>
   </table>
+  <p>{{filteredList}}</p>
 </template>
 
 <script>
@@ -62,32 +62,85 @@ export default {
         {firstName: 'Mark', lastName: 'Smith', username: 'msmith', emailAddress: 'msmith@foo.com', status: 'Inactive'}
       ],
       search: {
-        firstName: "",
-        lastName: "",
-        username: "",
-        emailAddress: "",
-        status: "",
+        firstName: "".toLowerCase(),
+        lastName: "".toLowerCase(),
+        username: "".toLowerCase(),
+        emailAddress: "".toLowerCase(),
+        status: "".toLowerCase(),
       }
     }
   },
   computed:{
     filteredList(){
-      let array = Object.values(this.search).filter((x) => {
-       return x.length > 0}
-      )
-      let test = []
-      for (let each of this.users){
-        let objArray = Object.values(each).toString()
-        for(let other of array){
-          if(objArray.indexOf(other) !== -1){
-            test.push(each)
-            break
+      let arrayOne = []
+      for(let each in this.search){
+        if(this.search[each].length > 0) {
+          console.log("Test")
+          let checkSearch = this.search[each].toLowerCase()
+          console.log(checkSearch)
+          for (let user of this.users) {
+            let checkUsers = user[each].toLowerCase()
+            console.log(checkUsers)
+            if (checkUsers.indexOf(checkSearch) !== -1) {
+              arrayOne.push(user)
+            }
           }
         }
       }
-      return test
-      }
+      return arrayOne
+      // let array = Object.values(this.search)
+      // if(array.length === 0){
+      //   return this.users
+      // }
+      // array = array.filter((x) => x.length > 0)//       let array = Object.values(this.search)
+      // if(array.length === 0){
+      //   return this.users
+      // }
+      // array = array.filter((x) => x.length > 0)
+
+
+      // let arrayOne = []
+      //
+      // for(let each of this.users){
+      //   let arrayConditions = [
+      //     each.firstName.toLowerCase().indexOf(this.search.firstName) !== -1,
+      //     each.lastName.toLowerCase().indexOf(this.search.lastName) !== -1,
+      //     each.username.toLowerCase().indexOf(this.search.username) !== -1,
+      //     each.emailAddress.toLowerCase().indexOf(this.search.emailAddress) !== -1,
+      //     each.status.toLowerCase().indexOf(this.search.status) !== -1,
+      //   ]
+      //   console.log(arrayConditions)
+      //   if(arrayConditions.some((cu) => cu === true)){
+      //     arrayOne.push(each)
+      //   }
+      // }
+      // console.log(arrayOne)
+      // return arrayOne
+      // return []
     }
+    }
+
+// works but will not pass test
+//       let array = Object.values(this.search)
+//       if(array.length === 0){
+//         return this.users
+//       }
+//       array = array.filter((x) => x.length > 0)
+    //   let test = []
+    //   for (let each of this.users){
+    //     let objArray = Object.values(each).toString().toLowerCase()
+    //     for(let other of array){
+    //       if(objArray.indexOf(other) !== -1){
+    //         test.push(each)
+    //         break
+    //       }
+    //     }
+    //   }
+    //   return test
+    //   }
+    // }
+
+  // works but will not pass test// works but will not pass test
     // let array = Object.values(this.search)
     // let test = []
     // for (let each of this.users){
