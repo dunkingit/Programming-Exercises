@@ -16,14 +16,15 @@
         <td><input type="text" id="usernameFilter" v-model="search.username"/></td>
         <td><input type="text" id="emailFilter" v-model="search.emailAddress"/></td>
         <td>
-          <select id="statusFilter" v-model="search.status">
-            <option value="" >Show All</option>
+          <select id="statusFilter" v-model="search.status" v-bind:class="search.status">
+            <option disabled value="">Show All</option>
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
           </select>
         </td>
       </tr>
-      <tr v-for="(user, index) in users" v-bind:key="index">
+<!--      v-bind:class="user.status"-->
+      <tr v-for="(user, index) in users" v-bind:key="index" v-bind:class=user.status>
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.username }}</td>
@@ -62,108 +63,45 @@ export default {
         {firstName: 'Mark', lastName: 'Smith', username: 'msmith', emailAddress: 'msmith@foo.com', status: 'Inactive'}
       ],
       search: {
-        firstName: "".toLowerCase(),
-        lastName: "".toLowerCase(),
-        username: "".toLowerCase(),
-        emailAddress: "".toLowerCase(),
-        status: "".toLowerCase(),
+        firstName: "",
+        lastName: "",
+        username: "",
+        emailAddress: "",
+        status: "Active",
       }
     }
   },
   computed:{
     filteredList(){
-      let arrayOne = []
-      for(let each in this.search){
-        if(this.search[each].length > 0) {
-          console.log("Test")
-          let checkSearch = this.search[each].toLowerCase()
-          console.log(checkSearch)
-          for (let user of this.users) {
-            let checkUsers = user[each].toLowerCase()
-            console.log(checkUsers)
-            if (checkUsers.indexOf(checkSearch) !== -1) {
-              arrayOne.push(user)
-            }
-          }
-        }
-      }
-      return arrayOne
-      // let array = Object.values(this.search)
-      // if(array.length === 0){
-      //   return this.users
-      // }
-      // array = array.filter((x) => x.length > 0)//       let array = Object.values(this.search)
-      // if(array.length === 0){
-      //   return this.users
-      // }
-      // array = array.filter((x) => x.length > 0)
-
-
-      // let arrayOne = []
+      // return this.users.filter((cu) => {
+      // console.log("cu - Current Value Inside of users objects" + cu.toString())
+      // return Object.keys(this.search).every((cur) => {
       //
-      // for(let each of this.users){
-      //   let arrayConditions = [
-      //     each.firstName.toLowerCase().indexOf(this.search.firstName) !== -1,
-      //     each.lastName.toLowerCase().indexOf(this.search.lastName) !== -1,
-      //     each.username.toLowerCase().indexOf(this.search.username) !== -1,
-      //     each.emailAddress.toLowerCase().indexOf(this.search.emailAddress) !== -1,
-      //     each.status.toLowerCase().indexOf(this.search.status) !== -1,
-      //   ]
-      //   console.log(arrayConditions)
-      //   if(arrayConditions.some((cu) => cu === true)){
-      //     arrayOne.push(each)
+      //    console.log("cur - Current key  Inside of search object" + cur.toString())
+      //    let userObjKey = cu[cur].toLowerCase()
+      //    let searchObjValueByKey = this.search[cur].toLowerCase()
+      //   if(searchObjValueByKey.length > 1) {
+      //     let checkIndexOf = userObjKey.indexOf(searchObjValueByKey)
+      //     console.log("cur[cur] - Current key  Inside of search object " + cur.toString())
+      //     console.log("User object by key " + userObjKey)
+      //     console.log("Search obj value by key " + searchObjValueByKey)
+      //     console.log("Check index of: " + userObjKey.indexOf(searchObjValueByKey))
+      //     console.log(checkIndexOf !== -1)
+      //     return checkIndexOf !== -1
+      //   }else{
+      //     return false
       //   }
-      // }
-      // console.log(arrayOne)
-      // return arrayOne
-      // return []
-    }
+      //  })
+      // })
+
+     // return this.users.filter((cu) => Object.keys(this.search).every((cur) =>
+     //     cu[cur].toLowerCase().indexOf(this.search[cur].toLowerCase()) !== -1))
+      console.log(this.search.status)
+      return this.users.filter((cu) => Object.keys(this.search).every((cur) =>
+          cu[cur].toLowerCase().includes(this.search[cur].toLowerCase())))
     }
 
-// works but will not pass test
-//       let array = Object.values(this.search)
-//       if(array.length === 0){
-//         return this.users
-//       }
-//       array = array.filter((x) => x.length > 0)
-    //   let test = []
-    //   for (let each of this.users){
-    //     let objArray = Object.values(each).toString().toLowerCase()
-    //     for(let other of array){
-    //       if(objArray.indexOf(other) !== -1){
-    //         test.push(each)
-    //         break
-    //       }
-    //     }
-    //   }
-    //   return test
-    //   }
-    // }
-
-  // works but will not pass test// works but will not pass test
-    // let array = Object.values(this.search)
-    // let test = []
-    // for (let each of this.users){
-    //   console.log(each.toString())
-    //   for (let i =0; i < array.length; i++){
-    //     let currentObjValue = Object.values(each)[i]
-    //     let currentValue = array[i]
-    //     if(currentObjValue.includes(currentValue)){
-    //       test.push(each)
-    //     }
-    //   }
-    // }
-    // console.log(test)
-    // return test
-    // }
-  // for(let i = 0; i < array.length; i++){
-  //   if(objArray[i].indexOf(array[i])){
-  //     let text = "checking " + objArray[i] + " = " + "array list " + array[i]
-  //     console.log(text)
-  //     console.log(objArray[i].includes(array[i]))
-  //     test.push(each)
-  //     break
-  //   }
+  }
 }
 </script>
 
