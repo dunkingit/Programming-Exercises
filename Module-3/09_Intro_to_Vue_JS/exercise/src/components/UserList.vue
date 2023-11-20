@@ -66,28 +66,51 @@ export default {
         lastName: "",
         username: "",
         emailAddress: "",
-        status: "".value,
+        status: "",
       }
     }
   },
   computed:{
     filteredList(){
-    let array = Object.values(this.search)
-
-    let test = []
-    for (let each of this.users){
-      for (let i =0; i < array.length; i++){
-        let currentObjValue = Object.values(each)[i]
-        let currentValue = array[i]
-        if(currentObjValue.includes(currentValue)){
-          test.push(each)
+      let array = Object.values(this.search).filter((x) => {
+       return x.length > 0}
+      )
+      let test = []
+      for (let each of this.users){
+        let objArray = Object.values(each).toString()
+        for(let other of array){
+          if(objArray.indexOf(other) !== -1){
+            test.push(each)
+            break
+          }
         }
       }
+      return test
+      }
     }
-    console.log(test)
-    return test
-    }
-  }
+    // let array = Object.values(this.search)
+    // let test = []
+    // for (let each of this.users){
+    //   console.log(each.toString())
+    //   for (let i =0; i < array.length; i++){
+    //     let currentObjValue = Object.values(each)[i]
+    //     let currentValue = array[i]
+    //     if(currentObjValue.includes(currentValue)){
+    //       test.push(each)
+    //     }
+    //   }
+    // }
+    // console.log(test)
+    // return test
+    // }
+  // for(let i = 0; i < array.length; i++){
+  //   if(objArray[i].indexOf(array[i])){
+  //     let text = "checking " + objArray[i] + " = " + "array list " + array[i]
+  //     console.log(text)
+  //     console.log(objArray[i].includes(array[i]))
+  //     test.push(each)
+  //     break
+  //   }
 }
 </script>
 
