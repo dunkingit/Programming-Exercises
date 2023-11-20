@@ -72,27 +72,20 @@ export default {
   },
   computed:{
     filteredList(){
-      // for(let inner in this.search){
-      //   let text = this.search[inner]
-      //   // console.log("inner " + inner)
-      //   console.log("text " + text)
-      // }
+    let array = Object.values(this.search)
 
-      let terms = Object.values(this.search)
-      let test = []
-      console.log(typeof this.users)
-      for (let each of this.users){
-        for (let other in each){
-          let othercheck = each[other]
-          for (let check of terms){
-            if(othercheck.includes(check)){
-              test.push(each)
-            }
-          }
+    let test = []
+    for (let each of this.users){
+      for (let i =0; i < array.length; i++){
+        let currentObjValue = Object.values(each)[i]
+        let currentValue = array[i]
+        if(currentObjValue.includes(currentValue)){
+          test.push(each)
         }
       }
-      console.log(test)
-      return test
+    }
+    console.log(test)
+    return test
     }
   }
 }
