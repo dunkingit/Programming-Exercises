@@ -62,12 +62,11 @@
       </tbody>
     </table>
 
-    <div v-bind:class="{ deactivated: this.arrayUserIds.length === 0 , 'all-actions':this.arrayUserIds.length !== 0}" >
-      <button>Activate Users</button>
-      <button>Deactivate Users</button>
-      <button>Delete Users</button>
+    <div class="all-action" >
+      <button :disabled="isButtonDisabled">Activate Users</button>
+      <button :disabled="isButtonDisabled">Deactivate Users</button>
+      <button :disabled="isButtonDisabled">Delete Users</button>
     </div>
-<!--    v-on:click="showElementOrHide"-->
     <button   v-on:click="showElementOrHide">Add New User</button>
     <form id="frmAddNewUser" v-show="show" v-on:submit.prevent="addUser($event)" v-bind="frmAddNewUser">
       <div class="field">
@@ -199,6 +198,7 @@ export default {
     },
 
     checkBoxEvent(event){
+      console.log(this.arrayUserIds.length === 0)
       let id = event.target.id
       let checkInArray = this.arrayUserIds.indexOf(event.target.id)
       let condition = checkInArray === -1
@@ -207,9 +207,13 @@ export default {
       }else{
         this.arrayUserIds = this.arrayUserIds.filter((cu) => cu !== id)
       }
+      console.log(this.arrayUserIds.toString())
     }
   },
   computed: {
+    isButtonDisabled(){
+      return this.arrayUserIds.length === 0;
+    },
     filteredList() {
       let filteredUsers = this.users;
       if (this.filter.firstName != "") {
