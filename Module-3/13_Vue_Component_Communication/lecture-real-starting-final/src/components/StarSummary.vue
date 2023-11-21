@@ -1,28 +1,28 @@
 <template>
-  <div class="well">
-    <span class="amount" v-on:click="updateFilter()">{{ numberOfReviews }}</span>
-    {{ rating }} Star Review{{ numberOfReviews === 1 ? '' : 's' }}
-  </div>
+    <div class="well">
+        <span class="amount" v-on:click="updateFilter">{{ numberOfReviews }}</span>
+        {{ rating }} Star Review{{ numberOfReviews === 1 ? '' : 's' }}
+    </div>
 </template>
 
 <script>
 export default {
-  props: ['rating'],
-  methods: {
-    updateFilter() {
-
+    props: ['rating'],
+    methods: {
+        updateFilter() {
+            this.$store.commit('UPDATE_FILTER', parseInt(this.rating))
+        }
+    },
+    computed: {
+        numberOfReviews() {
+            const reviews = this.$store.state.reviews;
+            const reviewsWithNumStars = reviews.filter((review) => {
+                return review.rating === this.rating;
+            });
+            return reviewsWithNumStars.length;
+        }
     }
-  },
-  computed: {
-    numberOfReviews() {
-      const reviews = [];
-      const matchingReviews = reviews.filter((review) => {
-        return review.rating === this.rating;
-      });
-      return matchingReviews.length;
-    }
-  }
-};
+}
 </script>
 
 <style scoped>
@@ -45,5 +45,4 @@ export default {
 .amount:hover {
   cursor: pointer;
 }
-
 </style>

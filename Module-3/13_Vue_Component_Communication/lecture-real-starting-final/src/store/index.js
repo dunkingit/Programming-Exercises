@@ -57,16 +57,17 @@ export function createStore() {
       ],
     },
     mutations: {
-      ADD_REVIEW(state, review) {
-        review.id = state.nextReviewId++;
-        state.reviews.unshift(review);
-      },
-      UPDATE_FILTER(state, filter) {
-        state.filter = filter;
-      },
-      FLIP_FAVORITED(state, reviewToChange) {
-        reviewToChange.favorited = ! reviewToChange.favorited;
-      }
+     UPDATE_FILTER(state, filterValue){
+      state.filter = filterValue;
+     },
+     ADD_REVIEW(state, review){
+      review.id = state.nextReviewId;
+      state.reviews.unshift(review);
+      state.nextReviewId++;
+     },
+     FLIP_FAVORITED(state, reviewToChange){
+      reviewToChange.favorited = ! reviewToChange.favorited
+     }
     },
     actions: {
     },

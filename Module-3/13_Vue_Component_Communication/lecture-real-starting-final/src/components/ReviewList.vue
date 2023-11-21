@@ -1,28 +1,23 @@
 <template>
-  <div>
-    <review-display
-      v-for="review in filteredReviews"
-      v-bind:key="review.id"
-      v-bind:review="review"
-    />
-  </div>
+    <review-display v-for="review in filteredReviews" v-bind:key="review.id" v-bind:review="review"></review-display>
 </template>
-
 <script>
 import ReviewDisplay from './ReviewDisplay.vue';
 
 export default {
-  components: {
-    ReviewDisplay
-  },
-  computed: {
-    filteredReviews() {
-      const reviewsFilter = -1;
-      const reviews = [];
-      return reviews.filter(review => {
-        return reviewsFilter === 0 || reviewsFilter === review.rating;
-      });
+    components: {
+        ReviewDisplay
+    },
+    computed: {
+        filteredReviews() {
+            const reviews = this.$store.state.reviews;
+            return reviews.filter(review => {
+                return this.$store.state.filter === 0 || this.$store.state.filter === review.rating;
+            });
+        }
     }
-  }
-};
+}
+
 </script>
+
+<style></style>

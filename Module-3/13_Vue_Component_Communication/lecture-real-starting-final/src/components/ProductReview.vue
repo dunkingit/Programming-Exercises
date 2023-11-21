@@ -1,14 +1,7 @@
 <template>
   <div class="main">
-    <h2>Product Reviews for {{ name }}</h2>
 
-    <p class="description">{{ description }}</p>
-
-    <div class="well-display">
-      <div class="well">
-        <span class="amount" v-on:click="filter = 0">{{ averageRating }}</span>
-        Average Rating
-      </div>
+   
 
       <div class="well">
         <span class="amount" v-on:click="filter = 1">{{ numberOfOneStarReviews }}</span>
@@ -97,7 +90,7 @@
         <input type="checkbox" v-bind:id="'favorite_' + review.id" v-model="review.favorited" />
       </p>
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -161,16 +154,7 @@ export default {
     };
   },
   computed: {
-    averageRating() {
-      if (this.reviews.length === 0) {
-        return 0;
-      }
-
-      let sum = this.reviews.reduce((currentSum, review) => {
-        return currentSum + review.rating;
-      }, 0);
-      return (sum / this.reviews.length).toFixed(2);
-    },
+  
     numberOfOneStarReviews() {
       return this.numberOfReviews(1);
     },
