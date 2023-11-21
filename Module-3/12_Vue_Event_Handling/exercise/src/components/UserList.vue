@@ -63,9 +63,9 @@
     </table>
 
     <div class="all-action" >
-      <button :disabled="isButtonDisabled">Activate Users</button>
-      <button :disabled="isButtonDisabled">Deactivate Users</button>
-      <button :disabled="isButtonDisabled">Delete Users</button>
+      <button :disabled="isButtonDisabled" v-on:click="changeStatuses('Active')">Activate Users</button>
+      <button :disabled="isButtonDisabled" v-on:click="changeStatuses('Inactive')"  >Deactivate Users</button>
+      <button :disabled="isButtonDisabled" v-on:click="deleteUsers">Delete Users</button>
     </div>
     <button   v-on:click="showElementOrHide">Add New User</button>
     <form id="frmAddNewUser" v-show="show" v-on:submit.prevent="addUser($event)" v-bind="frmAddNewUser">
@@ -165,49 +165,75 @@ export default {
     }
   },
   methods: {
-    staticButtonStatus(status){
+    staticButtonStatus(status) {
       // If the user status is Active, the button text displays Deactivate.
       //     If the user status is Inactive, the button text displays Activate.
       //     When you click the button, change the user's status from Active
       //     to Inactive, or Inactive to Active.
-     return status.includes("Active")? "Deactivate":"Activate"
+      return status.includes("Active") ? "Deactivate" : "Activate"
     },
-    clickStaticButtonStatus(userId){
-      for(let each of this.users){
-        if(each.id === userId){
-          each.status = each.status == "Active"?"Inactive":"Active"
+    clickStaticButtonStatus(userId) {
+      for (let each of this.users) {
+        if (each.id === userId) {
+          each.status = each.status == "Active" ? "Inactive" : "Active"
         }
       }
     },
     getNextUserId() {
       return this.nextUserId++;
     },
-    showElementOrHide(){
+    showElementOrHide() {
       this.show = !this.show
     },
-    showElement(){
+    showElement() {
       this.show = true
     },
-    hideElement(){
+    hideElement() {
       this.show = false
     },
-    addUser(event){
+    addUser(event) {
       this.newUser.id = this.getNextUserId()
       this.users.push(this.newUser)
       event.target.id.reset()
     },
 
-    checkBoxEvent(event){
-      console.log(this.arrayUserIds.length === 0)
+    checkBoxEvent(event) {
       let id = event.target.id
       let checkInArray = this.arrayUserIds.indexOf(event.target.id)
       let condition = checkInArray === -1
-      if(condition){
+      if (condition) {
         this.arrayUserIds.push(id)
-      }else{
+      } else {
         this.arrayUserIds = this.arrayUserIds.filter((cu) => cu !== id)
       }
-      console.log(this.arrayUserIds.toString())
+    },
+    changeStatuses(check) {
+      for(let id of this.arrayUserIds){
+        for(let num in this.users){
+         let objId = this.users[num]
+         if(id == objId.id){
+           objId.status = check
+         }
+        }
+      }
+    },
+    deleteUsers(){
+      let newarray = []
+      for(let user in this.users){
+        let deleteObj = false
+        let obj = this.users[user]
+        let userid = this.users[user].id
+        for(let arr in this.arrayUserIds){
+          let enterid = this.arrayUserIds[arr]
+          if(userid == enterid){
+            deleteObj = true
+          }
+        }
+        if(!deleteObj){
+          newarray.push(obj)
+        }
+      }
+      this.users = newarray
     }
   },
   computed: {
