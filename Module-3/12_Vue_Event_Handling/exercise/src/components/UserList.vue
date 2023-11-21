@@ -44,7 +44,10 @@
           v-bind:class="{ deactivated: user.status === 'Inactive' }"
         >
           <td>
-            <input type="checkbox" v-bind:id="user.id" v-bind:value="user.id" />
+            <input type="checkbox"
+                   v-bind:id="user.id"
+                   v-bind:value="user.id"
+                   v-on:click="checkBoxEvent($event)"/>
           </td>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
@@ -52,36 +55,36 @@
           <td>{{ user.emailAddress }}</td>
           <td>{{ user.status }}</td>
           <td>
-            <button class="btnActivateDeactivate">Activate or Deactivate</button>
+
+            <button class="btnActivateDeactivate" v-on:click="clickStaticButtonStatus(user.id)">{{ staticButtonStatus(user.status) }}</button>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <div class="all-actions">
+    <div v-bind:class="{ deactivated: this.arrayUserIds.length === 0 , 'all-actions':this.arrayUserIds.length !== 0}" >
       <button>Activate Users</button>
       <button>Deactivate Users</button>
       <button>Delete Users</button>
     </div>
-
-    <button>Add New User</button>
-
-    <form id="frmAddNewUser">
+<!--    v-on:click="showElementOrHide"-->
+    <button   v-on:click="showElementOrHide">Add New User</button>
+    <form id="frmAddNewUser" v-show="show" v-on:submit.prevent="addUser($event)" v-bind="frmAddNewUser">
       <div class="field">
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" />
+        <input type="text" id="firstName" name="firstName"  v-model="newUser.firstName" />
       </div>
       <div class="field">
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" />
+        <input type="text" id="lastName" name="lastName"  v-model="newUser.lastName"/>
       </div>
       <div class="field">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" />
+        <input type="text" id="username" name="username" v-model="newUser.username" />
       </div>
       <div class="field">
         <label for="emailAddress">Email Address:</label>
-        <input type="text" id="emailAddress" name="emailAddress" />
+        <input type="text" id="emailAddress" name="emailAddress" v-model="newUser.emailAddress"/>
       </div>
       <button type="submit" class="btn save">Save User</button>
     </form>
@@ -92,6 +95,8 @@
 export default {
   data() {
     return {
+      arrayUserIds: [],
+      show: false,
       filter: {
         firstName: "",
         lastName: "",
@@ -101,7 +106,7 @@ export default {
       },
       nextUserId: 7,
       newUser: {
-        id: null,
+        id: 0,
         firstName: "",
         lastName: "",
         username: "",
@@ -157,12 +162,51 @@ export default {
           emailAddress: "msmith@foo.com",
           status: "Inactive"
         }
-      ]
-    };
+      ],
+    }
   },
   methods: {
+    staticButtonStatus(status){
+      // If the user status is Active, the button text displays Deactivate.
+      //     If the user status is Inactive, the button text displays Activate.
+      //     When you click the button, change the user's status from Active
+      //     to Inactive, or Inactive to Active.
+     return status.includes("Active")? "Deactivate":"Activate"
+    },
+    clickStaticButtonStatus(userId){
+      for(let each of this.users){
+        if(each.id === userId){
+          each.status = each.status == "Active"?"Inactive":"Active"
+        }
+      }
+    },
     getNextUserId() {
       return this.nextUserId++;
+    },
+    showElementOrHide(){
+      this.show = !this.show
+    },
+    showElement(){
+      this.show = true
+    },
+    hideElement(){
+      this.show = false
+    },
+    addUser(event){
+      this.newUser.id = this.getNextUserId()
+      this.users.push(this.newUser)
+      event.target.id.reset()
+    },
+
+    checkBoxEvent(event){
+      let id = event.target.id
+      let checkInArray = this.arrayUserIds.indexOf(event.target.id)
+      let condition = checkInArray === -1
+      if(condition){
+        this.arrayUserIds.push(id)
+      }else{
+        this.arrayUserIds = this.arrayUserIds.filter((cu) => cu !== id)
+      }
     }
   },
   computed: {
