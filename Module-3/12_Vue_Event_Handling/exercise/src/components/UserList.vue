@@ -15,7 +15,7 @@
       <tbody>
         <tr>
           <td>
-            <input type="checkbox" id="selectAll" />
+            <input type="checkbox" v-bind:id="selectAll" v-on:click="toggleAll" v-model="permissions" />
           </td>
           <td>
             <input type="text" id="firstNameFilter" v-model="filter.firstName" />
@@ -45,9 +45,12 @@
         >
           <td>
             <input type="checkbox"
+                   class="checkboxButtons"
                    v-bind:id="user.id"
                    v-bind:value="user.id"
-                   v-on:click="checkBoxEvent($event)"/>
+                   v-on:click="permissions.checked"
+                   v-model="permissions"
+                   />
           </td>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
@@ -94,6 +97,9 @@
 export default {
   data() {
     return {
+      selectAll: 'selectAll',
+      permissions: [],
+      allButtonState: false,
       arrayUserIds: [],
       show: false,
       filter: {
@@ -174,23 +180,19 @@ export default {
     },
     clickStaticButtonStatus(userId) {
       for (let each of this.users) {
-        if (each.id === userId) {
+        if (each.id == userId) {
           each.status = each.status == "Active" ? "Inactive" : "Active"
         }
       }
     },
+
     getNextUserId() {
       return this.nextUserId++;
     },
     showElementOrHide() {
       this.show = !this.show
     },
-    showElement() {
-      this.show = true
-    },
-    hideElement() {
-      this.show = false
-    },
+
     addUser(event) {
       this.newUser.id = this.getNextUserId()
       this.users.push(this.newUser)
@@ -198,87 +200,105 @@ export default {
     },
 
     checkBoxEvent(event) {
-      let id = event.target.id
-      let checkInArray = this.arrayUserIds.indexOf(event.target.id)
-      let condition = checkInArray === -1
-      if (condition) {
+      console.log(this.permissions.length)
+      let id = parseInt(event.target.id)
+      if (!this.arrayUserIds.includes(id)) {
         this.arrayUserIds.push(id)
+        console.log(this.arrayUserIds.includes(id))
       } else {
         this.arrayUserIds = this.arrayUserIds.filter((cu) => cu !== id)
       }
     },
+
+
     changeStatuses(check) {
-      for(let id of this.arrayUserIds){
-        for(let num in this.users){
-         let objId = this.users[num]
-         if(id == objId.id){
-           objId.status = check
-         }
-        }
-      }
+      this.arrayUserIds.forEach(cu => this.users.forEach(cu2 => cu === cu2.id ? cu2.status = check : null))
     },
-    deleteUsers(){
-      let newarray = []
-      for(let user in this.users){
-        let deleteObj = false
-        let obj = this.users[user]
-        let userid = this.users[user].id
-        for(let arr in this.arrayUserIds){
-          let enterid = this.arrayUserIds[arr]
-          if(userid == enterid){
-            deleteObj = true
-          }
-        }
-        if(!deleteObj){
-          newarray.push(obj)
+
+    deleteUsers() {
+      this.users = this.users.filter(cu => !this.arrayUserIds.includes(cu.id))
+      this.arrayUserIds = []
+    },
+
+    toggleAll() {
+      let x = document.getElementsByClassName("checkboxButtons")
+      for (let each in x){
+        let id = parseInt(x[each].id)
+        let sid = x[each].id
+        x[each].model = this.permissions.checked
+        console.log(sid)
+        if(!this.permissions.includes(id)){
+          try{sid.click()}
+          catch (e){console.log(e)}
+          console.log("trigger")
         }
       }
-      this.users = newarray
+
     }
   },
+
   computed: {
-    isButtonDisabled(){
+    checking(id){
+      return document.getElementById(id).checked? "checked":"unchecked"
+    },
+
+    isButtonDisabled() {
       return this.arrayUserIds.length === 0;
     },
+
+
     filteredList() {
       let filteredUsers = this.users;
+
+
       if (this.filter.firstName != "") {
         filteredUsers = filteredUsers.filter((user) =>
-          user.firstName
-            .toLowerCase()
-            .includes(this.filter.firstName.toLowerCase())
-        );
+            user.firstName
+                .toLowerCase()
+                .includes(this.filter.firstName.toLowerCase())
+        )
       }
+
+
       if (this.filter.lastName != "") {
         filteredUsers = filteredUsers.filter((user) =>
-          user.lastName
-            .toLowerCase()
-            .includes(this.filter.lastName.toLowerCase())
-        );
+            user.lastName
+                .toLowerCase()
+                .includes(this.filter.lastName.toLowerCase())
+        )
       }
+
+
       if (this.filter.username != "") {
         filteredUsers = filteredUsers.filter((user) =>
-          user.username
-            .toLowerCase()
-            .includes(this.filter.username.toLowerCase())
-        );
+            user.username
+                .toLowerCase()
+                .includes(this.filter.username.toLowerCase())
+        )
       }
+
+
       if (this.filter.emailAddress != "") {
         filteredUsers = filteredUsers.filter((user) =>
-          user.emailAddress
-            .toLowerCase()
-            .includes(this.filter.emailAddress.toLowerCase())
-        );
+            user.emailAddress
+                .toLowerCase()
+                .includes(this.filter.emailAddress.toLowerCase())
+        )
       }
+
+
       if (this.filter.status != "") {
         filteredUsers = filteredUsers.filter((user) =>
-          user.status === this.filter.status
-        );
+            user.status === this.filter.status
+        )
       }
+
+
       return filteredUsers;
     }
   }
-};
+}
+
 </script>
 
 <style scoped>
