@@ -15,7 +15,7 @@
       <tbody>
         <tr>
           <td>
-            <input type="checkbox" v-bind:id="selectAll" v-on:click="toggleAll" v-model="permissions" />
+            <input type="checkbox" id="selectAll" v-on:click="toggleAll" v-model="permissions" />
           </td>
           <td>
             <input type="text" id="firstNameFilter" v-model="filter.firstName" />
@@ -48,8 +48,8 @@
                    class="checkboxButtons"
                    v-bind:id="user.id"
                    v-bind:value="user.id"
-                   v-on:click="permissions.checked"
-                   v-model="permissions"
+                   v-bind:checked="permissions.includes(user.id)"
+                   v-on:change="permissions.includes(user.id)? permissions = permissions.filter(cu => cu != user.id):permissions.push(user.id)"
                    />
           </td>
           <td>{{ user.firstName }}</td>
@@ -97,11 +97,7 @@
 export default {
   data() {
     return {
-      selectAll: 'selectAll',
       permissions: [],
-      allButtonState: false,
-      arrayUserIds: [],
-      show: false,
       filter: {
         firstName: "",
         lastName: "",
@@ -199,15 +195,17 @@ export default {
       event.target.id.reset()
     },
 
-    checkBoxEvent(event) {
+    checkBoxEvent() {
+      console.log("trigger")
+      console.log(this.permissions.toString())
       console.log(this.permissions.length)
-      let id = parseInt(event.target.id)
-      if (!this.arrayUserIds.includes(id)) {
-        this.arrayUserIds.push(id)
-        console.log(this.arrayUserIds.includes(id))
-      } else {
-        this.arrayUserIds = this.arrayUserIds.filter((cu) => cu !== id)
-      }
+      console.log(this.permissions[0])
+      // let id = parseInt($event.target.id)
+      // if (!this.arrayUserIds.includes(id)) {
+      //   this.arrayUserIds.push(id)
+      // } else {
+      //   this.arrayUserIds = this.arrayUserIds.filter((cu) => cu !== id)
+      // }
     },
 
 
@@ -221,19 +219,12 @@ export default {
     },
 
     toggleAll() {
-      let x = document.getElementsByClassName("checkboxButtons")
-      for (let each in x){
-        let id = parseInt(x[each].id)
-        let sid = x[each].id
-        x[each].model = this.permissions.checked
-        console.log(sid)
-        if(!this.permissions.includes(id)){
-          try{sid.click()}
-          catch (e){console.log(e)}
-          console.log("trigger")
+      let all = document.getElementsByClassName("checkboxButtons")
+      for(let each in all){
+        if(!all[each].checked){
+          this.permissions.push(parseInt(all[each].id))
         }
       }
-
     }
   },
 
@@ -243,7 +234,7 @@ export default {
     },
 
     isButtonDisabled() {
-      return this.arrayUserIds.length === 0;
+      return this.permissions.length === 0;
     },
 
 
