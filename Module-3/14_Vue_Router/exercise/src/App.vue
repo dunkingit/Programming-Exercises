@@ -14,13 +14,6 @@ import HomeView from "@/views/HomeView.vue";
 import MyBooksView from "@/views/MyBooksView.vue";
 
 export default {
-  components:{
-    BookView,
-    HomeView,
-    MyBooksView,
-    NewBookView
-  }
-
 }
 </script>
 

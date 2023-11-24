@@ -15,7 +15,6 @@ import newBookForm from "@/components/NewBookForm.vue";
 export default {
   components:{
     readingList,
-    bookCard,
     newBookForm
   }
 }
