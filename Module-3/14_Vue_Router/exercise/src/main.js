@@ -5,7 +5,6 @@ import { createRouter } from './router'
 
 const store = createStore();
 const router = createRouter();
-
 const app = createApp(MyApp);
 app.use(store);
 app.use(router);

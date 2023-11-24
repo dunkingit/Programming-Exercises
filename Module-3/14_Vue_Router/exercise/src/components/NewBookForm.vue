@@ -1,5 +1,5 @@
 <template>
-  <form class="new-book-form" v-on:submit.prevent="saveBook">
+  <form class="new-book-form" v-on:submit.prevent="saveBook" v-on:submit="returnToMyBooks">
     <input class="title-input" name="title-input" type="text" placeholder="Title" v-model="book.title" />
     <input class="author-input" name="author-input" type="text" placeholder="Author" v-model="book.author" />
     <input class="isbn-input" name="isbn-input" type="text" placeholder="ISBN" v-model="book.isbn" />
@@ -7,9 +7,11 @@
     <input type="url" name="more-info-link" placeholder="More Info Link" v-model="book.moreInfoLink" />
     <button>Save</button>
   </form>
+  <router-link id="saved" v-bind:to="{name: 'myBooks'}"></router-link>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -20,8 +22,14 @@ export default {
     saveBook() {
       this.$store.commit('SAVE_BOOK', this.book);
       this.book = {};
+      document.getElementById("saved").click()
+    },
+
+    returnToMyBooks(){
+      this.$router.push({path: '/myBooks'})
     }
   }
+
 }
 </script>
 

@@ -15,7 +15,8 @@
       <tbody>
         <tr>
           <td>
-            <input type="checkbox" id="selectAll" v-on:click="toggleAll" v-model="permissions" />
+            <input type="checkbox" id="selectAll"
+                   v-bind:value="top" @change="checkAll(!toggle)" />
           </td>
           <td>
             <input type="text" id="firstNameFilter" v-model="filter.firstName" />
@@ -38,7 +39,7 @@
           </td>
           <td>&nbsp;</td>
         </tr>
-        <tr
+        <tr id="boxes"
           v-for="user in filteredList"
           v-bind:key="user.id"
           v-bind:class="{ deactivated: user.status === 'Inactive' }"
@@ -48,8 +49,7 @@
                    class="checkboxButtons"
                    v-bind:id="user.id"
                    v-bind:value="user.id"
-                   v-bind:checked="permissions.includes(user.id)"
-                   v-on:change="permissions.includes(user.id)? permissions = permissions.filter(cu => cu != user.id):permissions.push(user.id)"
+                   v-model="permissions"
                    />
           </td>
           <td>{{ user.firstName }}</td>
@@ -59,18 +59,17 @@
           <td>{{ user.status }}</td>
           <td>
 
-            <button class="btnActivateDeactivate" v-on:click="clickStaticButtonStatus(user.id)">{{ staticButtonStatus(user.status) }}</button>
+            <button class="btnActivateDeactivate" v-on:click="changeUniqueUserStatus(user.id)">{{ staticButtonStatus(user.status) }}</button>
           </td>
         </tr>
       </tbody>
     </table>
-
-    <div class="all-action" >
-      <button :disabled="isButtonDisabled" v-on:click="changeStatuses('Active')">Activate Users</button>
-      <button :disabled="isButtonDisabled" v-on:click="changeStatuses('Inactive')"  >Deactivate Users</button>
-      <button :disabled="isButtonDisabled" v-on:click="deleteUsers">Delete Users</button>
+    <div class="all-action" :disabled="permissions.length == 0">
+      <button :disabled="permissions.length == 0" v-on:click="clickStaticButtonStatus('Active')">Activate Users</button>
+      <button :disabled="permissions.length == 0" v-on:click="clickStaticButtonStatus('Inactive')"  >Deactivate Users</button>
+      <button :disabled="permissions.length == 0" v-on:click="deleteUsers">Delete Users</button>
     </div>
-    <button   v-on:click="showElementOrHide">Add New User</button>
+    <button   v-on:click="show = !show">Add New User</button>
     <form id="frmAddNewUser" v-show="show" v-on:submit.prevent="addUser($event)" v-bind="frmAddNewUser">
       <div class="field">
         <label for="firstName">First Name:</label>
@@ -97,6 +96,11 @@
 export default {
   data() {
     return {
+      show: false,
+      hideBtn: true,
+      buttonStatus: 0,
+      toggle:false,
+      top:0,
       permissions: [],
       filter: {
         firstName: "",
@@ -174,74 +178,72 @@ export default {
       //     to Inactive, or Inactive to Active.
       return status.includes("Active") ? "Deactivate" : "Activate"
     },
-    clickStaticButtonStatus(userId) {
-      for (let each of this.users) {
-        if (each.id == userId) {
-          each.status = each.status == "Active" ? "Inactive" : "Active"
-        }
-      }
+
+    clickStaticButtonStatus(action){
+      let array = this.permissions.filter(cu => parseInt(cu) != 0)
+      array.forEach(cu => this.iterUsersChangeUserStatus(cu, action))
+      this.clearCheckBoxes()
     },
 
+    iterUsersChangeUserStatus(userId, action){
+      let status = this.users.find(ele => ele.id == userId)
+      status.status = action
+    },
+
+    changeUniqueUserStatus(userId){
+      let status = this.users.find(ele => ele.id == userId)
+      status.status = status.status == "Active"? "Inactive":"Active"
+    },
     getNextUserId() {
       return this.nextUserId++;
     },
-    showElementOrHide() {
-      this.show = !this.show
-    },
-
     addUser(event) {
       this.newUser.id = this.getNextUserId()
       this.users.push(this.newUser)
       event.target.id.reset()
     },
-
-    checkBoxEvent() {
-      console.log("trigger")
-      console.log(this.permissions.toString())
-      console.log(this.permissions.length)
-      console.log(this.permissions[0])
-      // let id = parseInt($event.target.id)
-      // if (!this.arrayUserIds.includes(id)) {
-      //   this.arrayUserIds.push(id)
-      // } else {
-      //   this.arrayUserIds = this.arrayUserIds.filter((cu) => cu !== id)
-      // }
-    },
-
-
-    changeStatuses(check) {
-      this.arrayUserIds.forEach(cu => this.users.forEach(cu2 => cu === cu2.id ? cu2.status = check : null))
-    },
-
     deleteUsers() {
-      this.users = this.users.filter(cu => !this.arrayUserIds.includes(cu.id))
-      this.arrayUserIds = []
+      this.permissions.forEach(cu => console.log("Deleting user: " + cu))
+      this.users = this.users.filter(cu => !this.permissions.includes(cu.id))
+      this.users.forEach(cu => console.log("Checking current user id's: " + cu.id))
+      let condition = this.users.every(cu => !this.permissions.includes(cu.id))
+      console.log(condition)
+      this.permissions = this.permissions.filter(cu => cu != 0)
+      this.clearCheckBoxes()
     },
-
-    toggleAll() {
+    checkAll(toToggle){
+      this.toggle = toToggle
       let all = document.getElementsByClassName("checkboxButtons")
       for(let each in all){
-        if(!all[each].checked){
-          this.permissions.push(parseInt(all[each].id))
+        if(typeof all[each] == "object"){
+          if(toToggle && !all[each].checked){
+              this.permissions.push(parseInt(all[each].id))
+              console.log(all[each].id)
+          }
+          all[each].checked = toToggle
         }
       }
+      if(!toToggle){
+        this.permissions = []
+      }
+    },
+
+    checkList(id){
+      this.permissions.includes(id)? this.permissions = this.filter(cu => cu != id):this.permissions.push(id)
+      console.log(this.permissions.toString())
+    },
+
+    clearCheckBoxes(){
+      for (let i = 0; i < 7; i++) {
+        document.getElementById(i).checked = false
+      }
+      this.permissions = []
     }
   },
 
   computed: {
-    checking(id){
-      return document.getElementById(id).checked? "checked":"unchecked"
-    },
-
-    isButtonDisabled() {
-      return this.permissions.length === 0;
-    },
-
-
     filteredList() {
       let filteredUsers = this.users;
-
-
       if (this.filter.firstName != "") {
         filteredUsers = filteredUsers.filter((user) =>
             user.firstName
@@ -330,6 +332,12 @@ button {
 .all-actions {
   margin-bottom: 40px;
 }
+
+.all-actions button{
+
+}
+
+
 .btn.save {
   margin: 20px;
   float: right;

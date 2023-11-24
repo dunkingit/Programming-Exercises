@@ -6,10 +6,8 @@
     </div>
   </section>
 </template>
-
 <script>
 import BookCard from '../components/BookCard.vue';
-
 export default {
   computed: {
     books() {
@@ -23,7 +21,6 @@ export default {
   }
 }
 </script>
-
 <style>
 .best-seller-list {
   display: flex;

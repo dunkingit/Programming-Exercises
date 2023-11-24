@@ -3,23 +3,15 @@
     <h2 class="book-title">{{ book.title }}</h2>
     <h3 class="book-author">{{ book.author }}</h3>
     <img class="book-image" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'">
-    <button :class="{'mark-read' : !book.read, 'mark-unread':book.read}"
-            v-on:click="this.$store.commit('changeRead', book.isbn)">
-      Mark {{ book.read?"unread":"read" }}
-    </button>
+    <p>Number of pages: {{ book.numPages }}</p>
+    <a :href="book.moreInfoLink" target="_blank">More information</a>
   </div>
 </template>
 <script>
 export default {
-  props:["book"],
-  data(){
-    return{
-    }
+  props:{
+    book:Object,
   },
-  methods:{
-  },
-  computed:{
-  }
 }
 </script>
 
